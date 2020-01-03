@@ -3,7 +3,7 @@ from .models import Customer
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'email', 'note',)
+    list_display = ('name', 'phone', 'email', 'note', 'create_date', 'modify_date',)
     prepopulated_fields = {'slug': ('name',)}
 
 
