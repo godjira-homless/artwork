@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Customer
 
 def index(request):
     #persons = Person.objects.all()
