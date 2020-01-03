@@ -1,0 +1,11 @@
+
+alap form
+<div class="container">
+  <div class="form-row">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+      <button type="submit" class="btn btn-success">Save</button>
+      </form>
+  </div>
+</div>

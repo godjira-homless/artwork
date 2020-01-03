@@ -13,7 +13,7 @@ class Customer(models.Model):
     sale_percent = models.IntegerField(blank=True)
     buy_percent = models.IntegerField(blank=True)
     phone = models.CharField(max_length=50, blank=True)
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254, blank=True)
     note = models.TextField(blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
