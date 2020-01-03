@@ -10,11 +10,11 @@ class Customer(models.Model):
     city = models.CharField(max_length=100, blank=True)
     zip = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=100, blank=True)
-    sale_percent = models.IntegerField
-    buy_percent = models.IntegerField
+    sale_percent = models.IntegerField(blank=True)
+    buy_percent = models.IntegerField(blank=True)
     phone = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=254)
-    note = models.TextField
+    note = models.TextField(blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(null=False, unique=True)
