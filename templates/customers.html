@@ -16,7 +16,7 @@
 <div class="container">
 {% for customer in customers %}
     <div class="row">
-    {{ customer.name }}
+        <a href="{% url 'update_customer' customer.id %}">{{ customer.name }}</a>
     </div>
 {% endfor %}
 </div>
