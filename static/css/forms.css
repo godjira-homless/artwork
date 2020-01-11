@@ -1,0 +1,13 @@
+html,body,td,th,textarea {
+        font-family:tahoma, verdana, arial, sans-serif;
+       	font-size:1em;
+}
+
+body {
+	background-color: #A3A8AD;
+}
+
+.main_form {
+margin auto;
+background-color: #CDCDCD;
+}

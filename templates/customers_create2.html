@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+{% block title %}<title>Customers</title>{% endblock title %}
+
+{% block content %}
+
+{% if form %}
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                    <tr>
+                        <td align="left" width="33%" valign="top">
+                            <table width="100%" height="100" border="0" cellspacing="0" cellpadding="2" class=""
+                                   bgcolor="#FBFBFB">
+                                <tr>
+                                    <td align="left">Név:</td>
+                                    <td align="left">
+                                        {{ form.name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Város:</td>
+                                    <td align="left">
+                                        {{ form.city }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Utca:</td>
+                                    <td align="left">
+                                        {{ form.address }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Irsz:</td>
+                                    <td align="left">
+                                        {{ form.zip }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Ország:</td>
+                                    <td align="left">
+                                        {{ form.country }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Mobil:</td>
+                                    <td align="left">
+                                        {{ form.phone }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Bank:</td>
+                                    <td align="left">
+                                        {{ form.bank }}
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                    <tr>
+                        <td align="left" width="33%" valign="top">
+                            <table width="100%" height="100" border="0" cellspacing="0" cellpadding="2" class=""
+                                   bgcolor="#FBFBFB">
+                                <tr>
+                                    <td align="left">Email:</td>
+                                    <td align="left">
+                                        {{ form.email }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Eladó%:</td>
+                                    <td align="left">
+                                        {{ form.sale_percent }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Vevő%:</td>
+                                    <td align="left">
+                                        {{ form.buy_percent }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Adóazonosító:</td>
+                                    <td align="left">
+                                        {{ form.taxnumber }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Megjegyzés</td>
+                                    <td align="left">
+                                        {{ form.note }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Mobil:</td>
+                                    <td align="left">
+                                        {{ form.phone }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Bank:</td>
+                                    <td align="left">
+                                        {{ form.bank }}
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                    <tr>
+                        <td align="left" width="33%" valign="top">
+                            <table width="100%" height="100" border="0" cellspacing="0" cellpadding="2" class=""
+                                   bgcolor="#FBFBFB">
+                                <tr>
+                                    <td align="left">Email:</td>
+                                    <td align="left">
+                                        {{ form.email }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Eladó%:</td>
+                                    <td align="left">
+                                        {{ form.sale_percent }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Vevő%:</td>
+                                    <td align="left">
+                                        {{ form.buy_percent }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Adóazonosító:</td>
+                                    <td align="left">
+                                        {{ form.taxnumber }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Megjegyzés</td>
+                                    <td align="left">
+                                        {{ form.note }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Mobil:</td>
+                                    <td align="left">
+                                        {{ form.phone }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Bank:</td>
+                                    <td align="left">
+                                        {{ form.bank }}
+                                    </td>
+                                </tr>
+                            </table>
+                </div>
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock content %}

@@ -13,7 +13,9 @@ class Customer(models.Model):
     sale_percent = models.IntegerField(blank=True, null=True, default=21)
     buy_percent = models.IntegerField(blank=True, null=True, default=15)
     phone = models.CharField(max_length=50, blank=True)
+    bank = models.CharField(max_length=200, blank=True)
     email = models.EmailField(max_length=254, blank=True)
+    taxnumber = models.CharField(max_length=50, blank=True)
     note = models.TextField(blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
@@ -26,6 +28,6 @@ class Customer(models.Model):
         return reverse('customer_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        # if not self.slug:
-        self.slug = slugify(self.name)
+        if not self.slug:
+            self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
