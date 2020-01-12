@@ -8,29 +8,128 @@
 {% block content %}
 
 {% if form %}
-<form method="POST" class="main_form needs-validation" novalidate>
-    {% csrf_token %}
-    <div class="container">
-        <div class="form-group row">
-            <label for="id_name" class="col-sm-1 col-form-label">Név</label>
-            <div class="col-sm-4" >
-                {{ form.name }}
+<div class="container mt-2"><h4>Új ügyfél rögzítése</h4></div>
+<div class="container mt-2 my-container">
+    <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                    <tr>
+                        <td>{{ form.name.label }}</td>
+                        <td>
+                            {{ form.name }}
+                            {{ form.name.errors }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">{{ form.name.errors }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address" class="col-form-label">Utca:</label></td>
+                        <td>
+                            {{ form.address }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="city" class="col-form-label">Város:</label></td>
+                        <td>
+                            {{ form.city }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_zip" class="col-form-label">Irsz:</label></td>
+                        <td>
+                            {{ form.zip }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_country" class="col-form-label">Ország:</label></td>
+                        <td>
+                            {{ form.country }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                <tr>
+                        <td><label for="id_phone" class="col-form-label">Mobil:</label></td>
+                        <td>
+                            {{ form.phone }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                </tr>
+                <tr>
+                        <td><label for="id_bank" class="col-form-label">Bank:</label></td>
+                        <td>
+                            {{ form.bank }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="id_city" class="col-sm-1 col-form-label">Város</label>
-            <div class="col-sm-4">
-                {{ form.city }}
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Save customer</button>
-</form>
+            <div class="col-sm">
+                <table class="table table-sm table-borderless" >
+                    <tbody>
+                    <tr>
+                        <td><label for="id_email" class="col-form-label">E-mail:</label></td>
+                        <td>
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_taxnumber" class="col-form-label">Adóa.jel:</label></td>
+                        <td>
+                            {{ form.taxnumber }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_sale_percent" class="col-form-label">Beadó%:</label></td>
+                        <td>
+                            {{ form.sale_percent }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_buy_percent" class="col-form-label">Vevő%:</label></td>
+                        <td>
+                            {{ form.buy_percent }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_note" class="col-form-label">Megj.:</label></td>
+                        <td>
+                            {{ form.note }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Baad</div>
+                        </td>
+                    </tr>
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+          <button class="btn btn-primary" type="submit">Mentés</button>
+    </form>
+</div>
 
 {% endif %}
 
 {% endblock content %}
+
