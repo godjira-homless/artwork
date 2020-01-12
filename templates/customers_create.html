@@ -3,11 +3,12 @@
 {% load crispy_forms_tags %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
-{% block title %}<title>Customers</title>{% endblock title %}
+{% block title %}<title>Új ügyfél rögzítése</title>{% endblock title %}
 
 {% block content %}
 
 {% if form %}
+
 <div class="container mt-2"><h4>Új ügyfél rögzítése</h4></div>
 <div class="container mt-2 my-container">
     <form method="POST" class="needs-validation" novalidate>

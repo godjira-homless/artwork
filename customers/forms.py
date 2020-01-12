@@ -11,34 +11,34 @@ class CustomerForm(forms.ModelForm):
         label="Név:", required=True, error_messages=my_default_errors,
         widget=forms.TextInput(attrs={'class': 'form-control form-control-sm', 'autofocus': 'autofocus'}))
     address = forms.CharField(
-        label="address",
+        label="address", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     city = forms.CharField(
-        label="city",
+        label="city", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     zip = forms.CharField(
-        label="zip",
+        label="zip", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     country = forms.CharField(
-        label="country",
+        label="country", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     bank = forms.CharField(
-        label="bank",
+        label="bank", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     phone = forms.CharField(
-        label="phone",
+        label="phone", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     email = forms.EmailField(
-        label="email",
+        label="email", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     taxnumber = forms.CharField(
-        label="taxnumber",
+        label="taxnumber", required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     sale_percent = forms.CharField(
-        label="sale_percent", initial=21,
+        label="sale_percent", initial=21, required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     buy_percent = forms.CharField(
-        label="buy_percent", initial=15,
+        label="buy_percent", initial=15, required=False,
         widget=forms.TextInput(attrs={'class': 'form-control  form-control-sm'}))
     note = forms.Textarea(attrs={'class': 'form-control  form-control-sm'})
 
