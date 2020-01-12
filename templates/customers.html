@@ -31,7 +31,7 @@
 
 {% if object_list %}
 <div class="mt-4 container">
-    <h3>Results</h3>
+    <h3>Results {{ object_list.count }} db</h3>
     <table class="table">
         <thead>
         <tr>
@@ -63,6 +63,12 @@
         </tbody>
     </table>
 </div>
+{% endif %}
+
+{% if object_list.count < 1 %}
+
+<div class="container">Nincs találat</div>
+
 {% endif %}
 
     {% endblock content %}
