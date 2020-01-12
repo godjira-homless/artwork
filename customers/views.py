@@ -26,8 +26,8 @@ def create_customer(request):
     return render(request, 'customers_create.html', {'form': form})
 
 
-def update_customer(request, id=None):
-    id = get_object_or_404(Customer, pk=id)
+def update_customer(request, slug):
+    id = get_object_or_404(Customer, slug=slug)
     form = CustomerForm(request.POST or None, instance=id)
     customer = form['name'].value()
     if form.is_valid():
