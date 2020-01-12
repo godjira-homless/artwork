@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% load crispy_forms_tags %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+
 {% block title %}<title>Ügyfelek</title>{% endblock title %}
+
 {% block content %}
 
 <div class="container mt-2 my-container">
@@ -50,14 +50,14 @@
         {% for customer in object_list %}
         <tr>
             <th scope="row">{{ customer.id }}</th>
-            <td><a href="{% url 'update_customer' customer.slug %}">{{ customer.name }}</a></td>
+            <td><a href="{% url 'update_customer' customer.id %}">{{ customer.name }}</a></td>
             <td>{{ customer.email }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ customer.city }}</td>
             <td>{{ customer.address }}</td>
             <td>{{ customer.zip }}</td>
             <td>{{ customer.country }}</td>
-            <td><a href="{% url 'update_customer' customer.slug %}">edit</a> delete</td>
+            <td><a href="{% url 'update_customer' customer.id %}">edit</a> delete</td>
         </tr>
         {% endfor %}
         </tbody>
