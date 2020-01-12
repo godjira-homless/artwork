@@ -2,24 +2,67 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}<title>Customers</title>{% endblock title %}
+{% block title %}<title>Ügyfelek</title>{% endblock title %}
 
 {% block content %}
 
-<div class="container">
+<div class="container mt-2 my-container">
     <div class="row">
-    <a href="{% url 'create_customer' %}">Create new customer</a>
+        <div class="col-sm">
+            <form action="{% url 'search_results' %}" method="get">
+              <input name="q" type="text" placeholder="Search...">
+                 <input type="submit" name="btn" value="keresés">
+            </form>
+        </div>
+        <div class="col-sm">
+            <a href="{% url 'create_customer' %}">
+                <button class="btn btn-primary">Új ügyfél</button>
+            </a>
+        </div>
+        <div class="col-sm">
+            {% for customer in customers %}
+            <div class="row">
+                <a href="{% url 'update_customer' customer.id %}">{{ customer.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
-{% if customers %}
-<div class="container">
-{% for customer in customers %}
-    <div class="row">
-        <a href="{% url 'update_customer' customer.id %}">{{ customer.name }}</a>
-    </div>
-{% endfor %}
+{% if object_list %}
+<div class="mt-4 container">
+    <h3>Results</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Név</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Mobil</th>
+            <th scope="col">Város</th>
+            <th scope="col">Utca</th>
+            <th scope="col">Irsz</th>
+            <th scope="col">Ország</th>
+            <th scope="col">action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for customer in object_list %}
+        <tr>
+            <th scope="row">{{ customer.id }}</th>
+            <td><a href="{% url 'update_customer' customer.id %}">{{ customer.name }}</a></td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.city }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.zip }}</td>
+            <td>{{ customer.country }}</td>
+            <td><a href="{% url 'update_customer' customer.id %}">edit</a> delete</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endif %}
 
-{% endblock content %}
+    {% endblock content %}

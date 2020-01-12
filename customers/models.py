@@ -25,7 +25,7 @@ class Customer(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('customer_detail', kwargs={'slug': self.slug})
+        return reverse('update_customer', kwargs={'id': self.id})
 
     def save(self, *args, **kwargs):
         if not self.slug:

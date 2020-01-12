@@ -1,6 +1,8 @@
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views.generic import ListView
 
 from .models import Customer
 from .forms import CustomerForm
@@ -35,3 +37,14 @@ def update_customer(request, id=None):
     context = {'form': form, 'customer': customer}
 
     return render(request, 'customers_update.html', context)
+
+class SearchResultsView(ListView):
+    model = Customer
+    template_name = 'customers.html'
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get('q')
+        object_list = Customer.objects.filter(
+            Q(name__icontains=query) | Q(email__icontains=query)
+        )
+        return object_list
