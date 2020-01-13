@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+{% block title %}<title>Technikák</title>{% endblock title %}
+{% block content %}
+<div class="container mt-2"><h4>Technikák adminisztráció</h4></div>
+
+<div class="container mt-2 my-container">
+    <div class="row">
+        <div class="col-sm">
+            <form action="{% url 'search_results' %}" method="get">
+              <input name="q" type="text" placeholder="Search...">
+                 <input type="submit" name="btn" value="keresés">
+            </form>
+        </div>
+        <div class="col-sm">
+            <a href="{% url 'create_technic' %}">
+                <button class="btn btn-primary">Új technika</button>
+            </a>
+        </div>
+        <div class="col-sm">
+        nope
+        </div>
+    </div>
+</div>
+
+{% if obj %}
+
+<div class="mt-4 container">
+    <h4>Results {{ obj.count }} db</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Név</th>
+            <th scope="col">action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for technic in obj %}
+        <tr>
+            <th scope="row">{{ technic.id }}</th>
+            <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
+            <td><a href="{% url 'update_customer' technic.slug %}">edit</a> delete</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock content %}
