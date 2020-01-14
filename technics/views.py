@@ -8,8 +8,8 @@ from .models import Technics
 
 
 def technics_list(request):
-    obj = Technics.objects.all()
-    context = {'obj': obj}
+    object_list = Technics.objects.all()
+    context = {'object_list': object_list}
     return render(request, 'technics_list.html', context)
 
 

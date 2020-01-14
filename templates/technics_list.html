@@ -26,10 +26,10 @@
     </div>
 </div>
 
-{% if obj %}
+{% if object_list %}
 
 <div class="mt-4 container">
-    <h4>Results {{ obj.count }} db</h4>
+    <h5>Results {{ object_list.count }} db</h5>
     <table class="table">
         <thead>
         <tr>
@@ -40,7 +40,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for technic in obj %}
+        {% for technic in object_list %}
         <tr>
             <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
@@ -52,5 +52,12 @@
     </table>
 </div>
 {% endif %}
+
+{% if object_list.count < 1 %}
+
+<div class="mt-4 container">Nincs találat</div>
+
+{% endif %}
+
 
 {% endblock content %}

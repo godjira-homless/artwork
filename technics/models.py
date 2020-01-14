@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 
 class Technics(models.Model):
-    name = models.CharField(max_length=120, blank=False, null=False)
+    name = models.CharField(max_length=120, blank=False, null=False, unique=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(null=False, unique=True)
