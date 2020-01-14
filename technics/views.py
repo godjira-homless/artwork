@@ -48,3 +48,10 @@ def update_technic(request, slug):
     context = {'form': form, 'technic': tech}
 
     return render(request, 'technics_update.html', context)
+
+
+def delete_technic(request, slug):
+    id = get_object_or_404(Technics, slug=slug)
+    form = Technics.objects.get(slug=slug)
+    form.delete()
+    return HttpResponseRedirect(reverse('technics_list'))

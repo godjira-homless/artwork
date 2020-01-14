@@ -45,7 +45,7 @@
             <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
             <td scope="row">{{ technic.create_date|date:"Y-m-d" }}</td>
-            <td><a href="{% url 'update_customer' technic.slug %}">edit</a> delete</td>
+            <td><a href="{% url 'delete_technic' technic.slug %}">delete</a></td>
         </tr>
         {% endfor %}
         </tbody>
