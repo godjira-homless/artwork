@@ -1,11 +1,10 @@
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView
 from .forms import TechnicForm
 from .models import Technics
-
 
 
 def technics_list(request):
@@ -39,4 +38,13 @@ def create_technic(request):
 
 
 def update_technic(request, slug):
-    pass
+    id = get_object_or_404(Technics, slug=slug)
+    form = TechnicForm(request.POST or None, instance=id)
+    tech = form['name'].value()
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('technics_list'))
+
+    context = {'form': form, 'technic': tech}
+
+    return render(request, 'technics_update.html', context)

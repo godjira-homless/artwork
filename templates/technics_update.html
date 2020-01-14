@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+{% block title %}<title>Technika szekesztése</title>{% endblock title %}
+
+{% block content %}
+
+{% if form %}
+
+<div class="container mt-2"><h4>Technika szerkesztése: {{ technic }}</h4></div>
+<div class="container mt-2 my-container">
+    <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                    <tr>
+                        <td>{{ form.name.label }}</td>
+                        <td>
+                            {{ form.name }}
+                            {{ form.name.errors }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">{{ form.name.errors }}</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+          <button class="btn btn-primary" type="submit">Mentés</button>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock content %}
+
