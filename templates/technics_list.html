@@ -35,14 +35,16 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Név</th>
+            <th scope="col">Dátum</th>
             <th scope="col">action</th>
         </tr>
         </thead>
         <tbody>
         {% for technic in obj %}
         <tr>
-            <th scope="row">{{ technic.id }}</th>
+            <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
+            <td scope="row">{{ technic.create_date|date:"Y-m-d" }}</td>
             <td><a href="{% url 'update_customer' technic.slug %}">edit</a> delete</td>
         </tr>
         {% endfor %}
