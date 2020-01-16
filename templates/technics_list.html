@@ -37,7 +37,6 @@
             <th scope="col">Név</th>
             <th scope="col">Dátum</th>
             <th scope="col">action</th>
-            <th>act2</th>
          </tr>
         </thead>
         <tbody>
@@ -48,17 +47,9 @@
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
             <td scope="row">{{ technic.create_date|date:"Y-m-d" }}</td>
             <td>
-                <form action="{% url 'delete_technic' technic.slug %}" method="post">
-                {% csrf_token %}
-                <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Biztosan törlöd');">Delete</button>
-                </form>
-
-            </td>
-            <td>
                 <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#uModal">
                     Delete
                 </button>
-
             </td>
         </tr>
         {% endfor %}
