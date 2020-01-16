@@ -11,10 +11,11 @@ from .models import Technics
 def technics_list(request):
     object_list = Technics.objects.all()
     paginator = Paginator(object_list, 5)
-    page_number = request.GET.get('page')
+    page_request_var = "page"
+    page_number = request.GET.get(page_request_var)
     page_obj = paginator.get_page(page_number)
 
-    context = {'object_list': object_list, 'page_obj': page_obj}
+    context = {'object_list': object_list, 'page_obj': page_obj, 'page_request_var': page_request_var}
     return render(request, 'technics_list.html', context)
 
 
@@ -23,11 +24,20 @@ class SearchResultsView(ListView):
     template_name = 'technics_list.html'
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('q')
+        context = super().get_context_data(**kwargs)
+        context['page_request_var'] = "q="+query+"&page"
+        context['object_list'] = Technics.objects.filter(Q(name__icontains=query))
+
+        return context
+
     def get_queryset(self):  # new
         query = self.request.GET.get('q')
         object_list = Technics.objects.filter(
             Q(name__icontains=query)
         )
+
         return object_list
 
 
