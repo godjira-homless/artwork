@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% include 'confirm_delete.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block css %}
@@ -37,7 +38,7 @@
             <th scope="col">Név</th>
             <th scope="col">Dátum</th>
             <th scope="col">action</th>
-        </tr>
+         </tr>
         </thead>
         <tbody>
         {% for technic in object_list %}
@@ -45,7 +46,13 @@
             <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
             <td scope="row">{{ technic.create_date|date:"Y-m-d" }}</td>
-            <td><a href="{% url 'delete_technic' technic.slug %}">delete</a></td>
+            <td>
+                <form action="{% url 'delete_technic' technic.slug %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Biztosan törlöd');">Delete</button>
+                </form>
+
+            </td>
         </tr>
         {% endfor %}
         </tbody>
@@ -61,3 +68,8 @@
 
 
 {% endblock content %}
+
+{% block script %}
+
+
+{% endblock script %}
