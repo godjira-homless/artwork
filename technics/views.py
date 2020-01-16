@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -9,13 +10,18 @@ from .models import Technics
 
 def technics_list(request):
     object_list = Technics.objects.all()
-    context = {'object_list': object_list}
+    paginator = Paginator(object_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'object_list': object_list, 'page_obj': page_obj}
     return render(request, 'technics_list.html', context)
 
 
 class SearchResultsView(ListView):
     model = Technics
     template_name = 'technics_list.html'
+    paginate_by = 5
 
     def get_queryset(self):  # new
         query = self.request.GET.get('q')

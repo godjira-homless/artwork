@@ -40,19 +40,42 @@
          </tr>
         </thead>
         <tbody>
-        {% for technic in object_list %}
-                {% include 'confirm_delete.html' %}
+        {% for technic in page_obj %}
         <tr>
             <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
             <td scope="row">{{ technic.create_date|date:"Y-m-d" }}</td>
             <td>
-                <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#uModal">
-                    Delete
-                </button>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_technic' technic.slug %}">Delete</a>
             </td>
         </tr>
         {% endfor %}
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+
+
+
         </tbody>
     </table>
 </div>
@@ -70,5 +93,7 @@
 {% endblock content %}
 
 {% block script %}
+
+
 
 {% endblock script %}
