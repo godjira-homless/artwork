@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% include 'confirm_delete.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block css %}
@@ -38,10 +37,12 @@
             <th scope="col">Név</th>
             <th scope="col">Dátum</th>
             <th scope="col">action</th>
+            <th>act2</th>
          </tr>
         </thead>
         <tbody>
         {% for technic in object_list %}
+                {% include 'confirm_delete.html' %}
         <tr>
             <td scope="row">{{ technic.id }}</td>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
@@ -53,12 +54,20 @@
                 </form>
 
             </td>
+            <td>
+                <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#uModal">
+                    Delete
+                </button>
+
+            </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 {% endif %}
+
+
 
 {% if object_list.count < 1 %}
 
@@ -70,6 +79,5 @@
 {% endblock content %}
 
 {% block script %}
-
 
 {% endblock script %}
