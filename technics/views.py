@@ -29,15 +29,13 @@ class SearchResultsView(ListView):
         context = super().get_context_data(**kwargs)
         context['page_request_var'] = "q="+query+"&page"
         context['object_list'] = Technics.objects.filter(Q(name__icontains=query))
-
         return context
 
-    def get_queryset(self):  # new
+    def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Technics.objects.filter(
             Q(name__icontains=query)
         )
-
         return object_list
 
 
