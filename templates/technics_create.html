@@ -10,7 +10,8 @@
 {% if form %}
 
 <div class="container mt-2"><h4>Új technika rögzítése</h4></div>
-<div class="container mt-2 my-container">
+<div class="container mt-2">
+  <div class="card-body" style="width: 36rem;">
     <form method="POST" class="needs-validation" novalidate>
         {% csrf_token %}
         <div class="row">
@@ -30,8 +31,9 @@
                 </table>
             </div>
         </div>
-                  <button class="btn btn-primary" type="submit">Mentés</button>
+                  <button class="btn btn-primary btn-sm" type="submit">Mentés</button>
     </form>
+   </div>
 </div>
 {% endif %}
 
