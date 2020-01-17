@@ -9,7 +9,7 @@ from .models import Technics
 
 
 def technics_list(request):
-    object_list = Technics.objects.all()
+    object_list = Technics.objects.all().order_by('-create_date')
     paginator = Paginator(object_list, 5)
     page_request_var = "page"
     page_number = request.GET.get(page_request_var)
@@ -35,7 +35,7 @@ class SearchResultsView(ListView):
         query = self.request.GET.get('q')
         object_list = Technics.objects.filter(
             Q(name__icontains=query)
-        )
+        ).order_by('-create_date')
         return object_list
 
 
