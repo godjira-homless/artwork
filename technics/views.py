@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -8,6 +9,7 @@ from .forms import TechnicForm
 from .models import Technics
 
 
+@login_required
 def technics_list(request):
     object_list = Technics.objects.all().order_by('-create_date')
     paginator = Paginator(object_list, 5)
@@ -27,7 +29,7 @@ class SearchResultsView(ListView):
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
         context = super().get_context_data(**kwargs)
-        context['page_request_var'] = "q="+query+"&page"
+        context['page_request_var'] = "q=" + query + "&page"
         context['object_list'] = Technics.objects.filter(Q(name__icontains=query))
         return context
 
@@ -39,6 +41,7 @@ class SearchResultsView(ListView):
         return object_list
 
 
+@login_required
 def create_technic(request):
     if request.method == 'POST':
         form = TechnicForm(request.POST)
@@ -51,6 +54,7 @@ def create_technic(request):
     return render(request, 'technics_create.html', {'form': form})
 
 
+@login_required
 def update_technic(request, slug):
     id = get_object_or_404(Technics, slug=slug)
     form = TechnicForm(request.POST or None, instance=id)
@@ -64,6 +68,7 @@ def update_technic(request, slug):
     return render(request, 'technics_update.html', context)
 
 
+@login_required
 def delete_technic(request, slug):
     id = get_object_or_404(Technics, slug=slug)
     form = Technics.objects.get(slug=slug)
