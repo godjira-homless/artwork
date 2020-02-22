@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -8,12 +9,14 @@ from .models import Customer
 from .forms import CustomerForm
 
 
+@login_required
 def index(request):
     customers = Customer.objects.all()
     context = {'customers': customers}
     return render(request, 'customers.html', context)
 
 
+@login_required
 def create_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
@@ -26,6 +29,7 @@ def create_customer(request):
     return render(request, 'customers_create.html', {'form': form})
 
 
+@login_required
 def update_customer(request, slug):
     id = get_object_or_404(Customer, slug=slug)
     form = CustomerForm(request.POST or None, instance=id)
@@ -37,6 +41,7 @@ def update_customer(request, slug):
     context = {'form': form, 'customer': customer}
 
     return render(request, 'customers_update.html', context)
+
 
 class SearchResultsView(ListView):
     model = Customer
