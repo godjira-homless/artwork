@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+{% block title %}<title>Edit appraiser</title>{% endblock title %}
+
+{% block content %}
+
+{% if form %}
+
+<div class="container mt-2"><h4>Edit appraiser</h4></div>
+<div class="container mt-2">
+   <div class="card-body" style="width: 36rem;">
+    <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                    <tr>
+                        <td>{{ form.name.label }}</td>
+                        <td>
+                            {{ form.name }}
+                            {{ form.name.errors }}
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">{{ form.name.errors }}</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+          <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+   </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}
+
