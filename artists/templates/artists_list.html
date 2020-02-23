@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
+{% block title %}<title>Artists</title>{% endblock title %}
+{% block content %}
+<div class="container mt-2"><h4>Artists</h4></div>
+
+<div class="container mt-2 my-container">
+    <div class="row">
+        <div class="col-sm">
+            <form action="" method="get">
+              <input name="q" type="text" value="" placeholder="Search..." autofocus="autofocus">
+                <button class="btn btn-secondary btn-sm">Search</button>
+            </form>
+        </div>
+        <div class="col-sm">
+            <a href="{% url 'create_artist' %}">
+                <button class="btn btn-primary btn-sm">New artist</button>
+            </a>
+        </div>
+        <div class="col-sm">
+
+        </div>
+    </div>
+</div>
+
+{% if object_list %}
+
+<div class="mt-4 container table-responsive">
+    <h5>Results {{ object_list.count }} db</h5>
+    <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Bio</th>
+            <th scope="col">Date</th>
+            <th scope="col">Created</th>
+            <th scope="col">Modified</th>
+            <th scope="col">Action</th>
+         </tr>
+        </thead>
+        <tbody>
+        {% for artist in page_obj %}
+        <tr>
+            <th scope="row">{{ artist.id }}</th>
+            <td><a href="{% url 'update_artist' artist.slug %}">{{ artist.name }}</a></td>
+            <td>{{ artist.bio }}</td>
+            <td>{{ artist.create_date|date:"Y-m-d" }}</td>
+            <td>{{ artist.created_by }}</td>
+            <td>{{ artist.modified_by }}</td>
+            <td>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_artist' artist.slug %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?{{ page_request_var }}=1">&laquo; first</a>
+                    <a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}">next</a>
+                    <a href="?{{ page_request_var }}={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+</div>
+{% endif %}
+
+
+
+{% if object_list.count < 1 %}
+
+<div class="mt-4 container">No results</div>
+
+{% endif %}
+
+
+{% endblock content %}
+
+{% block script %}
+
+
+
+{% endblock script %}

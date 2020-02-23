@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<p>id: {{ context.id }} and name: {{ context.name }}</p>
+
+<a href="{{ context.prev }}">back</a>
+
+{% endblock content %}

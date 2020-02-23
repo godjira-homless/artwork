@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" method="POST" id="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+
+ <script>
+   $(document).ready(function(){
+    $( "#id_artist" ).autocomplete({
+      source: "{% url 'auto_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_artist").val(ui.item.id)
+      }
+        });
+
+   });
+   </script>
+
+{% endblock scripts %}

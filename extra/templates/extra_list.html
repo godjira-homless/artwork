@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>Extra</p>
+{% if items.count == 0 %}
+<a href="{% url 'create_extra' %}">Create extra</a>
+{% endif %}
+<ul>
+    {% for item in items %}
+<li>{{ item.artist }} {{ item.owner }}  <a href="{% url 'update_extra' item.slug %}">Update</a>  <a href="{% url 'delete_extra' item.slug %}">Delete</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
