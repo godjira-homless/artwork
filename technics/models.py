@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -5,6 +7,9 @@ from django.utils.text import slugify
 
 class Technics(models.Model):
     name = models.CharField(max_length=120, blank=False, null=False, unique=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                   null=True, blank=True, related_name='created', on_delete=models.SET('1'))
+    modified_by = models.ForeignKey(User, null=True, related_name='modified', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(null=False, unique=True)

@@ -12,7 +12,7 @@ from .models import Technics
 @login_required
 def technics_list(request):
     object_list = Technics.objects.all().order_by('-create_date')
-    paginator = Paginator(object_list, 5)
+    paginator = Paginator(object_list, 20)
     page_request_var = "page"
     page_number = request.GET.get(page_request_var)
     page_obj = paginator.get_page(page_number)
@@ -24,7 +24,7 @@ def technics_list(request):
 class SearchResultsView(ListView):
     model = Technics
     template_name = 'technics_list.html'
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         query = self.request.GET.get('q')
@@ -46,11 +46,13 @@ def create_technic(request):
     if request.method == 'POST':
         form = TechnicForm(request.POST)
         if form.is_valid():
+            us = request.user
+            obj = form.save(commit=False)
+            obj.created_by = us
             form.save()
             return HttpResponseRedirect(reverse('technics_list'))
     else:
         form = TechnicForm()
-
     return render(request, 'technics_create.html', {'form': form})
 
 
@@ -60,11 +62,12 @@ def update_technic(request, slug):
     form = TechnicForm(request.POST or None, instance=id)
     tech = form['name'].value()
     if form.is_valid():
+        us = request.user
+        obj = form.save(commit=False)
+        obj.modified_by = us
         form.save()
         return HttpResponseRedirect(reverse('technics_list'))
-
     context = {'form': form, 'technic': tech}
-
     return render(request, 'technics_update.html', context)
 
 

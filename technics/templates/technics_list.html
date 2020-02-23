@@ -2,25 +2,25 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
-{% block title %}<title>Technikák</title>{% endblock title %}
+{% block title %}<title>Technics</title>{% endblock title %}
 {% block content %}
-<div class="container mt-2"><h4>Technikák adminisztráció</h4></div>
+<div class="container mt-2"><h4>Technics</h4></div>
 
 <div class="container mt-2 my-container">
     <div class="row">
         <div class="col-sm">
             <form action="{% url 'search_results' %}" method="get">
-              <input name="q" type="text" value="" placeholder="Keresés..." autofocus="autofocus">
-                <button class="btn btn-secondary btn-sm">Keresés</button>
+              <input name="q" type="text" value="" placeholder="Search..." autofocus="autofocus">
+                <button class="btn btn-secondary btn-sm">Search</button>
             </form>
         </div>
         <div class="col-sm">
             <a href="{% url 'create_technic' %}">
-                <button class="btn btn-primary btn-sm">Új technika</button>
+                <button class="btn btn-primary btn-sm">New technic</button>
             </a>
         </div>
         <div class="col-sm">
-        nope
+
         </div>
     </div>
 </div>
@@ -33,9 +33,11 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Név</th>
-            <th scope="col">Dátum</th>
-            <th scope="col">action</th>
+            <th scope="col">Technic</th>
+            <th scope="col">Date</th>
+            <th scope="col">Created</th>
+            <th scope="col">Modified</th>
+            <th scope="col">Action</th>
          </tr>
         </thead>
         <tbody>
@@ -44,6 +46,8 @@
             <th scope="row">{{ technic.id }}</th>
             <td><a href="{% url 'update_technic' technic.slug %}">{{ technic.name }}</a></td>
             <td>{{ technic.create_date|date:"Y-m-d" }}</td>
+            <td>{{ technic.created_by }}</td>
+            <td>{{ technic.modified_by }}</td>
             <td>
                 <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_technic' technic.slug %}">Delete</a>
             </td>
