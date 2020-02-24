@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -10,7 +11,13 @@ from .forms import ArtistForm
 
 @login_required
 def artists_list(request):
+    # artists = Artists.objects.all().order_by('name')
     artists = Artists.objects.all().order_by('name')
+    query = request.GET.get("q")
+    if query:
+        artists = artists.filter(
+            Q(name__icontains=query) | Q(bio__icontains=query)
+        )
     paginator = Paginator(artists, 20)
     page_request_var = "page"
     page_number = request.GET.get(page_request_var)
