@@ -39,7 +39,7 @@ def update_artist(request, slug):
     if form.is_valid():
         form.save()
         return HttpResponseRedirect(reverse('artists_list'))
-    return render(request, 'form.html', {'form': form})
+    return render(request, 'update_artist.html', {'form': form})
 
 
 @login_required
