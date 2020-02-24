@@ -6,6 +6,6 @@ urlpatterns = [
     #path('search/', ArtistResults.as_view(), name='artist_search'),
     # path('<int:id>/', views.artist_detail, name='artist_detail'),
     path('create/', views.create_artist, name='create_artist'),
-    path('update_artist/<int:id>', views.update_artist, name='update_artist'),
-    path('delete_artist/<int:id>', views.delete_artist, name='delete_artist'),
+    path('update_artist/<slug:slug>', views.update_artist, name='update_artist'),
+    path('delete_artist/<slug:slug>', views.delete_artist, name='delete_artist'),
 ]

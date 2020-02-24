@@ -13,7 +13,7 @@ class Extras(models.Model):
     modified_by = models.ForeignKey(User, null=True, related_name='extra_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modify_date = models.DateTimeField(auto_now=True, null=True, blank=True)
-    slug = models.SlugField(null=False, unique=True, default="5")
+    slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
         return str(str(self.artist))
@@ -29,8 +29,8 @@ class Extras(models.Model):
             self.slug = self.get_unique_slug(self.id, self.artist, Extras.objects)
         return super().save(*args, **kwargs)
 
-    def get_unique_slug(self, id, title, obj):
-        slug = slugify(title)
+    def get_unique_slug(self, id, artist, obj):
+        slug = slugify(artist)
         unique_slug = slug
         counter = 1
         while obj.filter(slug=unique_slug).exists():

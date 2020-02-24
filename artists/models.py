@@ -13,7 +13,7 @@ class Artists(models.Model):
     modified_by = models.ForeignKey(User, null=True, related_name='artist_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modify_date = models.DateTimeField(auto_now=True, null=True, blank=True)
-    slug = models.SlugField(null=False, unique=True, default="5")
+    slug = models.SlugField(null=False, unique=True)
 
     class Meta:
         verbose_name_plural = "Művészek"

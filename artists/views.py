@@ -10,7 +10,7 @@ from .forms import ArtistForm
 
 @login_required
 def artists_list(request):
-    artists = Artists.objects.all()
+    artists = Artists.objects.all().order_by('-create_date')
     paginator = Paginator(artists, 20)
     page_request_var = "page"
     page_number = request.GET.get(page_request_var)
