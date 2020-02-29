@@ -54,4 +54,9 @@ def update_artist(request, slug):
 
 @login_required
 def delete_artist(request, slug):
-    pass
+    obj = get_object_or_404(Artists, slug=slug)
+    context = {'obj': obj}
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect(reverse('artists_list'))
+    return render(request, "artists_delete.html", context)
