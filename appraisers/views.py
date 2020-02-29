@@ -47,5 +47,10 @@ def update_appraiser(request, slug):
 
 
 @login_required
-def delete_appraiser(request):
-    pass
+def delete_appraiser(request, slug):
+    obj = get_object_or_404(Appraisers, slug=slug)
+    context = {'obj': obj}
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect(reverse('appraisers_list'))
+    return render(request, "appraisers_delete.html", context)
