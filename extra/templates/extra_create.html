@@ -10,9 +10,10 @@
 
 {% endblock content %}
 
-{% block scripts %}
 
- <script>
+{% block script %}
+
+<script>
    $(document).ready(function(){
     $( "#id_artist" ).autocomplete({
       source: "{% url 'auto_complete' %}",
@@ -24,6 +25,6 @@
         });
 
    });
-   </script>
+</script>
 
-{% endblock scripts %}
+{% endblock script %}
