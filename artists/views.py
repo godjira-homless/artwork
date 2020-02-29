@@ -44,6 +44,9 @@ def update_artist(request, slug):
     id = get_object_or_404(Artists, slug=slug)
     form = ArtistForm(request.POST or None, instance=id)
     if form.is_valid():
+        us = request.user
+        obj = form.save(commit=False)
+        obj.modified_by = us
         form.save()
         return HttpResponseRedirect(reverse('artists_list'))
     return render(request, 'update_artist.html', {'form': form})
