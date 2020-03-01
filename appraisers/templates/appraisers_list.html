@@ -44,12 +44,12 @@
         {% for appraiser in page_obj %}
         <tr>
             <th scope="row">{{ appraiser.id }}</th>
-            <td><a href="{% url 'update_appraiser' appraiser.slug %}">{{ appraiser.name }}</a></td>
+            <td><a href="{% url 'update_appraiser' appraiser.id %}">{{ appraiser.name }}</a></td>
             <td>{{ appraiser.create_date|date:"Y-m-d" }}</td>
             <td>{{ appraiser.created_by }}</td>
             <td>{{ appraiser.modified_by }}</td>
             <td>
-                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_appraiser' appraiser.slug %}">Delete</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_appraiser' appraiser.id %}">Delete</a>
             </td>
         </tr>
         {% endfor %}

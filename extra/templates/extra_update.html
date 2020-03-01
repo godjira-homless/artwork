@@ -29,6 +29,18 @@
         });
 
    });
+
+   $(document).ready(function(){
+    $( "#id_appraiser" ).autocomplete({
+      source: "{% url 'appraiser_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_appraiser").val(ui.item.id)
+      }
+        });
+
+   });
    </script>
 
 {% endblock script %}

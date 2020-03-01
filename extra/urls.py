@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from artists import views as artview
+from appraisers import views as appview
 
 urlpatterns = [
 
@@ -10,6 +11,7 @@ urlpatterns = [
     path('delete/<slug:slug>', views.delete_extra, name='delete_extra'),
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),
     path('auto_complete/', artview.auto_complete, name='auto_complete'),
+    path('appraiser_complete/', appview.appraiser_complete, name='appraiser_complete'),
 
 ]
 

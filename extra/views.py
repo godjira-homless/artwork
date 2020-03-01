@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from artists.models import Artists
+from appraisers.models import Appraisers
 # from tetelek.forms import TetelekForm
 from .models import Extras
 from .forms import ExtrasForm
@@ -44,7 +45,12 @@ def update_extra(request, slug):
         artist_name = Artists.objects.values_list('name', flat=True).get(pk=aid)
     else:
         artist_name = ""
-    form = ExtrasForm(request.POST or None, initial={'artist': artist_name}, instance=instance)
+    apid = fr.initial['appraiser']
+    if apid:
+        appraiser_name = Appraisers.objects.values_list('name', flat=True).get(pk=apid)
+    else:
+        appraiser_name = ""
+    form = ExtrasForm(request.POST or None, initial={'artist': artist_name, 'appraiser': appraiser_name}, instance=instance)
     if form.is_valid():
         # obj = form.save(commit=False)
         form.save()
@@ -60,3 +66,4 @@ def delete_extra(request, slug):
         return HttpResponseRedirect(reverse('extra_list'))
     else:
         return HttpResponseRedirect(reverse('extra_list'))
+

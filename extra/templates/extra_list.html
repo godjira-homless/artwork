@@ -22,6 +22,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Appraiser</th>
             <th scope="col">Date</th>
             <th scope="col">Owner</th>
             <th scope="col">Last modified</th>
@@ -34,6 +35,7 @@
         <tr>
             <th scope="row">{{ item.id }}</th>
             <td><a href="{% url 'update_extra' item.slug %}">{{ item.artist }}</a></td>
+            <td><a href="{% url 'update_extra' item.slug %}">{{ item.appraiser }}</a></td>
             <td>{{ item.create_date|date:"Y-m-d" }}</td>
             <td>{{ item.owner }}</td>
             <td data-toggle="tooltip" data-placement="top" title="{{ item.modify_date | timesince }} ago">{{ item.modify_date|timesince }} ago</td>

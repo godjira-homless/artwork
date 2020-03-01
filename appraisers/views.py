@@ -1,6 +1,9 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.db.models import Q
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
@@ -54,3 +57,18 @@ def delete_appraiser(request, slug):
         obj.delete()
         return HttpResponseRedirect(reverse('appraisers_list'))
     return render(request, "appraisers_delete.html", context)
+
+
+@login_required
+def appraiser_complete(request):
+    q = request.GET.get('term', '')
+    users = Appraisers.objects.filter(Q(name__icontains=q))
+    users_list = []
+
+    for u in users:
+        value = '%s' % (u.name)
+        u_dict = {'id': u.id, 'label': value}
+        users_list.append(u_dict)
+    data = json.dumps(users_list)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
