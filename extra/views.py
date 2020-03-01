@@ -46,7 +46,7 @@ def update_extra(request, slug):
         artist_name = ""
     form = ExtrasForm(request.POST or None, initial={'artist': artist_name}, instance=instance)
     if form.is_valid():
-        obj = form.save(commit=False)
+        # obj = form.save(commit=False)
         form.save()
         return HttpResponseRedirect(reverse('extra_list'))
     return render(request, 'extra_update.html', {'form': form})

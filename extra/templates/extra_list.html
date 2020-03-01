@@ -1,15 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<p>Extra</p>
-{% if items.count == 0 %}
-<a href="{% url 'create_extra' %}">Create extra</a>
-{% endif %}
-<ul>
-    {% for item in items %}
-<li>{{ item.artist }} {{ item.owner }}  <a href="{% url 'update_extra' item.slug %}">Update</a>  <a href="{% url 'delete_extra' item.slug %}">Delete</a></li>
-    {% endfor %}
-</ul>
+<div class="container mt-2 my-container">
+    <div class="row">
+            <div class="col-sm">
+            <h4>Extra basic values</h4>
+            {% if items.count == 0 %}
+                <div class="col-sm">
+                    <a href="{% url 'create_extra' %}">
+                    <button class="btn btn-primary btn-sm">New extra artist</button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="mt-4 container table-responsive">
+    <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Last modified</th>
+            <th scope="col">Action</th>
+         </tr>
+        </thead>
+        <tbody>
+
+        {% for item in items %}
+        <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td><a href="{% url 'update_extra' item.slug %}">{{ item.artist }}</a></td>
+            <td>{{ item.create_date|date:"Y-m-d" }}</td>
+            <td>{{ item.owner }}</td>
+            <td data-toggle="tooltip" data-placement="top" title="{{ item.modify_date | timesince }} ago">{{ item.modify_date|timesince }} ago</td>
+            <td>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.slug %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}
 
