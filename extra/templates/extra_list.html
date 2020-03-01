@@ -6,7 +6,12 @@
             <div class="col-sm">
             <h4>Extra basic values</h4>
             {% if items.count == 0 %}
-                <div class="col-sm">
+                <div class="col-sm mt-2">
+                    Owner: {{ item.owner }}
+                    Created: {{ item.create_date|date:"Y-m-d" }}
+                    Modified: {{ item.modify_date|timesince }} ago
+                </div>
+                <div class="col-sm mt-2">
                     <a href="{% url 'create_extra' %}">
                     <button class="btn btn-primary btn-sm">New extra artist</button>
                     </a>
@@ -20,12 +25,11 @@
     <table class="table table-hover table-sm">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Artist</th>
             <th scope="col">Appraiser</th>
-            <th scope="col">Date</th>
-            <th scope="col">Owner</th>
-            <th scope="col">Last modified</th>
+            <th scope="col">Technic</th>
+            <th scope="col">Title</th>
+            <th scope="col">Worknumber</th>
             <th scope="col">Action</th>
          </tr>
         </thead>
@@ -33,14 +37,14 @@
 
         {% for item in items %}
         <tr>
-            <th scope="row">{{ item.id }}</th>
-            <td><a href="{% url 'update_extra' item.slug %}">{{ item.artist }}</a></td>
-            <td><a href="{% url 'update_extra' item.slug %}">{{ item.appraiser }}</a></td>
-            <td>{{ item.create_date|date:"Y-m-d" }}</td>
-            <td>{{ item.owner }}</td>
-            <td data-toggle="tooltip" data-placement="top" title="{{ item.modify_date | timesince }} ago">{{ item.modify_date|timesince }} ago</td>
+            <td>{{ item.artist }}</td>
+            <td>{{ item.appraiser }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>
-                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.slug %}">Delete</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
+                <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>
             </td>
         </tr>
         {% endfor %}

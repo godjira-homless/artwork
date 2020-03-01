@@ -34,11 +34,11 @@ def create_extra(request):
 
 
 @login_required
-def update_extra(request, slug):
-    only_the_owner = Extras.objects.filter(owner=request.user, slug=slug)
+def update_extra(request, id):
+    only_the_owner = Extras.objects.filter(owner=request.user, id=id)
     if not only_the_owner:
         return HttpResponseRedirect(reverse('extra_list'))
-    instance = get_object_or_404(Extras, slug=slug)
+    instance = get_object_or_404(Extras, id=id)
     fr = ExtrasForm(request.POST, instance=instance)
     aid = fr.initial['artist']
     if aid:
@@ -59,8 +59,8 @@ def update_extra(request, slug):
 
 
 @login_required
-def delete_extra(request, slug):
-    instance = get_object_or_404(Extras, slug=slug, owner=request.user)
+def delete_extra(request, id):
+    instance = get_object_or_404(Extras, id=id, owner=request.user)
     if instance:
         instance.delete()
         return HttpResponseRedirect(reverse('extra_list'))
