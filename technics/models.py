@@ -8,8 +8,8 @@ from django.utils.text import slugify
 class Technics(models.Model):
     name = models.CharField(max_length=120, blank=False, null=False, unique=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                   null=True, blank=True, related_name='created', on_delete=models.SET('1'))
-    modified_by = models.ForeignKey(User, null=True, related_name='modified', on_delete=models.SET('1'))
+                                   null=True, blank=True, related_name='technic_creator', on_delete=models.SET('1'))
+    modified_by = models.ForeignKey(User, null=True, related_name='technic_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(null=False, unique=True)

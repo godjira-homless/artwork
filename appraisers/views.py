@@ -13,7 +13,7 @@ from .forms import AppraiserForm
 
 @login_required
 def appraisers_list(request):
-    appraisers = Appraisers.objects.all()
+    appraisers = Appraisers.objects.all().order_by('name')
     paginator = Paginator(appraisers, 20)
     page_request_var = "page"
     page_number = request.GET.get(page_request_var)
@@ -37,8 +37,8 @@ def create_appraiser(request):
 
 @login_required
 def update_appraiser(request, slug):
-    id = get_object_or_404(Appraisers, slug=slug)
-    form = AppraiserForm(request.POST or None, instance=id)
+    instance = get_object_or_404(Appraisers, slug=slug)
+    form = AppraiserForm(request.POST or None, instance=instance)
     if form.is_valid():
         us = request.user
         obj = form.save(commit=False)
