@@ -41,6 +41,18 @@
         });
 
    });
+
+      $(document).ready(function(){
+    $( "#id_technic" ).autocomplete({
+      source: "{% url 'technic_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_technic").val(ui.item.id)
+      }
+        });
+
+   });
    </script>
 
 {% endblock script %}

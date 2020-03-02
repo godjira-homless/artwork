@@ -1,7 +1,9 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView
@@ -77,3 +79,18 @@ def delete_technic(request, slug):
     form = Technics.objects.get(slug=slug)
     form.delete()
     return HttpResponseRedirect(reverse('technics_list'))
+
+
+@login_required
+def technic_complete(request):
+    q = request.GET.get('term', '')
+    users = Technics.objects.filter(Q(name__icontains=q))
+    users_list = []
+
+    for u in users:
+        value = '%s' % (u.name)
+        u_dict = {'id': u.id, 'label': value}
+        users_list.append(u_dict)
+    data = json.dumps(users_list)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)

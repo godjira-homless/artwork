@@ -4,12 +4,16 @@ from django.urls import reverse
 from django.utils.text import slugify
 from artists.models import Artists
 from appraisers.models import Appraisers
+from technics.models import Technics
 from django.contrib.auth.models import User
 
 
 class Extras(models.Model):
     artist = models.ForeignKey(Artists, null=True, blank=True, on_delete=models.SET_NULL)
-    appraiser = models.ForeignKey(Appraisers, null=True, blank=True, related_name='appraiser_extra', on_delete=models.SET_NULL)
+    appraiser = models.ForeignKey(Appraisers, null=True, blank=True, related_name='appraiser_extra',
+                                  on_delete=models.SET_NULL)
+    technic = models.ForeignKey(Technics, null=True, blank=True, related_name='technic_extra',
+                                  on_delete=models.SET_NULL)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                               null=True, blank=True, related_name='extra_owner', on_delete=models.CASCADE)
     modified_by = models.ForeignKey(User, null=True, related_name='extra_modifier', on_delete=models.SET('1'))

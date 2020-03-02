@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from artists.models import Artists
 from appraisers.models import Appraisers
+from technics.models import Technics
 # from tetelek.forms import TetelekForm
 from .models import Extras
 from .forms import ExtrasForm
@@ -50,7 +51,13 @@ def update_extra(request, id):
         appraiser_name = Appraisers.objects.values_list('name', flat=True).get(pk=apid)
     else:
         appraiser_name = ""
-    form = ExtrasForm(request.POST or None, initial={'artist': artist_name, 'appraiser': appraiser_name}, instance=instance)
+    techid = fr.initial['technic']
+    if techid:
+        technic_name = Technics.objects.values_list('name', flat=True).get(pk=techid)
+    else:
+        technic_name = ""
+    form = ExtrasForm(request.POST or None, initial={'artist': artist_name, 'appraiser': appraiser_name, 'technic': technic_name},
+                      instance=instance)
     if form.is_valid():
         # obj = form.save(commit=False)
         form.save()
@@ -66,4 +73,3 @@ def delete_extra(request, id):
         return HttpResponseRedirect(reverse('extra_list'))
     else:
         return HttpResponseRedirect(reverse('extra_list'))
-
