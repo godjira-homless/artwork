@@ -42,7 +42,7 @@
          </tr>
         </thead>
         <tbody>
-        {% for artist in page_obj %}
+        {% for artist in object_list %}
         <tr>
             <th scope="row">{{ artist.id }}</th>
             <td><a href="{% url 'update_artist' artist.slug %}">{{ artist.name }}</a></td>

@@ -41,10 +41,10 @@
          </tr>
         </thead>
         <tbody>
-        {% for appraiser in page_obj %}
+        {% for appraiser in object_list %}
         <tr>
             <th scope="row">{{ appraiser.id }}</th>
-            <td><a href="{% url 'update_appraiser' appraiser.slug %}">{{ appraiser.name }}</a></td>
+            <td><a href="{{ appraiser.get_absolute_url }}">{{ appraiser.name }}</a></td>
             <td>{{ appraiser.create_date|date:"Y-m-d" }}</td>
             <td>{{ appraiser.created_by }}</td>
             <td>{{ appraiser.modified_by }}</td>

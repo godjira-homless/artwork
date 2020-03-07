@@ -50,7 +50,7 @@
             <td>{{ technic.created_by }}</td>
             <td>{{ technic.modified_by }}</td>
             <td>
-                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_technic' 'a' %}">Delete</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_technic' technic.slug %}">Delete</a>
             </td>
         </tr>
         {% endfor %}

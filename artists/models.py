@@ -13,7 +13,7 @@ class Artists(models.Model):
     modified_by = models.ForeignKey(User, null=True, related_name='artist_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modify_date = models.DateTimeField(auto_now=True, null=True, blank=True)
-    slug = models.SlugField(null=False, unique=True)
+    slug = models.SlugField(null=True, unique=True)
 
     class Meta:
         verbose_name_plural = "Művészek"
@@ -22,7 +22,7 @@ class Artists(models.Model):
         return str(self.name)
 
     def get_absolute_url(self):
-        return reverse('artist_list', kwargs={'slug': self.slug})
+        return reverse('update_artist', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -31,7 +31,9 @@ class Artists(models.Model):
         return super().save(*args, **kwargs)
 
     def get_unique_slug(self, id, name, obj):
-        slug = slugify(name)
+        slug = slugify(name).strip()
+        if slug == '':
+            slug = '1'
         unique_slug = slug
         counter = 1
         while obj.filter(slug=unique_slug).exists():
