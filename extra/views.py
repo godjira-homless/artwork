@@ -56,7 +56,7 @@ def update_extra(request, id):
         technic_name = Technics.objects.values_list('name', flat=True).get(pk=techid)
     else:
         technic_name = ""
-    form = ExtrasForm(request.POST or None, initial={'artist': artist_name, 'appraiser': appraiser_name, 'technic': technic_name},
+    form = ExtrasForm(request.POST or None, initial={'ai': aid, 'artist': artist_name, 'appraiser': appraiser_name, 'technic': technic_name},
                       instance=instance)
     if form.is_valid():
         # obj = form.save(commit=False)

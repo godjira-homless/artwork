@@ -12,18 +12,25 @@ class ExtrasForm(forms.ModelForm):
     artist = forms.CharField(max_length=100, required=False)
     appraiser = forms.CharField(max_length=100, required=False)
     technic = forms.CharField(max_length=100, required=False)
+    ai = forms.CharField(max_length=100, required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = Extras
         fields = (
             'artist',
+            'ai',
             'appraiser',
             'technic',
                   )
 
+    def clean_ai(self):
+        ai = self.cleaned_data.get("ai")
+        return ai
+
     def clean_artist(self, commit=True):
-        artist = self.cleaned_data.get("artist")
-        artist, created = Artists.objects.get_or_create(name=artist)
+        # artist = self.cleaned_data.get("artist")
+        aid = self.data['ai']
+        artist, created = Artists.objects.get_or_create(pk=aid)
         self.cleaned_data['artist'] = artist
         return artist
 
