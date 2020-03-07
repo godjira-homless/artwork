@@ -18,7 +18,7 @@ class Technics(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('update_technics', kwargs={'slug': self.slug})
+        return reverse('update_technic', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:

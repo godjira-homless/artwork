@@ -43,9 +43,9 @@
         <tbody>
         {% for technic in object_list %}
 
-        <tr>
+        <a>
             <th scope="row">{{ technic.id }}</th>
-            <td><a href="{% url 'update_technic' 'a' %}">{{ technic.name }}</a></td>
+            <td><a href="{{ technic.get_absolute_url }}">{{ technic.name }}</a></td>
             <td>{{ technic.create_date|date:"Y-m-d" }}</td>
             <td>{{ technic.created_by }}</td>
             <td>{{ technic.modified_by }}</td>
