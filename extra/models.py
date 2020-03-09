@@ -14,6 +14,7 @@ class Extras(models.Model):
                                   on_delete=models.SET_NULL)
     technic = models.ForeignKey(Technics, null=True, blank=True, related_name='technic_extra',
                                   on_delete=models.SET_NULL)
+    title = models.CharField(max_length=255, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                               null=True, blank=True, related_name='extra_owner', on_delete=models.CASCADE)
     modified_by = models.ForeignKey(User, null=True, related_name='extra_modifier', on_delete=models.SET('1'))
