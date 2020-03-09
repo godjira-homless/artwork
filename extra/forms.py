@@ -14,6 +14,7 @@ class ExtrasForm(forms.ModelForm):
     technic = forms.CharField(max_length=100, required=False)
     ai = forms.CharField(max_length=100, required=False, widget=forms.HiddenInput())
     title = forms.CharField(max_length=255, required=False)
+    worknumber = forms.IntegerField(required=False)
 
     class Meta:
         model = Extras
@@ -23,6 +24,7 @@ class ExtrasForm(forms.ModelForm):
             'appraiser',
             'technic',
             'title',
+            'worknumber',
                   )
 
     def clean_ai(self):
@@ -51,6 +53,10 @@ class ExtrasForm(forms.ModelForm):
     def clean_title(self, commit=True):
         title = self.cleaned_data.get("title")
         return title
+
+    def clean_worknumber(self, commit=True):
+        worknumber = self.cleaned_data.get("worknumber")
+        return worknumber
 
     def __init__(self, *args, **kwargs):
         super(ExtrasForm, self).__init__(*args, **kwargs)

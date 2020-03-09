@@ -12,7 +12,7 @@ class Technics(models.Model):
     modified_by = models.ForeignKey(User, null=True, related_name='technic_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(null=False, unique=True)
+    slug = models.SlugField(null=True, unique=True)
 
     def __str__(self):
         return self.name
@@ -28,6 +28,8 @@ class Technics(models.Model):
 
     def get_unique_slug(self, id, name, obj):
         slug = slugify(name)
+        if slug == '':
+            slug = '1'
         unique_slug = slug
         counter = 1
         while obj.filter(slug=unique_slug).exists():

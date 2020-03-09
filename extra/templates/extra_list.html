@@ -5,19 +5,27 @@
     <div class="row">
             <div class="col-sm">
             <h4>Extra basic values</h4>
-            {% if items.count == 0 %}
-                <div class="col-sm mt-2">
-                    Owner: {{ item.owner }}
-                    Created: {{ item.create_date|date:"Y-m-d" }}
-                    Modified: {{ item.modify_date|timesince }} ago
+            {% if items %}
+                <div class="container">
+                {% for item in items %}
+                    <div class="row">
+                        <a class="btn btn-lg btn-primary" href="">
+                            <i class="glyphicon glyphicon-user pull-left"></i>
+                            <span>{{ item.owner }}<br>
+                            <small>Created: {{ item.create_date|date:"Y-m-d" }}</small></span></a>
+                    </div>
                 </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% if items.count == 0 %}
                 <div class="col-sm mt-2">
                     <a href="{% url 'create_extra' %}">
                     <button class="btn btn-primary btn-sm">New extra artist</button>
                     </a>
                 </div>
             {% endif %}
-        </div>
     </div>
 </div>
 
@@ -41,7 +49,7 @@
             <td>{{ item.appraiser }}</td>
             <td>{{ item.technic }}</td>
             <td>{{ item.title }}</td>
-            <td></td>
+            <td>{{ item.worknumber }}</td>
             <td>
                 <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>
