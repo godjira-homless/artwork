@@ -39,6 +39,8 @@ class Extras(models.Model):
 
     def get_unique_slug(self, id, artist, obj):
         slug = slugify(artist)
+        if slug == '':
+            slug = '1'
         unique_slug = slug
         counter = 1
         while obj.filter(slug=unique_slug).exists():
