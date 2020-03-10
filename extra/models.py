@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 class Extras(models.Model):
-    artist = models.ForeignKey(Artists, null=True, blank=True, on_delete=models.SET_NULL)
+    artist = models.ForeignKey(Artists, null=True, blank=True, related_name='artist_extra', on_delete=models.SET_NULL)
     appraiser = models.ForeignKey(Appraisers, null=True, blank=True, related_name='appraiser_extra',
                                   on_delete=models.SET_NULL)
     technic = models.ForeignKey(Technics, null=True, blank=True, related_name='technic_extra',

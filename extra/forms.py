@@ -34,9 +34,13 @@ class ExtrasForm(forms.ModelForm):
     def clean_artist(self, commit=True):
         # artist = self.cleaned_data.get("artist")
         aid = self.data['ai']
-        artist, created = Artists.objects.get_or_create(pk=aid)
-        self.cleaned_data['artist'] = artist
+        if aid:
+            artist, created = Artists.objects.get_or_create(pk=aid)
+            self.cleaned_data['artist'] = artist
+        else:
+            artist = None
         return artist
+
 
     def clean_appraiser(self, commit=True):
         appraiser = self.cleaned_data.get("appraiser")
