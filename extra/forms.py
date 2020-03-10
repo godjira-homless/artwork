@@ -12,7 +12,9 @@ class ExtrasForm(forms.ModelForm):
     artist = forms.CharField(max_length=100, required=False)
     appraiser = forms.CharField(max_length=100, required=False)
     technic = forms.CharField(max_length=100, required=False)
-    ai = forms.CharField(max_length=100, required=False, widget=forms.HiddenInput())
+    ai = forms.CharField(max_length=10, required=False, widget=forms.HiddenInput())
+    api = forms.IntegerField(required=False, widget=forms.HiddenInput())
+    ti = forms.IntegerField(required=False, widget=forms.HiddenInput())
     title = forms.CharField(max_length=255, required=False)
     worknumber = forms.IntegerField(required=False)
 
@@ -21,6 +23,8 @@ class ExtrasForm(forms.ModelForm):
         fields = (
             'artist',
             'ai',
+            'api',
+            'ti',
             'appraiser',
             'technic',
             'title',
@@ -41,17 +45,24 @@ class ExtrasForm(forms.ModelForm):
             artist = None
         return artist
 
-
     def clean_appraiser(self, commit=True):
-        appraiser = self.cleaned_data.get("appraiser")
-        appraiser, created = Appraisers.objects.get_or_create(name=appraiser)
-        self.cleaned_data['appraiser'] = appraiser
+        # appraiser = self.cleaned_data.get("appraiser")
+        apid = self.data['api']
+        if apid:
+            appraiser, created = Appraisers.objects.get_or_create(pk=apid)
+            self.cleaned_data['appraiser'] = appraiser
+        else:
+            appraiser = None
         return appraiser
 
     def clean_technic(self, commit=True):
-        technic = self.cleaned_data.get("technic")
-        technic, created = Technics.objects.get_or_create(name=technic)
-        self.cleaned_data['technic'] = technic
+        # technic = self.cleaned_data.get("technic")
+        tid = self.data['ti']
+        if tid:
+            technic, created = Technics.objects.get_or_create(pk=tid)
+            self.cleaned_data['technic'] = technic
+        else:
+            technic = None
         return technic
 
     def clean_title(self, commit=True):
@@ -60,6 +71,10 @@ class ExtrasForm(forms.ModelForm):
 
     def clean_worknumber(self, commit=True):
         worknumber = self.cleaned_data.get("worknumber")
+        if worknumber:
+            self.cleaned_data['worknumber'] = worknumber
+        else:
+            worknumber = None
         return worknumber
 
     def __init__(self, *args, **kwargs):
