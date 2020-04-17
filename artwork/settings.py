@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'appraisers',
     'artists',
     'extra',
+    'lots',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -81,13 +82,35 @@ WSGI_APPLICATION = 'artwork.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'artplein',
+#        'USER': 'django',
+#        'PASSWORD': 'django',
+#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
+#    }
+# }
+# artdjango.mysql.pythonanywhere-services.com
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lwowdonz',
+        'USER': 'lwowdonz',
+        'PASSWORD': 'V1sqBQJ9MOS44NDRpeFAenCSgYWsXTkc',
+        'HOST': 'rogue.db.elephantsql.com',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

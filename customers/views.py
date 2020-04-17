@@ -21,6 +21,9 @@ def create_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
         if form.is_valid():
+            us = request.user
+            obj = form.save(commit=False)
+            obj.creator = us
             form.save()
             return HttpResponseRedirect(reverse('customers_list'))
     else:
@@ -35,6 +38,9 @@ def update_customer(request, slug):
     form = CustomerForm(request.POST or None, instance=id)
     customer = form['name'].value()
     if form.is_valid():
+        us = request.user
+        obj = form.save(commit=False)
+        obj.modifier = us
         form.save()
         return HttpResponseRedirect(reverse('customers_list'))
 

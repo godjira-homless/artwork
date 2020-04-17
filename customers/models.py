@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -20,6 +22,9 @@ class Customer(models.Model):
     note = models.TextField(blank=True, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+                              null=True, blank=True, related_name='customer_creator', on_delete=models.CASCADE)
+    modifier = models.ForeignKey(User, null=True, related_name='customer_modifier', on_delete=models.SET_NULL)
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
