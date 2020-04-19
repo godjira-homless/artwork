@@ -1,58 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'css/lots.css' %}">
 
 <div class="container mt-2 my-container">
     <div class="row">
-
         <div class="col-sm" role="form">
-            <form method="POST" class="needs-validation" novalidate>
-            {% csrf_token %}
-                    <div class="form-group row">
-                        {{ form.customer.errors }}
-                        <label for="customer" class="col-sm-2 col-form-label">{{ form.customer.label }}</label>
-                        <div class="col-sm-10">
-                            {{ form.customer }}
-                            <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
-                        </div>
-                    </div>
-        </div>
-
-
-        <div class="col-sm" role="form">
-            {% csrf_token %}
-                    <div class="form-group row">
-                        {{ form.appraiser.errors }}
-                        <label for="appraiser" class="col-sm-2 col-form-label">{{ form.appraiser.label }}</label>
-                        <div class="col-sm-10">
-                            {{ form.appraiser }}
-                            <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
-                        </div>
-                    </div>
-        </div>
-
-
-        <div class="col-sm" role="form">
-                    <div class="form-group row">
-                    image
-                    </div>
-        </div>
-
-
-
-    </div>
-</div>
-<div class="container mt-2 my-container">
-    <div class="row">
-        <div class="col-sm" role="form">
-
+                <form action="" method="POST" class="form-horizontal">
+                    {% csrf_token %}
                     <h3>Create new lot</h3>
                     <div class="form-group row">
+                        {{ form.code.errors }}
                         <label for="code" class="col-sm-2 col-form-label">{{ form.code.label }}</label>
                         <div class="col-sm-10">
                             {{ form.code }}
-                            <span class="text-danger"><small>{{ errors.code.as_text }}</small></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,10 +55,10 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        {{ form.type.errors }}
                         <label for="type" class="col-sm-2 col-form-label">{{ form.type.label }}</label>
                         <div class="col-sm-10">
                             {{ form.type }}
-                            <span class="text-danger"><small>{{ errors.type.as_text }}</small></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -157,13 +119,11 @@
                             {{ form.limit }}
                         </div>
                     </div>
-
         </div>
     </div>
-                                            <input type="submit" value="Save" />
+                <input type="submit" value="Save" />
                 </form>
 </div>
-
 {% endblock content %}
 
 

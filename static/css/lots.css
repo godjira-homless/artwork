@@ -1,0 +1,12 @@
+*[role="form"] {
+    max-width: 420px;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 0.3em;
+    background-color: #f2f2f2;
+#    border-style: solid;
+}
+
+.form-group {
+    margin-bottom: 0.7rem;
+}
