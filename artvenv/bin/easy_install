@@ -1,4 +1,4 @@
-#!/home/daniel/develop/artwork/artvenv/bin/python3
+#!/home/daniel/develop/artwork/artvenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

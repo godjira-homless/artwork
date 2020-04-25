@@ -1,6 +1,8 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView
@@ -48,6 +50,20 @@ def update_customer(request, slug):
 
     return render(request, 'customers_update.html', context)
 
+@login_required
+def auto_complete_customer(request):
+    q = request.GET.get('term', '')
+    # users = User.objects.filter(is_active=True)
+    users = Customer.objects.filter(Q(name__icontains=q))
+    users_list = []
+
+    for u in users:
+        value = '%s' % (u.name)
+        u_dict = {'id': u.id, 'label': value}
+        users_list.append(u_dict)
+    data = json.dumps(users_list)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
 
 class SearchResultsView(ListView):
     model = Customer

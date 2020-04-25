@@ -14,7 +14,7 @@ from technics.models import Technics
 
 def validate_type(value):
     if value:
-        print('ok')
+        pass
     else:
         raise ValidationError(
             ('%(value)s is not a selection'),
@@ -22,6 +22,7 @@ def validate_type(value):
         )
 
 TYPE_CHOICES = (
+    ('', '---------'),
     ('B', 'Bútor'),
     ('M', 'Műtárgy'),
     ('S', 'Szőnyeg'),
@@ -49,7 +50,7 @@ class Lots(models.Model):
     artist = models.ForeignKey(Artists, null=True, blank=True, related_name='artist_lot', on_delete=models.SET_NULL)
     desc = models.TextField(blank=True)
     technic = models.ForeignKey(Technics, null=True, blank=True, related_name='technic_lot', on_delete=models.SET_NULL)
-    type = models.CharField(blank=True, choices=TYPE_CHOICES, max_length=128, default=None, validators=[validate_type])
+    type = models.CharField(blank=False, choices=TYPE_CHOICES, max_length=128, default=None, validators=[validate_type])
     size = models.CharField(max_length=255, blank=True)
     weight = models.CharField(max_length=255, blank=True)
     purchase = models.PositiveIntegerField(blank=True, null=True, default=0)
@@ -63,7 +64,7 @@ class Lots(models.Model):
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
-        return str(str(self.artist))
+        return str(str(self.code))
 
     def get_absolute_url(self):
         return reverse('lots_list', kwargs={'slug': self.slug})
