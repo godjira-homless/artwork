@@ -1,3 +1,6 @@
+import os
+from os.path import exists
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -11,6 +14,30 @@ from artists.models import Artists
 from customers.models import Customer
 from appraisers.models import Appraisers
 from technics.models import Technics
+
+def exist_file(ph):
+    return exists(ph)
+
+def path_and_rename(instance, filename):
+    upload_to = 'images/'
+    ext = "jpg"
+    ph = "media/images/{}.{}".format(instance.code, ext)
+
+    if exist_file(ph):
+        kieg_n = 1
+        kieg = "_{:02d}".format(kieg_n)
+        filename = '{}{}.{}'.format(instance.code, kieg, ext)
+        ph = "media/images/{}".format(filename)
+        if exist_file(ph):
+            while exist_file(ph):
+                kieg_n += 1
+                kieg = "_{:02d}".format(kieg_n)
+                filename = '{}{}.{}'.format(instance.code, kieg, ext)
+                ph = "media/images/{}".format(filename)
+    else:
+        filename = '{}.{}'.format(instance.code, ext)
+
+    return os.path.join(upload_to, filename)
 
 def validate_type(value):
     if value:
@@ -59,6 +86,7 @@ class Lots(models.Model):
     start = models.PositiveIntegerField(blank=True, null=True, default=0)
     limit = models.PositiveIntegerField(blank=True, null=True, default=0)
     note = models.TextField(blank=True)
+    photo = models.ImageField(upload_to=path_and_rename, default='images/default.jpg')
     # hammer = models.PositiveIntegerField(blank=True, null=True, default=0)
     # sold = models.PositiveIntegerField(blank=True, null=True, default=0)
     slug = models.SlugField(null=False, unique=True)

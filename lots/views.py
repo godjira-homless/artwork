@@ -18,7 +18,7 @@ def lots_list(request):
 
 @login_required
 def create_lot(request):
-    form = LotsForm(request.POST or None)
+    form = LotsForm(request.POST or None, request.FILES)
     if form.is_valid():
         us = request.user
         obj = form.save(commit=False)

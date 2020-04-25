@@ -24,6 +24,7 @@ class LotsForm(forms.ModelForm):
         fields = (
             'customer',
             'appraiser',
+            'photo',
             'code',
             'worknumber',
             'title',

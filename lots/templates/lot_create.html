@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-sm" role="form">
-            <form method="POST" class="needs-validation" novalidate>
+            <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
             {% csrf_token %}
                     <div class="form-group row">
                         {{ form.customer.errors }}
@@ -36,7 +36,12 @@
 
         <div class="col-sm" role="form">
                     <div class="form-group row">
-                    image
+                        {{ form.photo.errors }}
+                        <label for="photo" class="col-sm-2 col-form-label">{{ form.photo.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.photo }}
+                            <span class="text-danger"><small>{{ errors.photo.as_text }}</small></span>
+                        </div>
                     </div>
         </div>
 
