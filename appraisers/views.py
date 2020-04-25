@@ -60,7 +60,7 @@ def delete_appraiser(request, slug):
 
 
 @login_required
-def appraiser_complete(request):
+def auto_complete_appraiser(request):
     q = request.GET.get('term', '')
     users = Appraisers.objects.filter(Q(name__icontains=q))
     users_list = []

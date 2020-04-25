@@ -10,9 +10,12 @@ from technics.models import Technics
 
 
 class LotsForm(forms.ModelForm):
-    artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}), max_length=200, required=False)
+    artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+                             max_length=200, required=False)
     customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
-                             max_length=200, required=True)
+                               max_length=200, required=True)
+    appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+                               max_length=200, required=True)
 
     class Meta:
         model = Lots
@@ -38,7 +41,7 @@ class LotsForm(forms.ModelForm):
 
         widgets = {
             # 'customer': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
-            'appraiser': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
+            # 'appraiser': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'desc': forms.Textarea(attrs={'rows': 2, 'cols': 30, 'style': 'width: 280px', 'class': 'form-control'}),
             'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'worknumber': forms.NumberInput(
@@ -71,6 +74,15 @@ class LotsForm(forms.ModelForm):
         else:
             raise forms.ValidationError(("Customer does not exist! Choose another client!"))
         return customer
+
+    def clean_appraiser(self, commit=True):
+        appraiser = self.cleaned_data.get("appraiser")
+        if Appraisers.objects.filter(name=appraiser).exists():
+            appraiser, created = Appraisers.objects.get_or_create(name=appraiser)
+            self.cleaned_data['appraiser'] = appraiser
+        else:
+            raise forms.ValidationError(("Appraiser does not exist! Choose another one!"))
+        return appraiser
 
     def __init__(self, *args, **kwargs):
         super(LotsForm, self).__init__(*args, **kwargs)

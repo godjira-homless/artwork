@@ -14,7 +14,7 @@ urlpatterns = [
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),
     path('auto_complete/', artview.auto_complete, name='auto_complete'),
     path('auto_complete_customer/', custview.auto_complete_customer, name='auto_complete_customer'),
-    #path('appraiser_complete/', appview.appraiser_complete, name='appraiser_complete'),
+    path('auto_complete_appraiser/', appview.auto_complete_appraiser, name='auto_complete_appraiser'),
     #path('technic_complete/', technic_complete, name='technic_complete'),
 
 ]
