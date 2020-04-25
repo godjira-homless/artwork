@@ -16,6 +16,8 @@ class LotsForm(forms.ModelForm):
                                max_length=200, required=True)
     appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
                                max_length=200, required=True)
+    technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+                             max_length=200, required=False)
 
     class Meta:
         model = Lots
@@ -47,7 +49,7 @@ class LotsForm(forms.ModelForm):
             'worknumber': forms.NumberInput(
                 attrs={'style': 'width: 15ch', 'class': 'form-control', 'placeholder': 'worknumber'}),
             'title': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control', 'placeholder': 'title'}),
-            'technic': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
+            # 'technic': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'type': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'size': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
             'weight': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
@@ -83,6 +85,13 @@ class LotsForm(forms.ModelForm):
         else:
             raise forms.ValidationError(("Appraiser does not exist! Choose another one!"))
         return appraiser
+
+    def clean_technic(self, commit=True):
+        technic = self.cleaned_data.get("technic") or None
+        if technic is not None:
+            technic, created = Technics.objects.get_or_create(name=technic)
+            self.cleaned_data['technic'] = technic
+        return technic
 
     def __init__(self, *args, **kwargs):
         super(LotsForm, self).__init__(*args, **kwargs)
