@@ -18,6 +18,7 @@ class LotsForm(forms.ModelForm):
                                max_length=200, required=True)
     technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
                              max_length=200, required=False)
+    # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
 
     class Meta:
         model = Lots
@@ -84,7 +85,7 @@ class LotsForm(forms.ModelForm):
             appraiser, created = Appraisers.objects.get_or_create(name=appraiser)
             self.cleaned_data['appraiser'] = appraiser
         else:
-            raise forms.ValidationError(("Appraiser does not exist! Choose another one!"))
+            raise forms.ValidationError("Appraiser does not exist! Choose another one!")
         return appraiser
 
     def clean_technic(self, commit=True):
@@ -93,6 +94,7 @@ class LotsForm(forms.ModelForm):
             technic, created = Technics.objects.get_or_create(name=technic)
             self.cleaned_data['technic'] = technic
         return technic
+
 
     def __init__(self, *args, **kwargs):
         super(LotsForm, self).__init__(*args, **kwargs)
