@@ -2,13 +2,14 @@
 {% load static %}
 {% block content %}
 
+<script src="{% static 'js/cleave.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/lots.css' %}">
 
 <div class="container mt-2 my-container">
     <div class="row">
 
         <div class="col-sm" role="form">
-            <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>
             {% csrf_token %}
                     <div class="form-group row">
                         {{ form.customer.errors }}
@@ -138,7 +139,7 @@
                     </div>
                     <div class="form-group row">
                         {{ form.price.errors }}
-                        <label for="purchase" class="col-sm-2 col-form-label">{{ form.price.label }}</label>
+                        <label for="price" class="col-sm-2 col-form-label">{{ form.price.label }}</label>
                         <div class="col-sm-10">
                             {{ form.price }}
                         </div>
@@ -219,5 +220,28 @@
       }
         });
    });
+
+
+if ($('#id_purchase').length) {
+  new Cleave('.input-numeral', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand'
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+
 {% endblock script %}

@@ -55,7 +55,7 @@ class LotsForm(forms.ModelForm):
             'type': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'size': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
             'weight': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
-            'purchase': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
+            'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-numeral'}),
             'price': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
             'pay': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
             'start': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
@@ -94,6 +94,7 @@ class LotsForm(forms.ModelForm):
             technic, created = Technics.objects.get_or_create(name=technic)
             self.cleaned_data['technic'] = technic
         return technic
+
 
 
     def __init__(self, *args, **kwargs):

@@ -114,3 +114,4 @@ class Lots(models.Model):
             unique_slug = '{}-{}'.format(slug, counter)
             counter += 1
         return unique_slug
+

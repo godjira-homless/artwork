@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 <div class="container mt-3">
@@ -40,6 +41,7 @@
                             <p class="font-italic text-muted mb-0 small">{{ item.title }}</p>
                             <p class="font-italic text-muted mb-0 small">{{ item.desc }}</p>
                             <p class="font-italic text-muted mb-0 small">{{ item.size }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.purchase|intcomma }}</p>
                             <p class="font-italic text-muted mb-0 small">{{ item.get_type_display }}</p>
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 <h6 class="font-weight-bold my-2">{{ item.created_by }} | {{ item.modified_by }}</h6>
