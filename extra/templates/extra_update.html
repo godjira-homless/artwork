@@ -33,7 +33,7 @@
 
    $(document).ready(function(){
     $( "#id_appraiser" ).autocomplete({
-      source: "{% url 'appraiser_complete' %}",
+      source: "{% url 'auto_complete_appraiser' %}",
       selectFirst:true,
       minLength:2,
       select:function(event,ui) {

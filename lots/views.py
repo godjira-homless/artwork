@@ -7,7 +7,8 @@ from django.urls import reverse
 
 from .models import Lots
 from .forms import LotsForm
-
+from extra.models import Extras
+from artists.models import Artists
 
 @login_required
 def lots_list(request):
@@ -31,6 +32,11 @@ def create_lot(request):
         next_code = next_code.code+1
     else:
         next_code = 600000
-    form = LotsForm(initial={'code': next_code})
-    # form = LotsForm()
+    if Extras.objects.filter(owner=request.user).exists():
+        extra_artist = Extras.objects.filter(owner=request.user).values_list('artist', flat=True)
+        aid = extra_artist[0]
+        artist_name = Artists.objects.values_list('name', flat=True).get(pk=aid)
+    else:
+        artist_name = ""
+    form = LotsForm(initial={'code': next_code, 'artist': artist_name})
     return render(request, 'lot_create.html', {'form': form, 'errors': errors})
