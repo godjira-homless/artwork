@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<script src="{% static 'js/cleave.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/lots.css' %}">
+
+<div class="container mt-2 my-container">
+    <div class="row">
+
+        <div class="col-sm" role="form">
+            <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+                    <div class="form-group row">
+                        {{ form.customer.errors }}
+                        <label for="customer" class="col-sm-2 col-form-label">{{ form.customer.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.customer }}
+                            <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
+                        </div>
+                    </div>
+        </div>
+
+
+        <div class="col-sm" role="form">
+            {% csrf_token %}
+                    <div class="form-group row">
+                        {{ form.appraiser.errors }}
+                        <label for="appraiser" class="col-sm-2 col-form-label">{{ form.appraiser.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.appraiser }}
+                            <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
+                        </div>
+                    </div>
+        </div>
+
+
+        <div class="col-sm" role="form">
+                    <div class="form-group row">
+                        {{ form.photo.errors }}
+                        <label for="photo" class="col-sm-2 col-form-label">{{ form.photo.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.photo }}
+                            <span class="text-danger"><small>{{ errors.photo.as_text }}</small></span>
+                        </div>
+                    </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="container mt-2 my-container">
+    <div class="row">
+        <div class="col-sm" role="form">
+
+                    <h3>Create new lot</h3>
+                    <div class="form-group row">
+                        <label for="code" class="col-sm-2 col-form-label">{{ form.code.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.code }}
+                            <span class="text-danger"><small>{{ errors.code.as_text }}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.worknumber.errors }}
+                        <label for="worknumber" class="col-sm-2 col-form-label">{{ form.worknumber.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.worknumber }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.artist.errors }}
+                        <label for="artist" class="col-sm-2 col-form-label">{{ form.artist.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.artist }}
+                            <span class="text-danger"><small>{{ errors.artist.as_text }}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.title.errors }}
+                        <label for="title" class="col-sm-2 col-form-label">{{ form.title.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.title }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.desc.errors }}
+                        <label for="desc" class="col-sm-2 col-form-label">{{ form.desc.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.desc }}
+                        </div>
+                    </div>
+        </div>
+        <div class="col-sm" role="form">
+                    <div class="form-group row">
+                        {{ form.technic.errors }}
+                        <label for="technic" class="col-sm-2 col-form-label">{{ form.technic.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.technic }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="type" class="col-sm-2 col-form-label">{{ form.type.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.type }}
+                            <span class="text-danger"><small>{{ errors.type.as_text }}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.size.errors }}
+                        <label for="size" class="col-sm-2 col-form-label">{{ form.size.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.size }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.weight.errors }}
+                        <label for="weight" class="col-sm-2 col-form-label">{{ form.weight.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.weight }}
+                        </div>
+                    </div>
+                <div class="form-group row">
+                        {{ form.note.errors }}
+                        <label for="note" class="col-sm-2 col-form-label">{{ form.note.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.note }}
+                        </div>
+                    </div>
+        </div>
+        <div class="col-sm" role="form">
+                    <div class="form-group row">
+                        {{ form.purchase.errors }}
+                        <label for="purchase" class="col-sm-2 col-form-label">{{ form.purchase.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.purchase }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.price.errors }}
+                        <label for="price" class="col-sm-2 col-form-label">{{ form.price.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.price }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.pay.errors }}
+                        <label for="pay" class="col-sm-2 col-form-label">{{ form.pay.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.pay }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.start.errors }}
+                        <label for="start" class="col-sm-2 col-form-label">{{ form.start.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.start }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        {{ form.limit.errors }}
+                        <label for="limit" class="col-sm-2 col-form-label">{{ form.limit.label }}</label>
+                        <div class="col-sm-10">
+                            {{ form.limit }}
+                        </div>
+                    </div>
+
+        </div>
+    </div>
+                                            <input type="submit" value="Save" />
+                </form>
+</div>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(document).ready(function(){
+    $( "#id_artist" ).autocomplete({
+      source: "{% url 'auto_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_artist").val(ui.item.id)
+      }
+        });
+   });
+
+     $(document).ready(function(){
+    $( "#id_customer" ).autocomplete({
+      source: "{% url 'auto_complete_customer' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_customer").val(ui.item.id)
+      }
+        });
+   });
+
+        $(document).ready(function(){
+    $( "#id_appraiser" ).autocomplete({
+      source: "{% url 'auto_complete_appraiser' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_appraiser").val(ui.item.id)
+      }
+        });
+   });
+
+         $(document).ready(function(){
+    $( "#id_technic" ).autocomplete({
+      source: "{% url 'technic_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_technic").val(ui.item.id)
+      }
+        });
+   });
+
+
+if ($('#id_purchase').length) {
+  new Cleave('.input-num_purchase', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_price').length) {
+  new Cleave('.input-num_price', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_pay').length) {
+  new Cleave('.input-num_pay', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_start').length) {
+  new Cleave('.input-num_start', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_limit').length) {
+  new Cleave('.input-num_limit', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+{% endblock script %}
