@@ -223,14 +223,47 @@
 
 
 if ($('#id_purchase').length) {
-  new Cleave('.input-numeral', {
+  new Cleave('.input-num_purchase', {
   numeral: true,
-  numeralThousandsGroupStyle: 'thousand'
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_price').length) {
+  new Cleave('.input-num_price', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
   });
 }
 
 
+if ($('#id_pay').length) {
+  new Cleave('.input-num_pay', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
 
+
+if ($('#id_start').length) {
+  new Cleave('.input-num_start', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_limit').length) {
+  new Cleave('.input-num_limit', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
 
 
 

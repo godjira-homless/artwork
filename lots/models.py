@@ -81,11 +81,11 @@ class Lots(models.Model):
     type = models.CharField(blank=False, choices=TYPE_CHOICES, max_length=128, default=None, validators=[validate_type])
     size = models.CharField(max_length=255, blank=True)
     weight = models.CharField(max_length=255, blank=True)
-    purchase = models.PositiveIntegerField(blank=True, null=True, default=0)
-    price = models.PositiveIntegerField(blank=True, null=True, default=0)
-    pay = models.PositiveIntegerField(blank=True, null=True, default=0)
-    start = models.PositiveIntegerField(blank=True, null=True, default=0)
-    limit = models.PositiveIntegerField(blank=True, null=True, default=0)
+    purchase = models.CharField(blank=True, null=True, default=0, max_length=20)
+    price = models.CharField(blank=True, null=True, default=0, max_length=20)
+    pay = models.CharField(blank=True, null=True, default=0, max_length=20)
+    start = models.CharField(blank=True, null=True, default=0, max_length=20)
+    limit = models.CharField(blank=True, null=True, default=0, max_length=20)
     note = models.TextField(blank=True)
     photo = models.ImageField(upload_to=path_and_rename, default='images/default.png')
     # hammer = models.PositiveIntegerField(blank=True, null=True, default=0)
@@ -114,4 +114,3 @@ class Lots(models.Model):
             unique_slug = '{}-{}'.format(slug, counter)
             counter += 1
         return unique_slug
-

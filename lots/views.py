@@ -19,16 +19,13 @@ def lots_list(request):
 @login_required
 def create_lot(request):
     form = LotsForm(request.POST or None, request.FILES or None)
-    # pur = request.POST.get("purchase")
     if form.is_valid():
-        us = request.user
         obj = form.save(commit=False)
-        obj.creator = us
+        obj.creator = request.user
         form.save()
         return HttpResponseRedirect(reverse('lots_list'))
     else:
         errors = form.errors
-        # print(form.errors.as_data())
     if Lots.objects.exists():
         next_code = Lots.objects.order_by('-code')[0]
         next_code = next_code.code+1

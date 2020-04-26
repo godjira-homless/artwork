@@ -44,22 +44,19 @@ class LotsForm(forms.ModelForm):
         )
 
         widgets = {
-            # 'customer': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
-            # 'appraiser': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'desc': forms.Textarea(attrs={'rows': 2, 'cols': 30, 'style': 'width: 280px', 'class': 'form-control'}),
             'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'worknumber': forms.NumberInput(
                 attrs={'style': 'width: 15ch', 'class': 'form-control', 'placeholder': 'worknumber'}),
             'title': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control', 'placeholder': 'title'}),
-            # 'technic': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'type': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
             'size': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
             'weight': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
-            'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-numeral'}),
-            'price': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
-            'pay': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
-            'start': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
-            'limit': forms.NumberInput(attrs={'style': 'width: 15ch', 'class': 'form-control'}),
+            'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
+            'price': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_price'}),
+            'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
+            'start': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}),
+            'limit': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}),
             'note': forms.Textarea(attrs={'rows': 4, 'cols': 30, 'style': 'width: 280px', 'class': 'form-control'}),
         }
 
@@ -95,6 +92,35 @@ class LotsForm(forms.ModelForm):
             self.cleaned_data['technic'] = technic
         return technic
 
+    def clean_purchase(self, commit=True):
+        purchase = self.cleaned_data.get("purchase") or None
+        pur = str(purchase)
+        purchase = pur.replace(",", '')
+        return purchase
+
+    def clean_price(self, commit=True):
+        price = self.cleaned_data.get("price") or None
+        pur = str(price)
+        price = pur.replace(",", '')
+        return price
+
+    def clean_pay(self, commit=True):
+        pay = self.cleaned_data.get("pay") or None
+        pur = str(pay)
+        pay = pur.replace(",", '')
+        return pay
+
+    def clean_start(self, commit=True):
+        start = self.cleaned_data.get("start") or None
+        pur = str(start)
+        start = pur.replace(",", '')
+        return start
+
+    def clean_limit(self, commit=True):
+        limit = self.cleaned_data.get("limit") or None
+        pur = str(limit)
+        limit = pur.replace(",", '')
+        return limit
 
 
     def __init__(self, *args, **kwargs):
