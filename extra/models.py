@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from artists.models import Artists
 from appraisers.models import Appraisers
+from customers.models import Customer
 from technics.models import Technics
 from django.contrib.auth.models import User
 
@@ -11,6 +12,8 @@ from django.contrib.auth.models import User
 class Extras(models.Model):
     artist = models.ForeignKey(Artists, null=True, blank=True, related_name='artist_extra', on_delete=models.SET_NULL)
     appraiser = models.ForeignKey(Appraisers, null=True, blank=True, related_name='appraiser_extra',
+                                  on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null=True, blank=True, related_name='customer_extra',
                                   on_delete=models.SET_NULL)
     technic = models.ForeignKey(Technics, null=True, blank=True, related_name='technic_extra',
                                   on_delete=models.SET_NULL)

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from artists import views as artview
 from appraisers import views as appview
+from customers import views as cusview
 from technics.views import technic_complete
 
 urlpatterns = [
@@ -13,6 +14,7 @@ urlpatterns = [
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),
     path('auto_complete/', artview.auto_complete, name='auto_complete'),
     path('auto_complete_appraiser/', appview.auto_complete_appraiser, name='auto_complete_appraiser'),
+    path('auto_complete_customer/', cusview.auto_complete_customer, name='auto_complete_customer'),
     path('technic_complete/', technic_complete, name='technic_complete'),
 
 ]

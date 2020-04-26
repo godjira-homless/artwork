@@ -5,15 +5,18 @@ from .models import Extras
 
 from artists.models import Artists
 from appraisers.models import Appraisers
+from customers.models import Customer
 from technics.models import Technics
 
 
 class ExtrasForm(forms.ModelForm):
     artist = forms.CharField(max_length=100, required=False)
     appraiser = forms.CharField(max_length=100, required=False)
+    customer = forms.CharField(max_length=100, required=False)
     technic = forms.CharField(max_length=100, required=False)
     ai = forms.CharField(max_length=10, required=False, widget=forms.HiddenInput())
     api = forms.IntegerField(required=False, widget=forms.HiddenInput())
+    cid = forms.IntegerField(required=False, widget=forms.HiddenInput())
     ti = forms.IntegerField(required=False, widget=forms.HiddenInput())
     title = forms.CharField(max_length=255, required=False)
     worknumber = forms.IntegerField(required=False)
@@ -26,7 +29,7 @@ class ExtrasForm(forms.ModelForm):
             'api',
             'ti',
             'appraiser',
-            'technic',
+            'customer',
             'title',
             'worknumber',
                   )
@@ -54,6 +57,16 @@ class ExtrasForm(forms.ModelForm):
         else:
             appraiser = None
         return appraiser
+
+    def clean_customer(self, commit=True):
+        # appraiser = self.cleaned_data.get("appraiser")
+        cid = self.data['cid']
+        if cid:
+            customer, created = Customer.objects.get_or_create(pk=cid)
+            self.cleaned_data['customer'] = customer
+        else:
+            customer = None
+        return customer
 
     def clean_technic(self, commit=True):
         # technic = self.cleaned_data.get("technic")
