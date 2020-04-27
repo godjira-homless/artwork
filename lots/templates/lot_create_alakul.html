@@ -22,86 +22,23 @@
 <div class="container">
     <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>{% csrf_token %}
   <div class="row">
-
-
-
     <div class="col-sm form-inline" style="background-color: #e3e3e3;">
-        <table class="table table-sm">
-            <tr>
-                <td>
-                    <label for="id_customer" class="col-form-label mr-2">{{ form.customer.label }}</label>
-                </td>
-                <td>
-                    {{ form.customer }}
-                    <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="id_worknumber" class="col-form-label mr-2">{{ form.worknumber.label }}</label>
-                </td>
-                <td>
-                    {{ form.worknumber }}
-                    <span class="text-danger"><small>{{ errors.worknumber.as_text }}</small></span>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <label for="id_customer" class="col-form-label mr-2">{{ form.customer.label }}</label>
+            {{ form.customer }}
+            <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
+        </div>
+        <div>
+            <label for="id_worknumber" class="col-form-label mr-2">{{ form.worknumber.label }}</label>
+            {{ form.worknumber }}
+            <span class="text-danger"><small>{{ errors.worknumber.as_text }}</small></span>
+        </div>
     </div>
-
-
-
-
     <div class="col-sm form-inline" style="background-color: #e3e3e3;">
-        <table>
-            <tr>
-                <td>
-                    <label for="id_appraiser" class="col-form-label mr-2">{{ form.appraiser.label }}</label>
-                </td>
-                <td>
-                    {{ form.appraiser }}
-                    <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="id_technic" class="col-form-label mr-2">{{ form.technic.label }}</label>
-                </td>
-                <td>
-                    {{ form.technic }}
-                    <span class="text-danger"><small>{{ errors.technic.as_text }}</small></span>
-                </td>
-            </tr>
-        </table>
+        <label for="id_appriaser" class="col-form-label mr-2">{{ form.appraiser.label }}</label>
+        {{ form.appraiser }}
+        <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
     </div>
-        <div class="col-sm form-inline" style="background-color: #e3e3e3;">
-        <table>
-            <tr>
-                <td>
-                    <label for="id_photo" class="col-form-label mr-2">{{ form.photo.label }}</label>
-                </td>
-                <td>
-                    {{ form.photo }}
-                    <span class="text-danger"><small>{{ errors.photo.as_text }}</small></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="id_purchase" class="col-form-label mr-2">{{ form.purchase.label }}</label>
-                </td>
-                <td>
-                    {{ form.purchase }}
-                    <span class="text-danger"><small>{{ errors.purchase.as_text }}</small></span>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
-
-
-
-
-
   </div>
         <input type="submit" value="Save" />
     </form>

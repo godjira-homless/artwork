@@ -10,13 +10,13 @@ from technics.models import Technics
 
 
 class LotsForm(forms.ModelForm):
-    artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+    artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                              max_length=200, required=False)
-    customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+    customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=200, required=True)
-    appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+    appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=200, required=True)
-    technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+    technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                              max_length=200, required=False)
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
 
