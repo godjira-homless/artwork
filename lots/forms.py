@@ -44,20 +44,20 @@ class LotsForm(forms.ModelForm):
         )
 
         widgets = {
-            'desc': forms.Textarea(attrs={'rows': 2, 'cols': 30, 'style': 'width: 280px', 'class': 'form-control'}),
+            'desc': forms.Textarea(attrs={'rows': 2, 'cols': 30, 'style': 'width: 220px', 'class': 'form-control'}),
             'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'worknumber': forms.NumberInput(
                 attrs={'style': 'width: 15ch', 'class': 'form-control', 'placeholder': 'worknumber'}),
-            'title': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control', 'placeholder': 'title'}),
-            'type': forms.Select(attrs={'style': 'width: 280px', 'class': 'form-control', }),
-            'size': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
-            'weight': forms.TextInput(attrs={'style': 'width: 280px', 'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', 'placeholder': 'title'}),
+            'type': forms.Select(attrs={'style': 'width: 220px', 'class': 'form-control', }),
+            'size': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+            'weight': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
             'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
             'price': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_price'}),
             'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
             'start': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}),
             'limit': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}),
-            'note': forms.Textarea(attrs={'rows': 4, 'cols': 30, 'style': 'width: 280px', 'class': 'form-control'}),
+            'note': forms.Textarea(attrs={'rows': 3, 'cols': 30, 'style': 'width: 220px', 'class': 'form-control'}),
         }
 
     def clean_artist(self, commit=True):

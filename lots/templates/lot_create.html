@@ -25,7 +25,7 @@
 
 
 
-    <div class="col-sm form-inline" style="background-color: #e3e3e3;">
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
         <table class="table table-sm">
             <tr>
                 <td>
@@ -38,6 +38,15 @@
             </tr>
             <tr>
                 <td>
+                    <label for="id_code" class="col-form-label mr-2">{{ form.code.label }}</label>
+                </td>
+                <td>
+                    {{ form.code }}
+                    <span class="text-danger"><small>{{ errors.code.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <label for="id_worknumber" class="col-form-label mr-2">{{ form.worknumber.label }}</label>
                 </td>
                 <td>
@@ -45,13 +54,41 @@
                     <span class="text-danger"><small>{{ errors.worknumber.as_text }}</small></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="id_artist" class="col-form-label mr-2">{{ form.artist.label }}</label>
+                </td>
+                <td>
+                    {{ form.artist }}
+                    <span class="text-danger"><small>{{ errors.artist.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_title" class="col-form-label mr-2">{{ form.title.label }}</label>
+                </td>
+                <td>
+                    {{ form.title }}
+                    <span class="text-danger"><small>{{ errors.title.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_desc" class="col-form-label mr-2">{{ form.desc.label }}</label>
+                </td>
+                <td>
+                    {{ form.desc }}
+                    <span class="text-danger"><small>{{ errors.desc.as_text }}</small></span>
+                </td>
+            </tr>
+
         </table>
     </div>
 
 
 
 
-    <div class="col-sm form-inline" style="background-color: #e3e3e3;">
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
         <table>
             <tr>
                 <td>
@@ -71,9 +108,47 @@
                     <span class="text-danger"><small>{{ errors.technic.as_text }}</small></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="id_type" class="col-form-label mr-2">{{ form.type.label }}</label>
+                </td>
+                <td>
+                    {{ form.type }}
+                    <span class="text-danger"><small>{{ errors.type.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_size" class="col-form-label mr-2">{{ form.size.label }}</label>
+                </td>
+                <td>
+                    {{ form.size }}
+                    <span class="text-danger"><small>{{ errors.size.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_weight" class="col-form-label mr-2">{{ form.weight.label }}</label>
+                </td>
+                <td>
+                    {{ form.weight }}
+                    <span class="text-danger"><small>{{ errors.weight.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_note" class="col-form-label mr-2">{{ form.note.label }}</label>
+                </td>
+                <td>
+                    {{ form.note }}
+                    <span class="text-danger"><small>{{ errors.note.as_text }}</small></span>
+                </td>
+            </tr>
         </table>
+
+
     </div>
-        <div class="col-sm form-inline" style="background-color: #e3e3e3;">
+        <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
         <table>
             <tr>
                 <td>
@@ -93,14 +168,45 @@
                     <span class="text-danger"><small>{{ errors.purchase.as_text }}</small></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="id_price" class="col-form-label mr-2">{{ form.price.label }}</label>
+                </td>
+                <td>
+                    {{ form.price }}
+                    <span class="text-danger"><small>{{ errors.price.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_pay" class="col-form-label mr-2">{{ form.pay.label }}</label>
+                </td>
+                <td>
+                    {{ form.pay }}
+                    <span class="text-danger"><small>{{ errors.pay.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_start" class="col-form-label mr-2">{{ form.start.label }}</label>
+                </td>
+                <td>
+                    {{ form.start }}
+                    <span class="text-danger"><small>{{ errors.start.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_limit" class="col-form-label mr-2">{{ form.limit.label }}</label>
+                </td>
+                <td>
+                    {{ form.limit }}
+                    <span class="text-danger"><small>{{ errors.limit.as_text }}</small></span>
+                </td>
+            </tr>
+
         </table>
     </div>
-
-
-
-
-
-
 
   </div>
         <input type="submit" value="Save" />
