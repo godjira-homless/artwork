@@ -1,9 +1,321 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load humanize %}
 {% block content %}
 
-hello
+<script src="{% static 'js/cleave.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/lots.css' %}">
 
+<div class="container">
+  <div class="row">
+    <div class="col-sm" style="background-color: #e3e3e3;">
+        <h4>Create new worklog</h4>
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      info
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      <img src="{{ form.photo.value.url }}" width="100" alt="...">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>{% csrf_token %}
+  <div class="row">
+
+
+
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table class="table table-sm">
+            <tr>
+                <td>
+                    <label for="id_customer" class="col-form-label mr-2">{{ form.customer.label }}</label>
+                </td>
+                <td>
+                    {{ form.customer }}
+                    <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_code" class="col-form-label mr-2">{{ form.code.label }}</label>
+                </td>
+                <td>
+                    {{ form.code }}
+                    <span class="text-danger"><small>{{ errors.code.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_worknumber" class="col-form-label mr-2">{{ form.worknumber.label }}</label>
+                </td>
+                <td>
+                    {{ form.worknumber }}
+                    <span class="text-danger"><small>{{ errors.worknumber.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_artist" class="col-form-label mr-2">{{ form.artist.label }}</label>
+                </td>
+                <td>
+                    {{ form.artist }}
+                    <span class="text-danger"><small>{{ errors.artist.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_title" class="col-form-label mr-2">{{ form.title.label }}</label>
+                </td>
+                <td>
+                    {{ form.title }}
+                    <span class="text-danger"><small>{{ errors.title.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_desc" class="col-form-label mr-2">{{ form.desc.label }}</label>
+                </td>
+                <td>
+                    {{ form.desc }}
+                    <span class="text-danger"><small>{{ errors.desc.as_text }}</small></span>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table>
+            <tr>
+                <td>
+                    <label for="id_appraiser" class="col-form-label mr-2">{{ form.appraiser.label }}</label>
+                </td>
+                <td>
+                    {{ form.appraiser }}
+                    <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_technic" class="col-form-label mr-2">{{ form.technic.label }}</label>
+                </td>
+                <td>
+                    {{ form.technic }}
+                    <span class="text-danger"><small>{{ errors.technic.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_type" class="col-form-label mr-2">{{ form.type.label }}</label>
+                </td>
+                <td>
+                    {{ form.type }}
+                    <span class="text-danger"><small>{{ errors.type.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_size" class="col-form-label mr-2">{{ form.size.label }}</label>
+                </td>
+                <td>
+                    {{ form.size }}
+                    <span class="text-danger"><small>{{ errors.size.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_weight" class="col-form-label mr-2">{{ form.weight.label }}</label>
+                </td>
+                <td>
+                    {{ form.weight }}
+                    <span class="text-danger"><small>{{ errors.weight.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_note" class="col-form-label mr-2">{{ form.note.label }}</label>
+                </td>
+                <td>
+                    {{ form.note }}
+                    <span class="text-danger"><small>{{ errors.note.as_text }}</small></span>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+        <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table>
+            <tr>
+                <td>
+                    <label for="id_photo" class="col-form-label mr-2">{{ form.photo.label }}</label>
+                </td>
+                <td>
+                    {{ form.photo }}
+                    <span class="text-danger"><small>{{ errors.photo.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_purchase" class="col-form-label mr-2">{{ form.purchase.label }}</label>
+                </td>
+                <td>
+                    {{ form.purchase }}
+                    <span class="text-danger"><small>{{ errors.purchase.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_price" class="col-form-label mr-2">{{ form.price.label }}</label>
+                </td>
+                <td>
+                    {{ form.price }}
+                    <span class="text-danger"><small>{{ errors.price.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_pay" class="col-form-label mr-2">{{ form.pay.label }}</label>
+                </td>
+                <td>
+                    {{ form.pay }}
+                    <span class="text-danger"><small>{{ errors.pay.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_start" class="col-form-label mr-2">{{ form.start.label }}</label>
+                </td>
+                <td>
+                    {{ form.start }}
+                    <span class="text-danger"><small>{{ errors.start.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_limit" class="col-form-label mr-2">{{ form.limit.label }}</label>
+                </td>
+                <td>
+                    {{ form.limit }}
+                    <span class="text-danger"><small>{{ errors.limit.as_text }}</small></span>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+  </div>
+        <input type="submit" value="Save" />
+    </form>
+</div>
 
 {% endblock content %}
+
+
+{% block script %}
+<script>
+   $(document).ready(function(){
+    $( "#id_artist" ).autocomplete({
+      source: "{% url 'auto_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_artist").val(ui.item.id)
+      }
+        });
+   });
+
+     $(document).ready(function(){
+    $( "#id_customer" ).autocomplete({
+      source: "{% url 'auto_complete_customer' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_customer").val(ui.item.id)
+      }
+        });
+   });
+
+        $(document).ready(function(){
+    $( "#id_appraiser" ).autocomplete({
+      source: "{% url 'auto_complete_appraiser' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_appraiser").val(ui.item.id)
+      }
+        });
+   });
+
+         $(document).ready(function(){
+    $( "#id_technic" ).autocomplete({
+      source: "{% url 'technic_complete' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_technic").val(ui.item.id)
+      }
+        });
+   });
+
+
+if ($('#id_purchase').length) {
+  new Cleave('.input-num_purchase', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_price').length) {
+  new Cleave('.input-num_price', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_pay').length) {
+  new Cleave('.input-num_pay', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_start').length) {
+  new Cleave('.input-num_start', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+if ($('#id_limit').length) {
+  new Cleave('.input-num_limit', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+{% endblock script %}

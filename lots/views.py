@@ -84,14 +84,12 @@ def create_lot(request):
 @login_required
 def update_lot(request, code):
     cd = get_object_or_404(Lots, code=code)
-    form = LotsForm(request.POST or None, instance=cd)
+    form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
     if form.is_valid():
         us = request.user
         obj = form.save(commit=False)
         obj.modifier = us
         form.save()
         return HttpResponseRedirect(reverse('lots_list'))
-
     context = {'form': form}
-
     return render(request, 'lot_update.html', context)

@@ -20,6 +20,7 @@ class LotsForm(forms.ModelForm):
                               max_length=200, required=False)
 
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
+    photo = forms.ImageField(widget=forms.FileInput, )
 
     class Meta:
         model = Lots
