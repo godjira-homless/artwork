@@ -15,9 +15,10 @@ class LotsForm(forms.ModelForm):
     customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=200, required=True)
     appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
-                               max_length=200, required=True)
+                                max_length=200, required=True)
     technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
-                             max_length=200, required=False)
+                              max_length=200, required=False)
+
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
 
     class Meta:
@@ -122,6 +123,5 @@ class LotsForm(forms.ModelForm):
         limit = pur.replace(",", '')
         return limit
 
-
     def __init__(self, *args, **kwargs):
-        super(LotsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)

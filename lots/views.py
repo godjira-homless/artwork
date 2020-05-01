@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import Lots
@@ -11,6 +11,7 @@ from extra.models import Extras
 from artists.models import Artists
 from appraisers.models import Appraisers
 from customers.models import Customer
+
 
 @login_required
 def lots_list(request):
@@ -31,7 +32,7 @@ def create_lot(request):
         errors = form.errors
     if Lots.objects.exists():
         next_code = Lots.objects.order_by('-code')[0]
-        next_code = next_code.code+1
+        next_code = next_code.code + 1
     else:
         next_code = 600000
     if Extras.objects.filter(owner=request.user).exists():
@@ -78,3 +79,19 @@ def create_lot(request):
     form = LotsForm(initial={'code': next_code, 'artist': artist_name, 'customer': customer_name,
                              'appraiser': appraiser_name, 'title': title, 'worknumber': worknumber})
     return render(request, 'lot_create.html', {'form': form, 'errors': errors})
+
+
+@login_required
+def update_lot(request, code):
+    cd = get_object_or_404(Lots, code=code)
+    form = LotsForm(request.POST or None, instance=cd)
+    if form.is_valid():
+        us = request.user
+        obj = form.save(commit=False)
+        obj.modifier = us
+        form.save()
+        return HttpResponseRedirect(reverse('lots_list'))
+
+    context = {'form': form}
+
+    return render(request, 'lot_update.html', context)

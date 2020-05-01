@@ -93,7 +93,7 @@ class Lots(models.Model):
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
-        return str(str(self.code))
+        return str(self.code)
 
     def get_absolute_url(self):
         return reverse('lots_list', kwargs={'slug': self.slug})

@@ -9,7 +9,7 @@ urlpatterns = [
 
     path('', views.lots_list, name='lots_list'),
     path('create/', views.create_lot, name='create_lot'),
-    #path('update/<int:id>', views.update_extra, name='update_extra'),
+    path('update/<int:code>', views.update_lot, name='update_lot'),
     #path('delete/<int:id>', views.delete_extra, name='delete_extra'),
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),
     path('auto_complete/', artview.auto_complete, name='auto_complete'),
