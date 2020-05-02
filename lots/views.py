@@ -11,6 +11,7 @@ from extra.models import Extras
 from artists.models import Artists
 from appraisers.models import Appraisers
 from customers.models import Customer
+from technics.models import Technics
 
 
 @login_required
@@ -85,6 +86,29 @@ def create_lot(request):
 def update_lot(request, code):
     cd = get_object_or_404(Lots, code=code)
     form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
+    cuid = form.initial['customer']
+    if cuid:
+        customer_name = Customer.objects.values_list('name', flat=True).get(pk=cuid)
+    else:
+        customer_name = ""
+    apid = form.initial['appraiser']
+    if apid:
+        appraiser_name = Appraisers.objects.values_list('name', flat=True).get(pk=apid)
+    else:
+        appraiser_name = ""
+    arid = form.initial['artist']
+    if arid:
+        artist_name = Artists.objects.values_list('name', flat=True).get(pk=arid)
+    else:
+        artist_name = ""
+    tecid = form.initial['technic']
+    if tecid:
+        technic_name = Technics.objects.values_list('name', flat=True).get(pk=tecid)
+    else:
+        technic_name = ""
+    form = LotsForm(request.POST or None,
+                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name, 'technic': technic_name},
+                    instance=cd)
     if form.is_valid():
         us = request.user
         obj = form.save(commit=False)
