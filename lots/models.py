@@ -35,7 +35,6 @@ def path_and_rename(instance, filename):
                 ph = "media/images/{}".format(filename)
     else:
         filename = '{}.{}'.format(instance.code, ext).lower()
-
     return os.path.join(upload_to, filename)
 
 

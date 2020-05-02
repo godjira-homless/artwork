@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-from .models import Lots
+from .models import Lots, path_and_rename
 from .forms import LotsForm
 from extra.models import Extras
 from artists.models import Artists
@@ -86,6 +86,8 @@ def create_lot(request):
 def update_lot(request, code):
     cd = get_object_or_404(Lots, code=code)
     form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
+    filepath = request.FILES.get('photo', False)
+    photo = path_and_rename(cd, filepath)
     cuid = form.initial['customer']
     if cuid:
         customer_name = Customer.objects.values_list('name', flat=True).get(pk=cuid)

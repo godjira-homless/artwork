@@ -8,13 +8,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm" style="background-color: #e3e3e3;">
-        <h4>Create new worklog</h4>
+        <h4>Update worklog</h4>
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
       info
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
-      {% if from.photo %}
+      {% if form.photo %}
         <img src="{{ form.photo.value.url }}" width="100" alt="...">
       {% endif %}
     </div>
@@ -308,14 +308,6 @@ if ($('#id_limit').length) {
   delimiter: ','
   });
 }
-
-
-
-
-
-
-
-
 
 </script>
 
