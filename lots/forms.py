@@ -87,7 +87,7 @@ class LotsForm(forms.ModelForm):
             raise forms.ValidationError("Appraiser does not exist! Choose another one!")
         return appraiser
 
-    def clean_technic(self, commit=True):
+    def clean_technic(self, **kwargs):
         technic = self.cleaned_data.get("technic") or None
         if technic is not None:
             technic, created = Technics.objects.get_or_create(name=technic)
@@ -125,5 +125,6 @@ class LotsForm(forms.ModelForm):
         return limit
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(LotsForm, self).__init__(*args, **kwargs)
         self.fields['photo'].required = False
+

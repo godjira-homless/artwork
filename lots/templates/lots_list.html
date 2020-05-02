@@ -46,6 +46,7 @@
                             <p class="font-italic text-muted mb-0 small">{{ item.get_type_display }}</p>
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 <h6 class="font-weight-bold my-2">{{ item.create_date }} | {{ item.modified_by }}</h6>
+                                <h7 class="font-weight-bold my-2">{{ item.creator }} | {{ item.modifier }}</h7>
                                     <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_lot' code=item.code %}">Edit</a></p>
                                 <ul class="list-inline small">
                                     <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
@@ -56,7 +57,10 @@
                                 </ul>
                             </div>
                         </div>
-                        <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="150" class="ml-lg-5 order-1 order-lg-2">
+                        {% if item.photo %}
+                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="150" class="ml-lg-5 order-1 order-lg-2">
+                        {% endif %}
+
                     </div> <!-- End -->
                 </li>
                 <!-- list group item -->

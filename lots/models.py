@@ -16,21 +16,19 @@ from customers.models import Customer
 from appraisers.models import Appraisers
 from technics.models import Technics
 
-def exist_file(ph):
-    return exists(ph)
 
 def path_and_rename(instance, filename):
     upload_to = 'images/'
     ext = "jpg"
     ph = "media/images/{}.{}".format(instance.code, ext).lower()
 
-    if exist_file(ph):
+    if os.path.exists(ph):
         kieg_n = 1
         kieg = "_{:02d}".format(kieg_n)
         filename = '{}{}.{}'.format(instance.code, kieg, ext).lower()
         ph = "media/images/{}".format(filename)
-        if exist_file(ph):
-            while exist_file(ph):
+        if os.path.exists(ph):
+            while os.path.exists(ph):
                 kieg_n += 1
                 kieg = "_{:02d}".format(kieg_n)
                 filename = '{}{}.{}'.format(instance.code, kieg, ext).lower()
@@ -40,6 +38,7 @@ def path_and_rename(instance, filename):
 
     return os.path.join(upload_to, filename)
 
+
 def validate_type(value):
     if value:
         pass
@@ -48,6 +47,7 @@ def validate_type(value):
             ('%(value)s is not a selection'),
             params={'value': value},
         )
+
 
 TYPE_CHOICES = (
     ('', '---------'),
@@ -62,6 +62,7 @@ TYPE_CHOICES = (
 )
 
 
+
 class Lots(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=False, related_name='customer_lot',
                                  on_delete=models.SET_NULL)
@@ -72,7 +73,8 @@ class Lots(models.Model):
     modifier = models.ForeignKey(User, null=True, related_name='lot_modifier', on_delete=models.SET('1'))
     create_date = models.DateTimeField(auto_now_add=True, editable=False)
     modify_date = models.DateTimeField(auto_now=True)
-    code = models.PositiveIntegerField(blank=False, null=True, unique=True, validators=[MinValueValidator(600000), MaxValueValidator(699999)], )
+    code = models.PositiveIntegerField(blank=False, null=True, unique=True,
+                                       validators=[MinValueValidator(600000), MaxValueValidator(699999)], )
     worknumber = models.PositiveIntegerField(blank=True, null=True)
     title = models.CharField(max_length=255, blank=True)
     artist = models.ForeignKey(Artists, null=True, blank=True, related_name='artist_lot', on_delete=models.SET_NULL)

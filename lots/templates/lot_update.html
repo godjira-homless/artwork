@@ -14,7 +14,9 @@
       info
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
-      <img src="{{ form.photo.value.url }}" width="100" alt="...">
+      {% if from.photo %}
+        <img src="{{ form.photo.value.url }}" width="100" alt="...">
+      {% endif %}
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@ from technics.models import Technics
 
 @login_required
 def lots_list(request):
-    lots = Lots.objects.all()
+    lots = Lots.objects.all().order_by('code')
     context = {'items': lots}
     return render(request, 'lots_list.html', context)
 
@@ -115,5 +115,10 @@ def update_lot(request, code):
         obj.modifier = us
         form.save()
         return HttpResponseRedirect(reverse('lots_list'))
-    context = {'form': form}
+    else:
+        errors = form.errors
+    form = LotsForm(request.POST or None,
+                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name, 'technic': technic_name},
+                    instance=cd)
+    context = {'form': form, 'errors': errors}
     return render(request, 'lot_update.html', context)
