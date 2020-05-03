@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Max
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Max, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -16,9 +17,31 @@ from technics.models import Technics
 
 @login_required
 def lots_list(request):
-    lots = Lots.objects.all().order_by('code')
-    context = {'items': lots}
+    # lots = Lots.objects.all().order_by('code')
+    # context = {'items': lots}
+    # return render(request, 'lots_list.html', context)
+
+    queryset_list = Lots.objects.all().order_by('code')
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(title__icontains=query) | Q(code__icontains=query) | Q(desc__icontains=query) | Q(artist__name__icontains=query) | Q(technic__name__icontains=query)
+        )
+    paginator = Paginator(queryset_list, 10)
+    page = request.GET.get('page')
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        queryset_list = paginator.page(paginator.num_pages)
+    context = {'items': queryset_list}
     return render(request, 'lots_list.html', context)
+
+
+
+
+
 
 
 @login_required
@@ -86,8 +109,8 @@ def create_lot(request):
 def update_lot(request, code):
     cd = get_object_or_404(Lots, code=code)
     form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
-    filepath = request.FILES.get('photo', False)
-    photo = path_and_rename(cd, filepath)
+    # filepath = request.FILES.get('photo', False)
+    # photo = path_and_rename(cd, filepath)
     cuid = form.initial['customer']
     if cuid:
         customer_name = Customer.objects.values_list('name', flat=True).get(pk=cuid)
@@ -115,6 +138,8 @@ def update_lot(request, code):
         us = request.user
         obj = form.save(commit=False)
         obj.modifier = us
+        if request.FILES:
+            obj.photo = request.FILES['photo']
         form.save()
         return HttpResponseRedirect(reverse('lots_list'))
     else:
