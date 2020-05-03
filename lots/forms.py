@@ -13,7 +13,7 @@ class LotsForm(forms.ModelForm):
     artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                              max_length=200, required=False)
     customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
-                               max_length=200, required=True)
+                               max_length=220, required=True)
     appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                 max_length=200, required=True)
     technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
