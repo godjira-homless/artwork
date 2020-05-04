@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 07:55+0200\n"
+"POT-Creation-Date: 2020-05-04 10:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,105 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: lots/forms.py:14
+msgid "This field is required."
+msgstr "A mező kitöltése kötelező"
+
+#: lots/forms.py:19
 msgid "Artist"
 msgstr "Szerző"
 
-#: lots/forms.py:16
+#: lots/forms.py:21
 msgid "Customer"
 msgstr "Ügyfél"
 
-#: lots/forms.py:18
+#: lots/forms.py:23
 msgid "Appraiser"
 msgstr "Becsüs"
 
-#: lots/forms.py:20
+#: lots/forms.py:25
 msgid "Technic"
 msgstr "Technika"
 
-#: lots/forms.py:24
+#: lots/templates/lot_create.html:12 lots/templates/lots_list.html:11
+msgid "Create new lot"
+msgstr "Új tétel létrehozása"
+
+#: lots/templates/lot_create.html:42 lots/templates/lot_update.html:44
+msgid "Code"
+msgstr "Kód"
+
+#: lots/templates/lot_create.html:51 lots/templates/lot_update.html:53
+msgid "Worknumber"
+msgstr "Munkaszám"
+
+#: lots/templates/lot_create.html:69 lots/templates/lot_update.html:71
+msgid "Title"
+msgstr "Cím"
+
+#: lots/templates/lot_create.html:78 lots/templates/lot_update.html:80
+msgid "Desc"
+msgstr "Leírás"
+
+#: lots/templates/lot_create.html:114 lots/templates/lot_update.html:116
+msgid "Type"
+msgstr "Típus"
+
+#: lots/templates/lot_create.html:123 lots/templates/lot_update.html:125
+msgid "Size"
+msgstr "Méret"
+
+#: lots/templates/lot_create.html:132 lots/templates/lot_update.html:134
+msgid "Weight"
+msgstr "Súly"
+
+#: lots/templates/lot_create.html:141 lots/templates/lot_update.html:143
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: lots/templates/lot_create.html:156 lots/templates/lot_update.html:158
 msgid "Photo"
 msgstr "Kép"
+
+#: lots/templates/lot_create.html:160 lots/templates/lot_update.html:162
+msgid "Select"
+msgstr "Kiválaszt"
+
+#: lots/templates/lot_create.html:168 lots/templates/lot_update.html:170
+msgid "Purchase"
+msgstr "Vétel"
+
+#: lots/templates/lot_create.html:177 lots/templates/lot_update.html:179
+msgid "Price"
+msgstr "Ár"
+
+#: lots/templates/lot_create.html:186 lots/templates/lot_update.html:188
+msgid "Pay"
+msgstr "Fizetendő"
+
+#: lots/templates/lot_create.html:195 lots/templates/lot_update.html:197
+msgid "Start"
+msgstr "Induló"
+
+#: lots/templates/lot_create.html:204 lots/templates/lot_update.html:206
+msgid "Limit"
+msgstr "Limit"
+
+#: lots/templates/lot_create.html:216 lots/templates/lot_update.html:218
+msgid "Save"
+msgstr "Mentés"
+
+#: lots/templates/lot_update.html:12
+msgid "Update lot"
+msgstr "Tétel szerkesztése"
+
+#: lots/templates/lots_list.html:16
+msgid "Search..."
+msgstr "Keresés..."
+
+#: lots/templates/lots_list.html:17
+msgid "Search"
+msgstr "Keresés"
+
+#: lots/templates/lots_list.html:51
+msgid "Edit"
+msgstr "Szerkeszt"

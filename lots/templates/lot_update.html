@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 
@@ -8,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm" style="background-color: #e3e3e3;">
-        <h4>Update worklog</h4>
+        <h4>{% trans 'Update lot' %}</h4>
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
       info
@@ -40,7 +41,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_code" class="col-form-label mr-2">{{ form.code.label }}</label>
+                    <label for="id_code" class="col-form-label mr-2">{% trans 'Code' %}</label>
                 </td>
                 <td>
                     {{ form.code }}
@@ -49,7 +50,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_worknumber" class="col-form-label mr-2">{{ form.worknumber.label }}</label>
+                    <label for="id_worknumber" class="col-form-label mr-2">{% trans 'Worknumber' %}</label>
                 </td>
                 <td>
                     {{ form.worknumber }}
@@ -67,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_title" class="col-form-label mr-2">{{ form.title.label }}</label>
+                    <label for="id_title" class="col-form-label mr-2">{% trans 'Title' %}</label>
                 </td>
                 <td>
                     {{ form.title }}
@@ -76,7 +77,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_desc" class="col-form-label mr-2">{{ form.desc.label }}</label>
+                    <label for="id_desc" class="col-form-label mr-2">{% trans 'Desc' %}</label>
                 </td>
                 <td>
                     {{ form.desc }}
@@ -112,7 +113,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_type" class="col-form-label mr-2">{{ form.type.label }}</label>
+                    <label for="id_type" class="col-form-label mr-2">{% trans 'Type' %}</label>
                 </td>
                 <td>
                     {{ form.type }}
@@ -121,7 +122,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_size" class="col-form-label mr-2">{{ form.size.label }}</label>
+                    <label for="id_size" class="col-form-label mr-2">{% trans 'Size' %}</label>
                 </td>
                 <td>
                     {{ form.size }}
@@ -130,7 +131,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_weight" class="col-form-label mr-2">{{ form.weight.label }}</label>
+                    <label for="id_weight" class="col-form-label mr-2">{% trans 'Weight' %}</label>
                 </td>
                 <td>
                     {{ form.weight }}
@@ -139,7 +140,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_note" class="col-form-label mr-2">{{ form.note.label }}</label>
+                    <label for="id_note" class="col-form-label mr-2">{% trans 'Note' %}</label>
                 </td>
                 <td>
                     {{ form.note }}
@@ -154,16 +155,19 @@
         <table>
             <tr>
                 <td>
-                    <label for="id_photo" class="col-form-label mr-2">{{ form.photo.label }}</label>
+                    <label for="id_photo" class="col-form-label mr-2">{% trans 'Photo' %}</label>
                 </td>
                 <td>
-                    {{ form.photo }}
+                    <div class="fileUpload btn btn-primary">
+                    <span>{% trans 'Select' %}</span>
+                    <input type="file" class="upload" name="photo" id="id_photo">
+                    </div>
                     <span class="text-danger"><small>{{ errors.photo.as_text }}</small></span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="id_purchase" class="col-form-label mr-2">{{ form.purchase.label }}</label>
+                    <label for="id_purchase" class="col-form-label mr-2">{% trans 'Purchase' %}</label>
                 </td>
                 <td>
                     {{ form.purchase }}
@@ -172,7 +176,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_price" class="col-form-label mr-2">{{ form.price.label }}</label>
+                    <label for="id_price" class="col-form-label mr-2">{% trans 'Price' %}</label>
                 </td>
                 <td>
                     {{ form.price }}
@@ -181,7 +185,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_pay" class="col-form-label mr-2">{{ form.pay.label }}</label>
+                    <label for="id_pay" class="col-form-label mr-2">{% trans 'Pay' %}</label>
                 </td>
                 <td>
                     {{ form.pay }}
@@ -190,7 +194,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_start" class="col-form-label mr-2">{{ form.start.label }}</label>
+                    <label for="id_start" class="col-form-label mr-2">{% trans 'Start' %}</label>
                 </td>
                 <td>
                     {{ form.start }}
@@ -199,7 +203,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="id_limit" class="col-form-label mr-2">{{ form.limit.label }}</label>
+                    <label for="id_limit" class="col-form-label mr-2">{% trans 'Limit' %}</label>
                 </td>
                 <td>
                     {{ form.limit }}
@@ -211,7 +215,7 @@
     </div>
 
   </div>
-        <input type="submit" value="Save" />
+        <input type="submit" class="btn btn-primary" value="{% trans 'Save' %}">
     </form>
 </div>
 

@@ -1,3 +1,4 @@
+from django.forms import Field
 from django import forms
 from django.http import request
 from django.utils.translation import gettext as _
@@ -8,6 +9,10 @@ from artists.models import Artists
 from customers.models import Customer
 from appraisers.models import Appraisers
 from technics.models import Technics
+
+Field.default_error_messages = {
+    'required': _("This field is required."),
+}
 
 
 class LotsForm(forms.ModelForm):
@@ -21,7 +26,7 @@ class LotsForm(forms.ModelForm):
                               max_length=200, required=False)
 
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
-    photo = forms.ImageField(label=_('Photo'), widget=forms.FileInput, ),
+    photo = forms.ImageField(widget=forms.FileInput, ),
 
     class Meta:
         model = Lots

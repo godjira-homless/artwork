@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,22 +24,22 @@
         <a class="nav-link" href="{% url 'index' %}">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'customers_list' %}">Customers</a>
+        <a class="nav-link" href="{% url 'customers_list' %}">{% trans 'Customers' %}</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="{% url 'technics_list' %}">Technics</a>
+        <a class="nav-link" href="{% url 'technics_list' %}">{% trans 'Technics' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'appraisers_list' %}">Appraisers</a>
+        <a class="nav-link" href="{% url 'appraisers_list' %}">{% trans 'Appraisers' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'artists_list' %}">Artists</a>
+        <a class="nav-link" href="{% url 'artists_list' %}">{% trans 'Artists' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'extra_list' %}">Extra</a>
+        <a class="nav-link" href="{% url 'extra_list' %}">{% trans 'Extras' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'lots_list' %}">Lots</a>
+        <a class="nav-link" href="{% url 'lots_list' %}">{% trans 'Lots' %}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
@@ -46,11 +47,11 @@
       <li class="nav-item">
             {% if user.is_authenticated %}
       <li>
-        <a class="nav-link" href="{% url 'logout' %}" tabindex="-1" aria-label="logout">Logout</a>
+        <a class="nav-link" href="{% url 'logout' %}" tabindex="-1" aria-label="logout">{% trans 'Logout' %}</a>
       </li>
     {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-label="login">Login</a>
+        <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-label="login">{% trans 'Login' %}</a>
       </li>
     {% endif %}
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

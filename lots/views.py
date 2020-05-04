@@ -1,3 +1,5 @@
+from django.forms import Field
+from django.utils.translation import gettext as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -6,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
+
 from .models import Lots, path_and_rename
 from .forms import LotsForm
 from extra.models import Extras
@@ -13,7 +16,6 @@ from artists.models import Artists
 from appraisers.models import Appraisers
 from customers.models import Customer
 from technics.models import Technics
-
 
 @login_required
 def lots_list(request):

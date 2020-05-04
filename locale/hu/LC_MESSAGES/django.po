@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 07:55+0200\n"
+"POT-Creation-Date: 2020-05-04 10:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/base.html:27
+msgid "Customers"
+msgstr "Ügyfelek"
+
+#: templates/base.html:30
+msgid "Technics"
+msgstr "Technikák"
+
+#: templates/base.html:33
+msgid "Appraisers"
+msgstr "Becsüsök"
+
+#: templates/base.html:36
+msgid "Artists"
+msgstr "Szerzők"
+
+#: templates/base.html:39
+msgid "Extras"
+msgstr "Extrák"
+
+#: templates/base.html:42
+msgid "Lots"
+msgstr "Tételek"
+
+#: templates/base.html:50
+msgid "Logout"
+msgstr "Kilépés"
+
+#: templates/base.html:54
+msgid "Login"
+msgstr "Belépés"
 
 #: venv/lib/python3.8/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"

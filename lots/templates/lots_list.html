@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% load humanize %}
 {% block content %}
@@ -7,13 +8,13 @@
     <div class="row">
         <div class="col-sm">
             <a href="{% url 'create_lot' %}">
-                <button class="btn btn-secondary">Új tétel rögzítése</button>
+                <button class="btn btn-secondary">{% trans 'Create new lot' %}</button>
             </a>
         </div>
         <div class="col-sm">
             <form action="{% url 'lots_list' %}" method="GET">
-                <input name="q" type="text" value="{{ request.GET.q }}"  onClick="this.select();" placeholder="Keresés...">
-                <input type="submit" class="btn btn-primary btn-sm" name="keres" value="keres">
+                <input name="q" type="text" value="{{ request.GET.q }}"  onClick="this.select();" placeholder="{% trans 'Search...' %}">
+                <input type="submit" class="btn btn-primary btn-sm" name="keres" value="{% trans 'Search' %}">
             </form>
         </div>
         <div class="col-sm">
@@ -47,7 +48,7 @@
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 <h6 class="font-weight-bold my-2">{{ item.create_date }} | {{ item.modified_by }}</h6>
                                 <h7 class="font-weight-bold my-2">{{ item.creator }} | {{ item.modifier }}</h7>
-                                    <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_lot' code=item.code %}">Edit</a></p>
+                                    <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_lot' code=item.code %}">{% trans 'Edit' %}</a></p>
                                 <ul class="list-inline small">
                                     <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
                                     <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
