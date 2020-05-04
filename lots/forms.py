@@ -1,5 +1,6 @@
 from django import forms
 from django.http import request
+from django.utils.translation import gettext as _
 
 from .models import Lots
 
@@ -10,17 +11,17 @@ from technics.models import Technics
 
 
 class LotsForm(forms.ModelForm):
-    artist = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+    artist = forms.CharField(label=_('Artist'), widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                              max_length=200, required=False)
-    customer = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+    customer = forms.CharField(label=_('Customer'), widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=220, required=True)
-    appraiser = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+    appraiser = forms.CharField(label=_('Appraiser'), widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                 max_length=200, required=True)
-    technic = forms.CharField(widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+    technic = forms.CharField(label=_('Technic'), widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                               max_length=200, required=False)
 
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
-    photo = forms.ImageField(widget=forms.FileInput, )
+    photo = forms.ImageField(label=_('Photo'), widget=forms.FileInput, ),
 
     class Meta:
         model = Lots

@@ -21,7 +21,7 @@ def lots_list(request):
     # context = {'items': lots}
     # return render(request, 'lots_list.html', context)
 
-    queryset_list = Lots.objects.all().order_by('code')
+    queryset_list = Lots.objects.all().order_by('-code')
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
