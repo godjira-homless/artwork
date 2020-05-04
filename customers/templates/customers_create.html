@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock css %}
-{% block title %}<title>Új ügyfél rögzítése</title>{% endblock title %}
+{% block title %}<title>{% trans 'Create new customer' %}</title>{% endblock title %}
 
 {% block content %}
 
 {% if form %}
 
-<div class="container mt-2"><h4>Új ügyfél rögzítése</h4></div>
+<div class="container mt-2"><h4>{% trans 'Create new customer' %}</h4></div>
 <div class="container mt-2 my-container">
     <form method="POST" class="needs-validation" novalidate>
         {% csrf_token %}
@@ -27,7 +28,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_address" class="col-form-label">Utca:</label></td>
+                        <td><label for="id_address" class="col-form-label">{% trans 'Street' %}</label></td>
                         <td>
                             {{ form.address }}
                             <div class="valid-feedback">Looks good!</div>
@@ -35,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="city" class="col-form-label">Város:</label></td>
+                        <td><label for="city" class="col-form-label">{% trans 'City' %}</label></td>
                         <td>
                             {{ form.city }}
                             <div class="valid-feedback">Looks good!</div>
@@ -43,7 +44,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_zip" class="col-form-label">Irsz:</label></td>
+                        <td><label for="id_zip" class="col-form-label">{% trans 'Zip' %}</label></td>
                         <td>
                             {{ form.zip }}
                             <div class="valid-feedback">Looks good!</div>
@@ -51,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_country" class="col-form-label">Ország:</label></td>
+                        <td><label for="id_country" class="col-form-label">{% trans 'Country' %}</label></td>
                         <td>
                             {{ form.country }}
                             <div class="valid-feedback">Looks good!</div>
@@ -59,7 +60,7 @@
                         </td>
                     </tr>
                 <tr>
-                        <td><label for="id_phone" class="col-form-label">Mobil:</label></td>
+                        <td><label for="id_phone" class="col-form-label">{% trans 'Mobile' %}</label></td>
                         <td>
                             {{ form.phone }}
                             <div class="valid-feedback">Looks good!</div>
@@ -67,7 +68,7 @@
                         </td>
                 </tr>
                 <tr>
-                        <td><label for="id_bank" class="col-form-label">Bank:</label></td>
+                        <td><label for="id_bank" class="col-form-label">{% trans 'Bank' %}</label></td>
                         <td>
                             {{ form.bank }}
                             <div class="valid-feedback">Looks good!</div>
@@ -81,7 +82,7 @@
                 <table class="table table-sm table-borderless" >
                     <tbody>
                     <tr>
-                        <td><label for="id_email" class="col-form-label">E-mail:</label></td>
+                        <td><label for="id_email" class="col-form-label">{% trans 'E-mail' %}</label></td>
                         <td>
                             {{ form.email }}
                             {{ form.email.errors }}
@@ -90,7 +91,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_taxnumber" class="col-form-label">Adóa.jel:</label></td>
+                        <td><label for="id_taxnumber" class="col-form-label">{% trans 'Taxnumber' %}</label></td>
                         <td>
                             {{ form.taxnumber }}
                             <div class="valid-feedback">Looks good!</div>
@@ -98,7 +99,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_sale_percent" class="col-form-label">Beadó%:</label></td>
+                        <td><label for="id_sale_percent" class="col-form-label">{% trans 'Customer' %}%</label></td>
                         <td>
                             {{ form.sale_percent }}
                             <div class="valid-feedback">Looks good!</div>
@@ -106,7 +107,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_buy_percent" class="col-form-label">Vevő%:</label></td>
+                        <td><label for="id_buy_percent" class="col-form-label">{% trans 'Buyer' %}%</label></td>
                         <td>
                             {{ form.buy_percent }}
                             <div class="valid-feedback">Looks good!</div>
@@ -114,7 +115,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="id_note" class="col-form-label">Megj.:</label></td>
+                        <td><label for="id_note" class="col-form-label">{% trans 'Note' %}</label></td>
                         <td>
                             {{ form.note }}
                             <div class="valid-feedback">Looks good!</div>
@@ -126,7 +127,7 @@
                 </table>
             </div>
         </div>
-          <button class="btn btn-primary" type="submit">Mentés</button>
+          <button class="btn btn-primary" type="submit">{% trans 'Save' %}</button>
     </form>
 </div>
 

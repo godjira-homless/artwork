@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-04 13:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: customers/templates/customers.html:6
+msgid "Customers"
+msgstr "Ügyfelek"
+
+#: customers/templates/customers.html:9
+msgid "Customers administration"
+msgstr "Ügyfelek adminisztráció"
+
+#: customers/templates/customers.html:15
+msgid "Search..."
+msgstr "Keresés..."
+
+#: customers/templates/customers.html:16
+msgid "Search"
+msgstr "Keresés"
+
+#: customers/templates/customers.html:21
+#: customers/templates/customers_create.html:7
+#: customers/templates/customers_create.html:13
+msgid "Create new customer"
+msgstr "Új ügyfél rögzítése"
+
+#: customers/templates/customers.html:36
+msgid "Results"
+msgstr "Eredmény"
+
+#: customers/templates/customers.html:41
+msgid "Name"
+msgstr "Név"
+
+#: customers/templates/customers.html:42
+#: customers/templates/customers_create.html:85
+msgid "E-mail"
+msgstr "E-mail"
+
+#: customers/templates/customers.html:43
+#: customers/templates/customers_create.html:63
+msgid "Mobile"
+msgstr "Mobil"
+
+#: customers/templates/customers.html:44
+#: customers/templates/customers_create.html:39
+msgid "City"
+msgstr "Város"
+
+#: customers/templates/customers.html:45
+#: customers/templates/customers_create.html:31
+msgid "Street"
+msgstr "Utca"
+
+#: customers/templates/customers.html:46
+#: customers/templates/customers_create.html:47
+msgid "Zip"
+msgstr "Irsz"
+
+#: customers/templates/customers.html:47
+#: customers/templates/customers_create.html:55
+msgid "Country"
+msgstr "Ország"
+
+#: customers/templates/customers.html:48
+msgid "Action"
+msgstr "Művelet"
+
+#: customers/templates/customers.html:62
+msgid "Edit"
+msgstr "Szerkeszt"
+
+#: customers/templates/customers.html:62
+msgid "Delete"
+msgstr "Töröl"
+
+#: customers/templates/customers.html:73
+msgid "No results"
+msgstr "Nincs találat"
+
+#: customers/templates/customers_create.html:71
+msgid "Bank"
+msgstr "Bank"
+
+#: customers/templates/customers_create.html:94
+msgid "Taxnumber"
+msgstr "Adóazonosító"
+
+#: customers/templates/customers_create.html:102
+msgid "Customer"
+msgstr "Ügyfél"
+
+#: customers/templates/customers_create.html:110
+msgid "Buyer"
+msgstr "Vevő"
+
+#: customers/templates/customers_create.html:118
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: customers/templates/customers_create.html:130
+msgid "Save"
+msgstr "Mentés"
+
