@@ -29,7 +29,8 @@ urlpatterns = [
     path('artists/', include('artists.urls')),
     path('extra/', include('extra.urls')),
     path('lots/', include('lots.urls')),
-#    path('imgup/', include("imgup.urls")),
+    path('sale/', include('sale.urls')),
+    # path('imgup/', include("imgup.urls")),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
 ]

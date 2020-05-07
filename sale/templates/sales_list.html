@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <a href="{% url 'create_sale' %}">
+                <button class="btn btn-secondary">{% trans 'Create new sale' %}</button>
+            </a>
+        </div>
+        <div class="col-sm">
+            <form action="{% url 'sale_list' %}" method="GET">
+                <input name="q" type="text" value="{{ request.GET.q }}"  onClick="this.select();" placeholder="{% trans 'Search...' %}">
+                <input type="submit" class="btn btn-primary btn-sm" name="keres" value="{% trans 'Search' %}">
+            </form>
+        </div>
+        <div class="col-sm">
+            One of the three columns
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- List group-->
+            <ul class="list-group shadow">
+                {% for item in items %}
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                           <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }}</h5>
+                            <p class="font-italic text-muted mb-0 small">{{ item.customer }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.vjegy }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.purchase|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.sold|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.pay|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.invoice }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.customer_invoice }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.sale_date }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.note }}</p>
+                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                <h6 class="font-weight-bold my-2">{{ item.create_date }} | {{ item.modified_by }}</h6>
+                                <h7 class="font-weight-bold my-2">{{ item.creator }} | {{ item.modifier }}</h7>
+                                    <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_lot' code=item.code %}">{% trans 'Edit' %}</a></p>
+                                <ul class="list-inline small">
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% if item.photo %}
+                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="150" class="ml-lg-5 order-1 order-lg-2">
+                        {% endif %}
+
+                    </div> <!-- End -->
+                </li>
+                <!-- list group item -->
+            {% endfor %}
+            </ul> <!-- End -->
+        </div>
+    </div>
+</div>
+
+
+{% if items.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if items.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#"><span>&laquo;</span></a></li>
+            {% endif %}
+            {% for i in items.paginator.page_range %}
+            {% if items.number == i %}
+                <li class="page-item active"><a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if items.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+
+{% endblock content %}
