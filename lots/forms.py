@@ -49,6 +49,7 @@ class LotsForm(forms.ModelForm):
             'start',
             'limit',
             'note',
+            'vjegy',
         )
 
         widgets = {
@@ -66,6 +67,7 @@ class LotsForm(forms.ModelForm):
             'start': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}),
             'limit': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}),
             'note': forms.Textarea(attrs={'rows': 3, 'cols': 30, 'style': 'width: 220px', 'class': 'form-control'}),
+            'vjegy': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
         }
 
     def clean_artist(self, commit=True):

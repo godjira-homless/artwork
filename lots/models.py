@@ -89,6 +89,7 @@ class Lots(models.Model):
     limit = models.CharField(blank=True, null=True, max_length=20)
     note = models.TextField(blank=True)
     photo = models.ImageField(upload_to=path_and_rename, default='images/default.png', null=True, blank=True)
+    vjegy = models.CharField(max_length=255, blank=True)
     # hammer = models.PositiveIntegerField(blank=True, null=True, default=0)
     # sold = models.PositiveIntegerField(blank=True, null=True, default=0)
     slug = models.SlugField(null=False, unique=True)

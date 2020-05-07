@@ -210,6 +210,15 @@
                     <span class="text-danger"><small>{{ errors.limit.as_text }}</small></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="id_vjegy" class="col-form-label mr-2">{% trans 'Vjegy' %}</label>
+                </td>
+                <td>
+                    {{ form.vjegy }}
+                    <span class="text-danger"><small>{{ errors.vjegy.as_text }}</small></span>
+                </td>
+            </tr>
 
         </table>
     </div>
