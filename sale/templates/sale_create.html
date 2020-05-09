@@ -12,7 +12,7 @@
         <h4>{% trans 'Create new sale' %}</h4>
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
-      info
+      {{ customer }}
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
       more info
@@ -28,11 +28,11 @@
         <table class="table table-sm">
             <tr>
                 <td>
-                    <label for="id_customer" class="col-form-label mr-2">{{ form.customer.label }}</label>
+                    <label for="id_buyer" class="col-form-label mr-2">{{ form.buyer.label }}</label>
                 </td>
                 <td>
-                    {{ form.customer }}
-                    <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
+                    {{ form.buyer }}
+                    <span class="text-danger"><small>{{ errors.buyer.as_text }}</small></span>
                 </td>
             </tr>
             <tr>
@@ -135,12 +135,12 @@
 <script>
 
 $(document).ready(function(){
-    $( "#id_customer" ).autocomplete({
+    $( "#id_buyer" ).autocomplete({
       source: "{% url 'auto_complete_customer' %}",
       selectFirst:true,
       minLength:2,
       select:function(event,ui) {
-        $("#id_customer").val(ui.item.id)
+        $("#id_buyer").val(ui.item.id)
       }
         });
 });

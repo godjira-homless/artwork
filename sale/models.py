@@ -9,7 +9,7 @@ from lots.models import Lots
 
 
 class Sales(models.Model):
-    customer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_customer',
+    buyer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_buyer',
                                   on_delete=models.SET_NULL)
     code = models.ForeignKey(Lots, to_field='code', null=True, blank=False, related_name='sale_lot',
                                   on_delete=models.SET_NULL)

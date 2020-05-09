@@ -14,6 +14,8 @@ class SaleSelector(forms.Form):
                            widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                            max_length=220, required=True,)
 
+    def __init__(self, *args, **kwargs):
+        super(SaleSelector, self).__init__(*args, **kwargs)
 
     def clean_selcode(self, commit=True):
         selcode = self.cleaned_data.get("selcode")
@@ -25,19 +27,19 @@ class SaleSelector(forms.Form):
         return selcode
 
 
-
 class SalesForm(forms.ModelForm):
-    customer = forms.CharField(label=_('Customer'),
+    buyer = forms.CharField(label=_('Buyer'),
                                widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=220, required=True)
     code = forms.CharField(label=_('Code'),
                            widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                            max_length=220, required=True,)
 
+
     class Meta:
         model = Sales
         fields = (
-            'customer',
+            'buyer',
             'code',
             'purchase',
             'sold',
@@ -50,7 +52,7 @@ class SalesForm(forms.ModelForm):
         )
 
         widgets = {
-            'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
+            # 'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
             'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
             'sold': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
@@ -65,14 +67,14 @@ class SalesForm(forms.ModelForm):
         super(SalesForm, self).__init__(*args, **kwargs)
         self.fields['code'].widget.attrs['readonly'] = True
 
-    def clean_customer(self, commit=True):
-        customer = self.cleaned_data.get("customer")
-        if Customer.objects.filter(name=customer).exists():
-            customer = Customer.objects.get(name=customer)
-            self.cleaned_data['customer'] = customer
+    def clean_buyer(self, commit=True):
+        buyer = self.cleaned_data.get("buyer")
+        if Customer.objects.filter(name=buyer).exists():
+            buyer = Customer.objects.get(name=buyer)
+            self.cleaned_data['buyer'] = buyer
         else:
             raise forms.ValidationError("Customer does not exist! Choose another client!")
-        return customer
+        return buyer
 
     def clean_purchase(self, commit=True):
         purchase = self.cleaned_data.get("purchase") or None
