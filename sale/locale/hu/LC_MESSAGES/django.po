@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-09 18:46+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: sale/forms.py:13 sale/forms.py:34 sale/templates/sale_create.html:40
+msgid "Code"
+msgstr "Kód"
+
+#: sale/forms.py:31
+msgid "Buyer"
+msgstr "Vevő"
+
+#: sale/templates/sale_create.html:12 sale/templates/sale_select.html:12
+#: sale/templates/sales_list.html:11
+msgid "Create new sale"
+msgstr "Új eladás rögzítése"
+
+#: sale/templates/sale_create.html:67
+msgid "Pay"
+msgstr "Fizetendő"
+
+#: sale/templates/sale_create.html:76
+msgid "Invoice"
+msgstr "Számla"
+
+#: sale/templates/sale_create.html:86
+msgid "Customer invoice"
+msgstr "Ügyfél számla"
+
+#: sale/templates/sale_create.html:96
+msgid "Vjegy"
+msgstr "Vételi jegy"
+
+#: sale/templates/sale_create.html:106
+msgid "Sale date"
+msgstr "Eladás dátuma"
+
+#: sale/templates/sale_create.html:116
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: sale/templates/sale_create.html:128 sale/templates/sale_select.html:41
+msgid "Save"
+msgstr "Mentés"
+
+#: sale/templates/sales_list.html:16
+msgid "Search..."
+msgstr "Keresés..."
+
+#: sale/templates/sales_list.html:17
+msgid "Search"
+msgstr "Keresés"
+
+#: sale/templates/sales_list.html:52
+msgid "Edit"
+msgstr "Szerkeszt"

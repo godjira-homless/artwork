@@ -18,25 +18,22 @@ def sale_list(request):
     context = {'items': items}
     return render(request, 'sales_list.html', context)
 
-
 @login_required
 def create_sale(request, code):
     ins = get_object_or_404(Lots, code=code)
     form = SalesForm(request.POST or None, instance=ins)
     if form.is_valid():
-        us = request.user
-        obj = form.save(commit=False)
-        obj.creator = us
         form.save()
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
     # form = SalesForm(instance=ins)
     customer_name = ins.customer
+
     form = SalesForm(request.POST or None,
                     initial={},
                     instance=ins)
-    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'customer': customer_name})
+    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})
 
 
 @login_required

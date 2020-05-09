@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-04 13:22+0200\n"
+"POT-Creation-Date: 2020-05-09 18:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,11 @@ msgstr "Induló"
 msgid "Limit"
 msgstr "Limit"
 
-#: lots/templates/lot_create.html:216 lots/templates/lot_update.html:218
+#: lots/templates/lot_create.html:213 lots/templates/lot_update.html:215
+msgid "Vjegy"
+msgstr ""
+
+#: lots/templates/lot_create.html:225 lots/templates/lot_update.html:227
 msgid "Save"
 msgstr "Mentés"
 
@@ -118,6 +122,6 @@ msgstr "Keresés..."
 msgid "Search"
 msgstr "Keresés"
 
-#: lots/templates/lots_list.html:51
+#: lots/templates/lots_list.html:52
 msgid "Edit"
 msgstr "Szerkeszt"
