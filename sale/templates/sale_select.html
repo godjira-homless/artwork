@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+<script src="{% static 'js/cleave.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/lots.css' %}">
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm" style="background-color: #e3e3e3;">
+        <h4>{% trans 'Create new sale' %}</h4>
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      info
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      more info
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>{% csrf_token %}
+  <div class="row">
+
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table class="table table-sm">
+            <tr>
+                <td>
+                    <label for="id_selcode" class="col-form-label mr-2">{{ form.selcode.label }}</label>
+                </td>
+                <td>
+                    {{ form.selcode }}
+                    <span class="text-danger"><small>{{ errors.selcode.as_text }}</small></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+  </div>
+          <input type="submit" value="{% trans 'Save' %}" />
+    </form>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+    $( "#id_selcode" ).autocomplete({
+      source: "{% url 'auto_complete_code' %}",
+      selectFirst:true,
+      minLength:4,
+      select:function(event,ui) {
+        $("#id_selcode").val(ui.item.id)
+      }
+        });
+});
+
+    </script>
+
+{% endblock script %}

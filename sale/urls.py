@@ -7,7 +7,8 @@ from .views import auto_complete_code
 urlpatterns = [
 
     path('', views.sale_list, name='sale_list'),
-    path('create_sale/', views.create_sale, name='create_sale'),
+    path('create_sale/<int:code>', views.create_sale, name='create_sale'),
+    path('sale_selector/', views.sale_selector, name='sale_selector'),
     # path('update/<int:code>', views.update_lot, name='update_lot'),
     # path('delete/<int:id>', views.delete_extra, name='delete_extra'),
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),

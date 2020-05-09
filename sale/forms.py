@@ -8,13 +8,31 @@ from customers.models import Customer
 from lots.models import Lots
 
 
+class SaleSelector(forms.Form):
+
+    selcode = forms.CharField(label=_('Code'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=True,)
+
+
+    def clean_selcode(self, commit=True):
+        selcode = self.cleaned_data.get("selcode")
+        if Lots.objects.filter(code=selcode).exists():
+            selcode = Lots.objects.get(code=selcode)
+            self.cleaned_data['selcode'] = selcode
+        else:
+            raise forms.ValidationError("Lot does not exist! Choose another Lot!")
+        return selcode
+
+
+
 class SalesForm(forms.ModelForm):
     customer = forms.CharField(label=_('Customer'),
                                widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                                max_length=220, required=True)
     code = forms.CharField(label=_('Code'),
                            widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
-                           max_length=220, required=True)
+                           max_length=220, required=True,)
 
     class Meta:
         model = Sales
@@ -45,6 +63,7 @@ class SalesForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SalesForm, self).__init__(*args, **kwargs)
+        self.fields['code'].widget.attrs['readonly'] = True
 
     def clean_customer(self, commit=True):
         customer = self.cleaned_data.get("customer")
@@ -54,15 +73,6 @@ class SalesForm(forms.ModelForm):
         else:
             raise forms.ValidationError("Customer does not exist! Choose another client!")
         return customer
-
-    def clean_code(self, commit=True):
-        code = self.cleaned_data.get("code")
-        if Lots.objects.filter(code=code).exists():
-            code = Lots.objects.get(code=code)
-            self.cleaned_data['code'] = code
-        else:
-            raise forms.ValidationError("Lot does not exist! Choose another Lot!")
-        return code
 
     def clean_purchase(self, commit=True):
         purchase = self.cleaned_data.get("purchase") or None
