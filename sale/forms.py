@@ -94,3 +94,12 @@ class SalesForm(forms.ModelForm):
         sold = pur.replace(",", '')
         return sold
 
+    def clean_code(self, commit=True):
+        code = self.cleaned_data.get("code")
+        if Lots.objects.filter(code=code).exists():
+            code = Lots.objects.get(code=code)
+            self.cleaned_data['code'] = code
+        else:
+            raise forms.ValidationError("Lots does not exist! Choose another client!")
+        return code
+

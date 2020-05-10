@@ -18,22 +18,20 @@ def sale_list(request):
     context = {'items': items}
     return render(request, 'sales_list.html', context)
 
+
 @login_required
 def create_sale(request, code):
     ins = get_object_or_404(Lots, code=code)
-    form = SalesForm(request.POST or None, instance=ins)
+    form = SalesForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+        obj = form.save(commit=False)
+        obj.creator = request.user
         form.save()
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
-    # form = SalesForm(instance=ins)
-    customer_name = ins.customer
-
-    form = SalesForm(request.POST or None,
-                    initial={},
-                    instance=ins)
-    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})
+    form = SalesForm(instance=ins)
+    return render(request, 'sale_create.html', {'form': form, 'errors': errors})
 
 
 @login_required
@@ -62,3 +60,19 @@ def auto_complete_code(request):
     data = json.dumps(users_list)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+def create_sale_old(request, code):
+    ins = get_object_or_404(Lots, code=code)
+    form = SalesForm(request.POST or None, instance=ins)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('sale_list'))
+    else:
+        errors = form.errors
+    # form = SalesForm(instance=ins)
+    customer_name = ins.customer
+
+    form = SalesForm(request.POST or None,
+                    initial={},
+                    instance=ins)
+    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})
