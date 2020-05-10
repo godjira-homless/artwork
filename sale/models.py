@@ -20,7 +20,7 @@ class Sales(models.Model):
     customer_invoice = models.CharField(max_length=255, blank=True)
     vjegy = models.CharField(blank=True, null=True, max_length=20)
     sale_date = models.DateField(blank=False, null=True)
-    note = models.TextField(blank=True)
+    note = models.TextField(blank=True, null=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 null=True, blank=True, related_name='sale_creator', on_delete=models.CASCADE)
     modifier = models.ForeignKey(User, null=True, related_name='sale_modifier', on_delete=models.SET('1'))

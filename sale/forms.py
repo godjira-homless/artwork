@@ -65,7 +65,7 @@ class SalesForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SalesForm, self).__init__(*args, **kwargs)
-        self.fields['code'].widget.attrs['readonly'] = True
+        #self.fields['code'].widget.attrs['readonly'] = True
 
     def clean_buyer(self, commit=True):
         buyer = self.cleaned_data.get("buyer")
