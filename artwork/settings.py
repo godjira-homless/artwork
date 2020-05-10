@@ -115,17 +115,7 @@ DATABASES = {
     }
 }
 """
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kjbuvrch',
-        'USER': 'kjbuvrch',
-        'PASSWORD': '7P7PElHy6For5xwJjxJFWKtsLL5bsY6G',
-        'HOST': 'dumbo.db.elephantsql.com',
-    }
-}
-"""
+
 
 DATABASES = {
     'default': {

@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.db.models.functions import ExtractQuarter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -14,7 +15,7 @@ from customers .models import Customer
 
 @login_required
 def sale_list(request):
-    items = Sales.objects.all()
+    items = Sales.objects.all().order_by('sale_date')
     context = {'items': items}
     return render(request, 'sales_list.html', context)
 
@@ -27,12 +28,12 @@ def create_sale(request, code):
         obj = form.save(commit=False)
         obj.creator = request.user
         form.save()
+        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
-    #form = SalesForm(initial={'code': ins.code, 'note': ''},)
-    form = SalesForm()
-    return render(request, 'sale_create.html', {'form': form, 'errors': errors})
+    form = SalesForm(initial={'note': '', }, instance=ins)
+    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})
 
 
 @login_required
@@ -46,6 +47,45 @@ def sale_selector(request):
     form = SaleSelector()
     return render(request, 'sale_select.html', {'form': form, 'errors': errors})
 
+def completed_quarter(dt):
+    prev_quarter_map = ((4, -1), (1, 0), (2, 0), (3, 0))
+    quarter, yd = prev_quarter_map[(dt.month - 1) // 3]
+    return quarter
+
+@login_required
+def update_sale(request, code):
+    cd = get_object_or_404(Sales, code=code)
+    ins = get_object_or_404(Lots, code=code)
+    form = SalesForm(request.POST or None, request.FILES or None, instance=cd)
+    buid = form.initial['buyer']
+    if buid:
+        buyer_name = Customer.objects.values_list('name', flat=True).get(pk=buid)
+    else:
+        buyer_name = ""
+    form = SalesForm(request.POST or None,
+                    initial={'buyer': buyer_name,}, instance=cd)
+    if form.is_valid():
+        us = request.user
+        obj = form.save(commit=False)
+        obj.modifier = us
+        form.save()
+        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
+        return HttpResponseRedirect(reverse('sale_list'))
+    else:
+        errors = form.errors
+    form = SalesForm(request.POST or None,
+                    initial={'buyer': buyer_name, }, instance=cd)
+    context = {'form': form, 'errors': errors, 'ins': ins}
+    return render(request, 'sale_update.html', context)
+
+@login_required
+def delete_sale(request, code):
+    instance = get_object_or_404(Sales, code=code)
+    if instance:
+        instance.delete()
+        return HttpResponseRedirect(reverse('sale_list'))
+    else:
+        return HttpResponseRedirect(reverse('sale_list'))
 
 @login_required
 def auto_complete_code(request):
@@ -61,19 +101,3 @@ def auto_complete_code(request):
     data = json.dumps(users_list)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
-
-def create_sale_old(request, code):
-    ins = get_object_or_404(Lots, code=code)
-    form = SalesForm(request.POST or None, instance=ins)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('sale_list'))
-    else:
-        errors = form.errors
-    # form = SalesForm(instance=ins)
-    customer_name = ins.customer
-
-    form = SalesForm(request.POST or None,
-                    initial={},
-                    instance=ins)
-    return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})

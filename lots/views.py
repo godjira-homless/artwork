@@ -41,11 +41,6 @@ def lots_list(request):
     return render(request, 'lots_list.html', context)
 
 
-
-
-
-
-
 @login_required
 def create_lot(request):
     form = LotsForm(request.POST or None, request.FILES or None)

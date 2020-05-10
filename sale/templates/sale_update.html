@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+<script src="{% static 'js/cleave.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/lots.css' %}">
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm" style="background-color: #e3e3e3;">
+        <h4>{% trans 'Update sale' %}</h4>
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      {% trans 'Customer' %}: {{ ins.customer }}
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+        <img src="{{ ins.photo.url }}" width="100">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate>{% csrf_token %}
+  <div class="row">
+
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table class="table table-sm">
+            <tr>
+                <td>
+                    <label for="id_buyer" class="col-form-label mr-2">{{ form.buyer.label }}</label>
+                </td>
+                <td>
+                    {{ form.buyer }}
+                    <span class="text-danger"><small>{{ errors.buyer.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_code" class="col-form-label mr-2">{% trans 'Code' %}</label>
+                </td>
+                <td>
+                    {{ form.code }}
+                    <span class="text-danger"><small>{{ errors.code.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_purchase" class="col-form-label mr-2">{{ form.purchase.label }}</label>
+                </td>
+                <td>
+                    {{ form.purchase }}
+                    <span class="text-danger"><small>{{ errors.purchase.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_sold" class="col-form-label mr-2">{{ form.sold.label }}</label>
+                </td>
+                <td>
+                    {{ form.sold }}
+                    <span class="text-danger"><small>{{ errors.sold.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_pay" class="col-form-label mr-2">{% trans 'Pay' %}</label>
+                </td>
+                <td>
+                    {{ form.pay }}
+                    <span class="text-danger"><small>{{ errors.pay.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_invoice" class="col-form-label mr-2">{% trans 'Invoice' %}</label>
+                </td>
+                <td>
+                    {{ form.invoice }}
+                    <span class="text-danger"><small>{{ errors.invoice.as_text }}</small></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="id_customer_invoice" class="col-form-label mr-2">{% trans 'Customer invoice' %}</label>
+                </td>
+                <td>
+                    {{ form.customer_invoice }}
+                    <span class="text-danger"><small>{{ errors.customer_invoice.as_text }}</small></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="id_vjegy" class="col-form-label mr-2">{% trans 'Vjegy' %}</label>
+                </td>
+                <td>
+                    {{ form.vjegy }}
+                    <span class="text-danger"><small>{{ errors.vjegy.as_text }}</small></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="id_sale_date" class="col-form-label mr-2">{% trans 'Sale date' %}</label>
+                </td>
+                <td>
+                    {{ form.sale_date }}
+                    <span class="text-danger"><small>{{ errors.sale_date.as_text }}</small></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="id_note" class="col-form-label mr-2">{% trans 'Note' %}</label>
+                </td>
+                <td>
+                    {{ form.note }}
+                    <span class="text-danger"><small>{{ errors.note.as_text }}</small></span>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+  </div>
+        <input type="submit" value="{% trans 'Save' %}" />
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+
+$(document).ready(function(){
+    $( "#id_buyer" ).autocomplete({
+      source: "{% url 'auto_complete_customer' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_buyer").val(ui.item.id)
+      }
+        });
+});
+
+$(document).ready(function(){
+    $( "#id_code" ).autocomplete({
+      source: "{% url 'auto_complete_code' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_code").val(ui.item.id)
+      }
+        });
+});
+
+
+if ($('#id_purchase').length) {
+  new Cleave('.input-num_purchase', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_pay').length) {
+  new Cleave('.input-num_pay', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_sold').length) {
+  new Cleave('.input-num_sold', {
+  numeral: true,
+  numeralThousandsGroupStyle: 'thousand',
+  delimiter: ','
+  });
+}
+
+if ($('#id_sale_date').length) {
+  new Cleave('.input-sale_date', {
+    date: true,
+    delimiter: '-',
+    datePattern: ['Y', 'm', 'd']
+  });
+}
+</script>
+
+{% endblock script %}

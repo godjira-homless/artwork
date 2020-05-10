@@ -8,10 +8,9 @@ urlpatterns = [
 
     path('', views.sale_list, name='sale_list'),
     path('create_sale/<int:code>', views.create_sale, name='create_sale'),
-    # path('create_sale/', views.create_sale, name='create_sale'),
     path('sale_selector/', views.sale_selector, name='sale_selector'),
-    # path('update/<int:code>', views.update_lot, name='update_lot'),
-    # path('delete/<int:id>', views.delete_extra, name='delete_extra'),
+    path('update/<int:code>', views.update_sale, name='update_sale'),
+    path('delete/<int:code>', views.delete_sale, name='delete_sale'),
     # path('<slug:slug>', views.detail_lot, name='detail_lot'),
     # path('auto_complete/', artview.auto_complete, name='auto_complete'),
     path('auto_complete_customer/', custview.auto_complete_customer, name='auto_complete_customer'),
