@@ -20,7 +20,8 @@ class Sales(models.Model):
     customer_invoice = models.CharField(max_length=255, blank=True)
     vjegy = models.CharField(blank=True, null=True, max_length=20)
     sale_date = models.DateField(blank=False, null=True)
-
+    diff = models.IntegerField(blank=True, null=True)
+    tax = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
                                 null=True, blank=True, related_name='sale_creator', on_delete=models.CASCADE)

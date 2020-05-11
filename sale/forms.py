@@ -103,3 +103,11 @@ class SalesForm(forms.ModelForm):
             raise forms.ValidationError("Lots does not exist! Choose another client!")
         return code
 
+    def clean_diff(self):
+        sold = self.cleaned_data.get("sold")
+        pay = self.cleaned_data.get("pay")
+        diff = 100
+        return diff
+
+
+

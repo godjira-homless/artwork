@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q, F, ExpressionWrapper
+from django.db.models import Q, F, ExpressionWrapper, Sum
 from django.db.models.functions import ExtractQuarter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -28,7 +28,9 @@ def biz_list(request, qt):
         items = ''
     else:
         items = Sales.objects.filter(sale_date__quarter=qt).values()
-    context = {'items': items}
+        total_tax = items.aggregate(Sum('tax'))
+        print(total_tax)
+    context = {'items': items, 'tx': total_tax}
     return render(request, 'biz_list.html', context)
 
 
@@ -39,6 +41,8 @@ def create_sale(request, code):
     if form.is_valid():
         obj = form.save(commit=False)
         obj.creator = request.user
+        obj.diff = int(obj.sold) - int(obj.pay)
+        obj.tax = obj.diff*0.2126
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))
@@ -80,6 +84,8 @@ def update_sale(request, code):
         us = request.user
         obj = form.save(commit=False)
         obj.modifier = us
+        obj.diff = int(obj.sold) - int(obj.pay)
+        obj.tax = obj.diff*0.2126
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))

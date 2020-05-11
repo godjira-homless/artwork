@@ -39,12 +39,12 @@
                 <tr>
                     <td>{{ item.invoice }}</td>
                     <td>{{ item.sale_date }}</td>
-                    <td>{{ item.code }}</td>
+                    <td>{{ item.code_id }}</td>
                     <td>{{ item.sold }}</td>
                     <td>{{ item.vjegy }}</td>
                     <td>{{ item.pay }}</td>
-                    <td>{{ items.diff }}</td>
-                    <td>{{ items.tax }}</td>
+                    <td>{{ item.diff }}</td>
+                    <td>{{ item.tax }}</td>
                     <td>
                         <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
                         <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>
@@ -53,6 +53,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+                <p>total tax: {{ tx.tax__sum }}</p>
         </div>
     </div>
 </div>
