@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm">
+            <a href="{% url 'biz_list' '1' %}">{% trans 'Quarter 1' %}</a>
+            <a href="{% url 'biz_list' '2' %}">{% trans 'Quarter 2' %}</a>
+            <a href="{% url 'biz_list' '3' %}">{% trans 'Quarter 3' %}</a>
+            <a href="{% url 'biz_list' '4' %}">{% trans 'Quarter 4' %}</a>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+                <h4>Quarter 2 sold items</h4>
+        <div class="mt-4 container table-responsive">
+            <table class="table table-hover table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Invoice</th>
+                    <th scope="col">Sale date</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Sold</th>
+                    <th scope="col">Vjegy</th>
+                    <th scope="col">Pay</th>
+                    <th scope="col">Diff</th>
+                    <th scope="col">Tax</th>
+                    <th scope="col">Action</th>
+                 </tr>
+                </thead>
+                <tbody>
+
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.invoice }}</td>
+                    <td>{{ item.sale_date }}</td>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.sold }}</td>
+                    <td>{{ item.vjegy }}</td>
+                    <td>{{ item.pay }}</td>
+                    <td>{{ items.diff }}</td>
+                    <td>{{ items.tax }}</td>
+                    <td>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% if items.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if items.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#"><span>&laquo;</span></a></li>
+            {% endif %}
+            {% for i in items.paginator.page_range %}
+            {% if items.number == i %}
+                <li class="page-item active"><a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if items.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+
+{% endblock content %}

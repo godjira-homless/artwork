@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, F, ExpressionWrapper
 from django.db.models.functions import ExtractQuarter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -16,8 +16,20 @@ from customers .models import Customer
 @login_required
 def sale_list(request):
     items = Sales.objects.all().order_by('sale_date')
+    qt = Sales.objects.filter(sale_date__quarter=3)
+    print(qt)
     context = {'items': items}
     return render(request, 'sales_list.html', context)
+
+@login_required
+def biz_list(request, qt):
+    pqt = (1, 2, 3, 4)
+    if qt not in pqt:
+        items = ''
+    else:
+        items = Sales.objects.filter(sale_date__quarter=qt).values()
+    context = {'items': items}
+    return render(request, 'biz_list.html', context)
 
 
 @login_required
