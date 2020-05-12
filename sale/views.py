@@ -28,7 +28,7 @@ def biz_list(request, qt):
         items = ''
     else:
         items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018)
-        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018).aggregate(Sum('tax'), Sum('diff'))
+        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018).values().aggregate(Sum('tax'), Sum('diff'))
         print(items)
     context = {'items': items, 'ag': ag}
     return render(request, 'biz_list.html', context)
