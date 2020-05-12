@@ -27,8 +27,8 @@ def biz_list(request, qt):
     if qt not in pqt:
         items = ''
     else:
-        items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018)
-        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018).values().aggregate(Sum('tax'), Sum('diff'))
+        items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2020)
+        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2020).values().aggregate(Sum('tax'), Sum('diff'))
         print(items)
     context = {'items': items, 'ag': ag}
     return render(request, 'biz_list.html', context)
@@ -41,8 +41,9 @@ def create_sale(request, code):
     if form.is_valid():
         obj = form.save(commit=False)
         obj.creator = request.user
-        obj.diff = int(obj.sold) - int(obj.pay)
-        obj.tax = ceil(obj.diff*0.2126)
+        obj.sold = form.cleaned_data['sold']
+        # obj.diff = obj.sold - int(obj.pay)
+        #obj.tax = ceil(obj.diff*0.2126)
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))

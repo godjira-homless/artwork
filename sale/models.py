@@ -1,12 +1,13 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import forms, CharField, fields
 from django.urls import reverse
 from django.utils.text import slugify
 
 from customers.models import Customer
 from lots.models import Lots
-
 
 class Sales(models.Model):
     buyer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_buyer',
@@ -14,8 +15,8 @@ class Sales(models.Model):
     code = models.ForeignKey(Lots, to_field='code', null=True, blank=False, related_name='sale_lot',
                                   on_delete=models.SET_NULL)
     purchase = models.CharField(blank=False, null=True, max_length=20)
-    sold = models.CharField(blank=False, null=True, max_length=20)
-    # sold = models.IntegerField(blank=True, null=True)
+    # sold = models.CharField(blank=False, null=True, max_length=20)
+    sold = models.IntegerField(blank=True, null=True)
     pay = models.CharField(blank=False, null=True, max_length=20)
     invoice = models.CharField(max_length=255, blank=True)
     customer_invoice = models.CharField(max_length=255, blank=True)

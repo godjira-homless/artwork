@@ -35,6 +35,9 @@ class SalesForm(forms.ModelForm):
                            widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                            max_length=220, required=True,)
 
+    sold = forms.CharField(label=_('Sold'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
+                           required=True)
 
     class Meta:
         model = Sales
@@ -42,7 +45,6 @@ class SalesForm(forms.ModelForm):
             'buyer',
             'code',
             'purchase',
-            'sold',
             'pay',
             'invoice',
             'customer_invoice',
@@ -55,7 +57,7 @@ class SalesForm(forms.ModelForm):
             # 'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
             'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
-            'sold': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
+            # 'sold': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
             'invoice': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', }),
             'customer_invoice': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', }),
             'sale_date': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-sale_date'}),
@@ -92,7 +94,7 @@ class SalesForm(forms.ModelForm):
         sold = self.cleaned_data.get("sold") or None
         pur = str(sold)
         sold = pur.replace(",", '')
-        return sold
+        return int(sold)
 
     def clean_code(self, commit=True):
         code = self.cleaned_data.get("code")
