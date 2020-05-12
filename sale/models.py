@@ -17,7 +17,7 @@ class Sales(models.Model):
     purchase = models.CharField(blank=False, null=True, max_length=20)
     # sold = models.CharField(blank=False, null=True, max_length=20)
     sold = models.IntegerField(blank=True, null=True)
-    pay = models.CharField(blank=False, null=True, max_length=20)
+    pay = models.IntegerField(blank=True, null=True)
     invoice = models.CharField(max_length=255, blank=True)
     customer_invoice = models.CharField(max_length=255, blank=True)
     vjegy = models.CharField(blank=True, null=True, max_length=20)

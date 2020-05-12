@@ -39,13 +39,15 @@ class SalesForm(forms.ModelForm):
                            widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
                            required=True)
 
+    pay = forms.CharField(label=_('Pay'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
+                           required=True)
     class Meta:
         model = Sales
         fields = (
             'buyer',
             'code',
             'purchase',
-            'pay',
             'invoice',
             'customer_invoice',
             'vjegy',
@@ -56,7 +58,7 @@ class SalesForm(forms.ModelForm):
         widgets = {
             # 'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
             'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
-            'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
+            # 'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
             # 'sold': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
             'invoice': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', }),
             'customer_invoice': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', }),
@@ -88,7 +90,7 @@ class SalesForm(forms.ModelForm):
         pay = self.cleaned_data.get("pay") or None
         pur = str(pay)
         pay = pur.replace(",", '')
-        return pay
+        return int(pay)
 
     def clean_sold(self, commit=True):
         sold = self.cleaned_data.get("sold") or None
@@ -104,12 +106,5 @@ class SalesForm(forms.ModelForm):
         else:
             raise forms.ValidationError("Lots does not exist! Choose another client!")
         return code
-
-    def clean_diff(self):
-        sold = self.cleaned_data.get("sold")
-        pay = self.cleaned_data.get("pay")
-        diff = 100
-        return diff
-
 
 
