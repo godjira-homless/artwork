@@ -1,4 +1,5 @@
 import json
+from math import ceil
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, F, ExpressionWrapper, Sum
@@ -17,7 +18,6 @@ from customers .models import Customer
 def sale_list(request):
     items = Sales.objects.all().order_by('sale_date')
     qt = Sales.objects.filter(sale_date__quarter=3)
-    print(qt)
     context = {'items': items}
     return render(request, 'sales_list.html', context)
 
@@ -27,10 +27,10 @@ def biz_list(request, qt):
     if qt not in pqt:
         items = ''
     else:
-        items = Sales.objects.filter(sale_date__quarter=qt).values()
-        total_tax = items.aggregate(Sum('tax'))
-        print(total_tax)
-    context = {'items': items, 'tx': total_tax}
+        items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018)
+        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018).aggregate(Sum('tax'), Sum('diff'))
+        print(items)
+    context = {'items': items, 'ag': ag}
     return render(request, 'biz_list.html', context)
 
 
@@ -42,7 +42,7 @@ def create_sale(request, code):
         obj = form.save(commit=False)
         obj.creator = request.user
         obj.diff = int(obj.sold) - int(obj.pay)
-        obj.tax = obj.diff*0.2126
+        obj.tax = ceil(obj.diff*0.2126)
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))
@@ -85,7 +85,7 @@ def update_sale(request, code):
         obj = form.save(commit=False)
         obj.modifier = us
         obj.diff = int(obj.sold) - int(obj.pay)
-        obj.tax = obj.diff*0.2126
+        obj.tax = ceil(obj.diff*0.2126)
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
         return HttpResponseRedirect(reverse('sale_list'))
