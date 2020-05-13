@@ -1,0 +1,37 @@
+Index: sale/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.conf import settings\nfrom django.db import models\nfrom django.contrib.auth.models import User\nfrom django.urls import reverse\nfrom django.utils.text import slugify\n\nfrom customers.models import Customer\nfrom lots.models import Lots\n\n\nclass Sales(models.Model):\n    buyer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_buyer',\n                                  on_delete=models.SET_NULL)\n    code = models.ForeignKey(Lots, to_field='code', null=True, blank=False, related_name='sale_lot',\n                                  on_delete=models.SET_NULL)\n    purchase = models.CharField(blank=False, null=True, max_length=20)\n    sold = models.CharField(blank=False, null=True, max_length=20)\n    # sold = models.IntegerField(blank=True, null=True)\n    pay = models.CharField(blank=False, null=True, max_length=20)\n    invoice = models.CharField(max_length=255, blank=True)\n    customer_invoice = models.CharField(max_length=255, blank=True)\n    vjegy = models.CharField(blank=True, null=True, max_length=20)\n    sale_date = models.DateField(blank=False, null=True)\n    diff = models.IntegerField(blank=True, null=True)\n    tax = models.IntegerField(blank=True, null=True)\n    note = models.TextField(blank=True, null=True)\n    creator = models.ForeignKey(settings.AUTH_USER_MODEL,\n                                null=True, blank=True, related_name='sale_creator', on_delete=models.CASCADE)\n    modifier = models.ForeignKey(User, null=True, related_name='sale_modifier', on_delete=models.SET('1'))\n    create_date = models.DateTimeField(auto_now_add=True, editable=False)\n    modify_date = models.DateTimeField(auto_now=True)\n    slug = models.SlugField(null=False, unique=True)\n\n    def __str__(self):\n        return str(str(self.code))\n\n    def get_absolute_url(self):\n        return reverse('sale_detail', kwargs={'slug': self.slug})\n\n    def save(self, *args, **kwargs):\n        # if Extras.objects.count() > 0:\n        #    return\n        if not self.slug:\n            # self.slug = slugify(self.title)\n            self.slug = self.get_unique_slug(self.id, self.code, Sales.objects)\n        return super().save(*args, **kwargs)\n\n    def get_unique_slug(self, id, code, obj):\n        slug = slugify(code)\n        if slug == '':\n            slug = '1'\n        unique_slug = slug\n        counter = 1\n        while obj.filter(slug=unique_slug).exists():\n            if obj.filter(slug=unique_slug).values('id')[0]['id'] == id:\n                break\n            unique_slug = '{}-{}'.format(slug, counter)\n            counter += 1\n        return unique_slug\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- sale/models.py	(revision c325fbefe96792b2a1e54cdaef6f5a4f3833f913)
++++ sale/models.py	(date 1589300194497)
+@@ -1,22 +1,23 @@
+ from django.conf import settings
++from django.core.exceptions import ValidationError
+ from django.db import models
+ from django.contrib.auth.models import User
++from django.forms import forms, CharField, fields
+ from django.urls import reverse
+ from django.utils.text import slugify
+ 
+ from customers.models import Customer
+ from lots.models import Lots
+ 
+-
+ class Sales(models.Model):
+     buyer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_buyer',
+                                   on_delete=models.SET_NULL)
+     code = models.ForeignKey(Lots, to_field='code', null=True, blank=False, related_name='sale_lot',
+                                   on_delete=models.SET_NULL)
+     purchase = models.CharField(blank=False, null=True, max_length=20)
+-    sold = models.CharField(blank=False, null=True, max_length=20)
+-    # sold = models.IntegerField(blank=True, null=True)
+-    pay = models.CharField(blank=False, null=True, max_length=20)
++    # sold = models.CharField(blank=False, null=True, max_length=20)
++    sold = models.IntegerField(blank=True, null=True)
++    pay = models.IntegerField(blank=True, null=True)
+     invoice = models.CharField(max_length=255, blank=True)
+     customer_invoice = models.CharField(max_length=255, blank=True)
+     vjegy = models.CharField(blank=True, null=True, max_length=20)

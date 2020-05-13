@@ -8,7 +8,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-
 from .models import Lots, path_and_rename
 from .forms import LotsForm
 from extra.models import Extras
@@ -16,6 +15,7 @@ from artists.models import Artists
 from appraisers.models import Appraisers
 from customers.models import Customer
 from technics.models import Technics
+
 
 @login_required
 def lots_list(request):
@@ -27,7 +27,8 @@ def lots_list(request):
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
-            Q(title__icontains=query) | Q(code__icontains=query) | Q(desc__icontains=query) | Q(artist__name__icontains=query) | Q(technic__name__icontains=query)
+            Q(title__icontains=query) | Q(code__icontains=query) | Q(desc__icontains=query) | Q(
+                artist__name__icontains=query) | Q(technic__name__icontains=query)
         )
     paginator = Paginator(queryset_list, 10)
     page = request.GET.get('page')
@@ -47,6 +48,11 @@ def create_lot(request):
     if form.is_valid():
         obj = form.save(commit=False)
         obj.creator = request.user
+        obj.purchase = form.cleaned_data['purchase']
+        obj.price = form.cleaned_data['price']
+        obj.pay = form.cleaned_data['pay']
+        obj.start = form.cleaned_data['start']
+        obj.limit = form.cleaned_data['limit']
         form.save()
         return HttpResponseRedirect(reverse('lots_list'))
     else:
@@ -108,6 +114,11 @@ def update_lot(request, code):
     form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
     # filepath = request.FILES.get('photo', False)
     # photo = path_and_rename(cd, filepath)
+    purchase = cd.purchase
+    pay = cd.pay
+    price = cd.price
+    start = cd.start
+    limit = cd.limit
     cuid = form.initial['customer']
     if cuid:
         customer_name = Customer.objects.values_list('name', flat=True).get(pk=cuid)
@@ -129,12 +140,18 @@ def update_lot(request, code):
     else:
         technic_name = ""
     form = LotsForm(request.POST or None,
-                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name, 'technic': technic_name},
+                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name,
+                             'technic': technic_name},
                     instance=cd)
     if form.is_valid():
         us = request.user
         obj = form.save(commit=False)
         obj.modifier = us
+        obj.purchase = form.cleaned_data['purchase']
+        obj.price = form.cleaned_data['price']
+        obj.pay = form.cleaned_data['pay']
+        obj.start = form.cleaned_data['start']
+        obj.limit = form.cleaned_data['limit']
         if request.FILES:
             obj.photo = request.FILES['photo']
         form.save()
@@ -142,7 +159,9 @@ def update_lot(request, code):
     else:
         errors = form.errors
     form = LotsForm(request.POST or None,
-                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name, 'technic': technic_name},
+                    initial={'customer': customer_name, 'appraiser': appraiser_name, 'artist': artist_name,
+                             'technic': technic_name, 'purchase': purchase, 'price': price, 'pay': pay, 'start': start,
+                             'limit': limit},
                     instance=cd)
     context = {'form': form, 'errors': errors}
     return render(request, 'lot_update.html', context)

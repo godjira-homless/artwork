@@ -24,6 +24,16 @@ class LotsForm(forms.ModelForm):
                                 max_length=200, required=True)
     technic = forms.CharField(label=_('Technic'), widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
                               max_length=200, required=False)
+    purchase = forms.CharField(label=_('Purchase'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}), required=False)
+    pay = forms.CharField(label=_('Pay'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}), required=False)
+    price = forms.CharField(label=_('Price'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_price'}), required=False)
+    start = forms.CharField(label=_('Start'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}), required=False)
+    limit = forms.CharField(label=_('Limit'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}), required=False)
 
     # photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control'}))
     photo = forms.ImageField(widget=forms.FileInput, ),
@@ -43,11 +53,6 @@ class LotsForm(forms.ModelForm):
             'type',
             'size',
             'weight',
-            'purchase',
-            'price',
-            'pay',
-            'start',
-            'limit',
             'note',
             'vjegy',
         )
@@ -61,11 +66,11 @@ class LotsForm(forms.ModelForm):
             'type': forms.Select(attrs={'style': 'width: 220px', 'class': 'form-control', }),
             'size': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
             'weight': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
-            'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
-            'price': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_price'}),
-            'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
-            'start': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}),
-            'limit': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}),
+            #'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
+            # 'price': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_price'}),
+            # 'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
+            # 'start': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_start'}),
+            # 'limit': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_limit'}),
             'note': forms.Textarea(attrs={'rows': 3, 'cols': 30, 'style': 'width: 220px', 'class': 'form-control'}),
             'vjegy': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
         }
@@ -103,33 +108,53 @@ class LotsForm(forms.ModelForm):
         return technic
 
     def clean_purchase(self, commit=True):
-        purchase = self.cleaned_data.get("purchase") or None
-        pur = str(purchase)
-        purchase = pur.replace(",", '')
+        purchase = self.cleaned_data.get("purchase")
+        if purchase:
+            pur = str(purchase)
+            purchase = pur.replace(",", '')
+            purchase = int(purchase)
+        else:
+            purchase = None
         return purchase
 
     def clean_price(self, commit=True):
-        price = self.cleaned_data.get("price") or None
-        pur = str(price)
-        price = pur.replace(",", '')
+        price = self.cleaned_data.get("price")
+        if price:
+            pur = str(price)
+            price = pur.replace(",", '')
+            price = int(price)
+        else:
+            price = None
         return price
 
     def clean_pay(self, commit=True):
-        pay = self.cleaned_data.get("pay") or None
-        pur = str(pay)
-        pay = pur.replace(",", '')
+        pay = self.cleaned_data.get("pay")
+        if pay:
+            pur = str(pay)
+            pay = pur.replace(",", '')
+            pay = int(pay)
+        else:
+            pay = None
         return pay
 
     def clean_start(self, commit=True):
-        start = self.cleaned_data.get("start") or None
-        pur = str(start)
-        start = pur.replace(",", '')
+        start = self.cleaned_data.get("start")
+        if start:
+            pur = str(start)
+            start = pur.replace(",", '')
+            start = int(start)
+        else:
+            start = None
         return start
 
     def clean_limit(self, commit=True):
-        limit = self.cleaned_data.get("limit") or None
-        pur = str(limit)
-        limit = pur.replace(",", '')
+        limit = self.cleaned_data.get("limit")
+        if limit:
+            pur = str(limit)
+            limit = pur.replace(",", '')
+            limit = int(limit)
+        else:
+            limit = None
         return limit
 
     def __init__(self, *args, **kwargs):
