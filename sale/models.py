@@ -9,12 +9,13 @@ from django.utils.text import slugify
 from customers.models import Customer
 from lots.models import Lots
 
+
 class Sales(models.Model):
     buyer = models.ForeignKey(Customer, null=True, blank=False, related_name='sale_buyer',
                                   on_delete=models.SET_NULL)
     code = models.ForeignKey(Lots, to_field='code', null=True, blank=False, related_name='sale_lot',
                                   on_delete=models.SET_NULL)
-    purchase = models.CharField(blank=False, null=True, max_length=20)
+    purchase = models.IntegerField(blank=False, null=True)
     # sold = models.CharField(blank=False, null=True, max_length=20)
     sold = models.IntegerField(blank=True, null=True)
     pay = models.IntegerField(blank=True, null=True)

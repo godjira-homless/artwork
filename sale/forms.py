@@ -42,12 +42,15 @@ class SalesForm(forms.ModelForm):
     pay = forms.CharField(label=_('Pay'),
                            widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
                            required=True)
+
+    purchase = forms.CharField(label=_('Purchase'),
+                           widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
+                           required=True)
     class Meta:
         model = Sales
         fields = (
             'buyer',
             'code',
-            'purchase',
             'invoice',
             'customer_invoice',
             'vjegy',
@@ -57,7 +60,7 @@ class SalesForm(forms.ModelForm):
 
         widgets = {
             # 'code': forms.NumberInput(attrs={'style': 'width:15ch', 'class': 'form-control', 'placeholder': 'code'}),
-            'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
+            # 'purchase': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
             # 'pay': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_pay'}),
             # 'sold': forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_sold'}),
             'invoice': forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control', }),
@@ -81,22 +84,34 @@ class SalesForm(forms.ModelForm):
         return buyer
 
     def clean_purchase(self, commit=True):
-        purchase = self.cleaned_data.get("purchase") or None
-        pur = str(purchase)
-        purchase = pur.replace(",", '')
+        purchase = self.cleaned_data.get("purchase")
+        if purchase:
+            pur = str(purchase)
+            purchase = pur.replace(",", '')
+            purchase = int(purchase)
+        else:
+            purchase = None
         return purchase
 
     def clean_pay(self, commit=True):
-        pay = self.cleaned_data.get("pay") or None
-        pur = str(pay)
-        pay = pur.replace(",", '')
-        return int(pay)
+        pay = self.cleaned_data.get("pay")
+        if pay:
+            pur = str(pay)
+            pay = pur.replace(",", '')
+            pay = int(pay)
+        else:
+            pay = None
+        return pay
 
     def clean_sold(self, commit=True):
-        sold = self.cleaned_data.get("sold") or None
-        pur = str(sold)
-        sold = pur.replace(",", '')
-        return int(sold)
+        sold = self.cleaned_data.get("sold")
+        if sold:
+            pur = str(sold)
+            sold = pur.replace(",", '')
+            sold = int(sold)
+        else:
+            sold = None
+        return sold
 
     def clean_code(self, commit=True):
         code = self.cleaned_data.get("code")

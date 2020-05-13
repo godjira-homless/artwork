@@ -7,17 +7,15 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm">
-            <a href="{% url 'biz_list' '1' %}">{% trans 'Quarter 1' %}</a>
-            <a href="{% url 'biz_list' '2' %}">{% trans 'Quarter 2' %}</a>
-            <a href="{% url 'biz_list' '3' %}">{% trans 'Quarter 3' %}</a>
-            <a href="{% url 'biz_list' '4' %}">{% trans 'Quarter 4' %}</a>
+             <a href="{% url 'biz_list' qt=1 ya=2018 %}">2018 01</a>
         </div>
     </div>
 </div>
 
+
 <div class="container py-5">
     <div class="row">
-                <h4>Quarter 2 sold items</h4>
+                <h4>Quarter {{ ty }} {{ qt }} sold items</h4>
         <div class="mt-4 container table-responsive">
             <table class="table table-hover table-sm">
                 <thead>
@@ -46,14 +44,26 @@
                     <td>{{ item.diff }}</td>
                     <td>{{ item.tax }}</td>
                     <td>
-                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
-                        <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'update_sale' item.code %}">Update</a>
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_sale' item.code %}">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
                 </tbody>
+                <tfoot>
+                <tr>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ ag.sold__sum }}</td>
+                    <td scope="col"></td>
+                    <td scope="col" title="{{ ag.pay__sum|intcomma }}">{{ ag.pay__sum }}</td>
+                    <td scope="col">{{ ag.diff__sum }}</td>
+                    <td scope="col">{{ ag.tax__sum }}</td>
+                    <td scope="col"></td>
+                 </tr>
+                </tfoot>
             </table>
-                <p>total tax: {{ ag.tax__sum }} total diff: {{ ag.diff__sum }} total sold: {{ ag.sold__sum }}</p>
         </div>
     </div>
 </div>

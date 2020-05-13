@@ -1,4 +1,5 @@
 import json
+import datetime
 from math import ceil
 
 from django.contrib.auth.decorators import login_required
@@ -14,22 +15,24 @@ from .models import Lots
 from customers .models import Customer
 
 
+def current_year():
+    return datetime.date.today().year
+
 @login_required
 def sale_list(request):
-    items = Sales.objects.all().order_by('sale_date')
-    qt = Sales.objects.filter(sale_date__quarter=3)
+    items = Sales.objects.all().order_by('-sale_date')
     context = {'items': items}
     return render(request, 'sales_list.html', context)
 
+
 @login_required
-def biz_list(request, qt):
+def biz_list(request, qt, ya):
     pqt = (1, 2, 3, 4)
     if qt not in pqt:
         items = ''
     else:
-        items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018)
-        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=2018).values().aggregate(Sum('tax'), Sum('diff'), Sum('sold'))
-        print(items)
+        items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=ya)
+        ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=ya).values().aggregate(Sum('tax'), Sum('diff'), Sum('sold'), Sum('purchase'), Sum('pay'))
     context = {'items': items, 'ag': ag}
     return render(request, 'biz_list.html', context)
 
@@ -42,8 +45,9 @@ def create_sale(request, code):
         obj = form.save(commit=False)
         obj.creator = request.user
         obj.sold = form.cleaned_data['sold']
+        obj.purchase = form.cleaned_data['purchase']
         obj.pay = form.cleaned_data['pay']
-        obj.diff = obj.sold - obj.pay
+        obj.diff = obj.sold-obj.pay
         obj.tax = ceil(obj.diff*0.2126)
         form.save()
         Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
@@ -75,6 +79,7 @@ def update_sale(request, code):
     cd = get_object_or_404(Sales, code=code)
     sold = cd.sold
     pay = cd.pay
+    purchase = cd.purchase
     ins = get_object_or_404(Lots, code=code)
     form = SalesForm(request.POST or None, request.FILES or None, instance=cd)
     buid = form.initial['buyer']
@@ -89,6 +94,7 @@ def update_sale(request, code):
         obj = form.save(commit=False)
         obj.modifier = us
         obj.sold = form.cleaned_data['sold']
+        obj.purchase = form.cleaned_data['purchase']
         obj.pay = form.cleaned_data['pay']
         obj.diff = int(obj.sold) - int(obj.pay)
         obj.tax = ceil(obj.diff*0.2126)
@@ -98,7 +104,7 @@ def update_sale(request, code):
     else:
         errors = form.errors
     form = SalesForm(request.POST or None,
-                    initial={'buyer': buyer_name, 'sold': sold, 'pay': pay}, instance=cd)
+                    initial={'buyer': buyer_name, 'sold': sold, 'pay': pay, 'purchase': purchase}, instance=cd)
     context = {'form': form, 'errors': errors, 'ins': ins}
     return render(request, 'sale_update.html', context)
 
