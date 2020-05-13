@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'artwork.wsgi.application'
 # }
 # artdjango.mysql.pythonanywhere-services.com
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -114,9 +114,9 @@ DATABASES = {
         'HOST': 'rogue.db.elephantsql.com',
     }
 }
-
-
 """
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -126,7 +126,7 @@ DATABASES = {
         'HOST': '192.168.8.100',
     }
 }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

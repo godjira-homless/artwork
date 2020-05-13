@@ -45,7 +45,7 @@ class SalesForm(forms.ModelForm):
 
     purchase = forms.CharField(label=_('Purchase'),
                            widget=forms.TextInput(attrs={'style': 'width: 15ch', 'class': 'form-control input-num_purchase'}),
-                           required=True)
+                           required=False)
     class Meta:
         model = Sales
         fields = (
