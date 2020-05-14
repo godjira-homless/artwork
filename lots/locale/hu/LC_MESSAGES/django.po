@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-09 18:46+0200\n"
+"POT-Creation-Date: 2020-05-14 13:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,33 @@ msgstr "Becsüs"
 msgid "Technic"
 msgstr "Technika"
 
+#: lots/forms.py:27 lots/templates/lot_create.html:168
+#: lots/templates/lot_update.html:170
+msgid "Purchase"
+msgstr "Vétel"
+
+#: lots/forms.py:29 lots/templates/lot_create.html:186
+#: lots/templates/lot_update.html:188
+msgid "Pay"
+msgstr "Fizetendő"
+
+#: lots/forms.py:31 lots/templates/lot_create.html:177
+#: lots/templates/lot_update.html:179
+msgid "Price"
+msgstr "Ár"
+
+#: lots/forms.py:33 lots/templates/lot_create.html:195
+#: lots/templates/lot_update.html:197
+msgid "Start"
+msgstr "Induló"
+
+#: lots/forms.py:35 lots/templates/lot_create.html:204
+#: lots/templates/lot_update.html:206
+msgid "Limit"
+msgstr "Limit"
+
 #: lots/templates/lot_create.html:12 lots/templates/lots_list.html:11
+#: lots/templates/lots_list_bak.html:11
 msgid "Create new lot"
 msgstr "Új tétel létrehozása"
 
@@ -82,26 +108,6 @@ msgstr "Kép"
 msgid "Select"
 msgstr "Kiválaszt"
 
-#: lots/templates/lot_create.html:168 lots/templates/lot_update.html:170
-msgid "Purchase"
-msgstr "Vétel"
-
-#: lots/templates/lot_create.html:177 lots/templates/lot_update.html:179
-msgid "Price"
-msgstr "Ár"
-
-#: lots/templates/lot_create.html:186 lots/templates/lot_update.html:188
-msgid "Pay"
-msgstr "Fizetendő"
-
-#: lots/templates/lot_create.html:195 lots/templates/lot_update.html:197
-msgid "Start"
-msgstr "Induló"
-
-#: lots/templates/lot_create.html:204 lots/templates/lot_update.html:206
-msgid "Limit"
-msgstr "Limit"
-
 #: lots/templates/lot_create.html:213 lots/templates/lot_update.html:215
 msgid "Vjegy"
 msgstr ""
@@ -114,14 +120,18 @@ msgstr "Mentés"
 msgid "Update lot"
 msgstr "Tétel szerkesztése"
 
-#: lots/templates/lots_list.html:16
+#: lots/templates/lots_list.html:16 lots/templates/lots_list_bak.html:16
 msgid "Search..."
 msgstr "Keresés..."
 
-#: lots/templates/lots_list.html:17
+#: lots/templates/lots_list.html:17 lots/templates/lots_list_bak.html:17
 msgid "Search"
 msgstr "Keresés"
 
-#: lots/templates/lots_list.html:52
+#: lots/templates/lots_list.html:41
+msgid "Sold"
+msgstr ""
+
+#: lots/templates/lots_list_bak.html:56
 msgid "Edit"
 msgstr "Szerkeszt"

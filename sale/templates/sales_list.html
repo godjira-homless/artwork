@@ -24,7 +24,6 @@
 </div>
 
 
-
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -36,30 +35,17 @@
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                           <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }} - {{ item.sale_date }}</h5>
-                            <p class="font-italic text-muted mb-0 small">{{ item.customer }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.vjegy }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.purchase|intcomma }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.sold|intcomma }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.pay|intcomma }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.invoice }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.customer_invoice }}</p>
-                            <p class="font-italic text-muted mb-0 small">{{ item.note }}</p>
+                           <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }} - {{ item.sale_date }} {{ item.Lots.size }}</h5>
+                            <p class="font-italic text-muted mb-0 small">{{ item.buyer }}</p>
+                            <p class="font-italic text-muted mb-0 small">Vétel: {{ item.purchase|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">Eladás: {{ item.sold|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">Fizetendő: {{ item.pay|intcomma }}</p>
                             <div class="d-flex align-items-center justify-content-between mt-1">
-                                <h6 class="font-weight-bold my-2">{{ item.create_date }} | {{ item.modified_by }}</h6>
-                                <h7 class="font-weight-bold my-2">{{ item.creator }} | {{ item.modifier }}</h7>
                                     <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_sale' code=item.code %}">{% trans 'Edit' %}</a> | <a href="{% url 'delete_sale' item.code %}">{% trans 'Delete' %}</a></p>
-                                <ul class="list-inline small">
-                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                </ul>
                             </div>
                         </div>
                         {% if item.photo %}
-                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="150" class="ml-lg-5 order-1 order-lg-2">
+                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="70" class="ml-lg-5 order-1 order-lg-2">
                         {% endif %}
 
                     </div> <!-- End -->

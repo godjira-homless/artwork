@@ -36,9 +36,9 @@
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                        <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }} {{ ed.code }}</h5>
+                        <h5 class="mt-0 font-weight-bold mb-2"><a href="{% url 'update_lot' code=item.code %}">{{ item.code }}</a> {{ ed.code }}</h5>
                             <p class="text-muted mb-0">{{ item.artist|default_if_none:"" }} {{ item.title }}</p>
-                            <p class="badge badge-info small">{%if item.status_sold == True %} Eladva {% endif %}</p>
+                            <p class="badge badge-info small">{%if item.status_sold == True %} {% trans 'Sold' %} {% endif %}</p>
                         </div>
                         <div class="media-body order-2 order-lg-1">
                             <div class="d-flex align-items-center justify-content-between mt-1">

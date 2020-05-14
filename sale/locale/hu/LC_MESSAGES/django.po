@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-09 18:46+0200\n"
+"POT-Creation-Date: 2020-05-14 13:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: sale/forms.py:13 sale/forms.py:34 sale/templates/sale_create.html:40
+#: sale/templates/sale_update.html:40
 msgid "Code"
 msgstr "Kód"
 
@@ -25,38 +27,56 @@ msgstr "Kód"
 msgid "Buyer"
 msgstr "Vevő"
 
+#: sale/forms.py:38
+msgid "Sold"
+msgstr "Eladott"
+
+#: sale/forms.py:42 sale/templates/sale_create.html:67
+#: sale/templates/sale_update.html:67
+msgid "Pay"
+msgstr "Fizetendő"
+
+#: sale/forms.py:46
+msgid "Purchase"
+msgstr "Vétel"
+
 #: sale/templates/sale_create.html:12 sale/templates/sale_select.html:12
 #: sale/templates/sales_list.html:11
 msgid "Create new sale"
 msgstr "Új eladás rögzítése"
 
-#: sale/templates/sale_create.html:67
-msgid "Pay"
-msgstr "Fizetendő"
+#: sale/templates/sale_create.html:15 sale/templates/sale_update.html:15
+msgid "Customer"
+msgstr "Ügyfél"
 
-#: sale/templates/sale_create.html:76
+#: sale/templates/sale_create.html:76 sale/templates/sale_update.html:76
 msgid "Invoice"
 msgstr "Számla"
 
-#: sale/templates/sale_create.html:86
+#: sale/templates/sale_create.html:86 sale/templates/sale_update.html:86
 msgid "Customer invoice"
 msgstr "Ügyfél számla"
 
-#: sale/templates/sale_create.html:96
+#: sale/templates/sale_create.html:96 sale/templates/sale_update.html:96
 msgid "Vjegy"
 msgstr "Vételi jegy"
 
-#: sale/templates/sale_create.html:106
+#: sale/templates/sale_create.html:106 sale/templates/sale_update.html:106
 msgid "Sale date"
 msgstr "Eladás dátuma"
 
-#: sale/templates/sale_create.html:116
+#: sale/templates/sale_create.html:116 sale/templates/sale_update.html:116
 msgid "Note"
 msgstr "Megjegyzés"
 
 #: sale/templates/sale_create.html:128 sale/templates/sale_select.html:41
+#: sale/templates/sale_update.html:128
 msgid "Save"
 msgstr "Mentés"
+
+#: sale/templates/sale_update.html:12
+msgid "Update sale"
+msgstr "Eladás módosítása"
 
 #: sale/templates/sales_list.html:16
 msgid "Search..."
@@ -66,6 +86,14 @@ msgstr "Keresés..."
 msgid "Search"
 msgstr "Keresés"
 
-#: sale/templates/sales_list.html:52
+#: sale/templates/sales_list.html:21
+msgid "Bizlist"
+msgstr ""
+
+#: sale/templates/sales_list.html:51
 msgid "Edit"
 msgstr "Szerkeszt"
+
+#: sale/templates/sales_list.html:51
+msgid "Delete"
+msgstr "Töröl"

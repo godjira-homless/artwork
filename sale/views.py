@@ -1,6 +1,7 @@
 import json
 import datetime
 from math import ceil
+from itertools import chain
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, F, ExpressionWrapper, Sum
@@ -21,7 +22,9 @@ def current_year():
 @login_required
 def sale_list(request):
     items = Sales.objects.all().order_by('-sale_date')
-    context = {'items': items}
+    # lts = Lots.objects.filter(code__in=Sales.objects.all().order_by('-sale_date').values('code'))
+    dd = Sales.objects.select_related('code').all()
+    context = {'items': dd}
     return render(request, 'sales_list.html', context)
 
 
@@ -113,6 +116,7 @@ def delete_sale(request, code):
     instance = get_object_or_404(Sales, code=code)
     if instance:
         instance.delete()
+        Lots.objects.filter(code=code).update(status_sold=False)
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         return HttpResponseRedirect(reverse('sale_list'))
