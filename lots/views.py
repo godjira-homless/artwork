@@ -15,6 +15,7 @@ from artists.models import Artists
 from appraisers.models import Appraisers
 from customers.models import Customer
 from technics.models import Technics
+from sale.models import Sales
 
 
 @login_required
@@ -22,7 +23,6 @@ def lots_list(request):
     # lots = Lots.objects.all().order_by('code')
     # context = {'items': lots}
     # return render(request, 'lots_list.html', context)
-
     queryset_list = Lots.objects.all().order_by('-code')
     query = request.GET.get("q")
     if query:

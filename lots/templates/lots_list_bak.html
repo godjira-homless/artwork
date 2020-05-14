@@ -23,8 +23,6 @@
     </div>
 </div>
 
-
-
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -36,24 +34,36 @@
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                        <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }} {{ ed.code }}</h5>
-                            <p class="text-muted mb-0">{{ item.artist|default_if_none:"" }} {{ item.title }}</p>
-                            <p class="badge badge-info small">{%if item.status_sold == True %} Eladva {% endif %}</p>
-                        </div>
-                        <div class="media-body order-2 order-lg-1">
+                           <h5 class="mt-0 font-weight-bold mb-2">{{ item.code }}</h5>
+                            <h5 class="mt-0 font-weight-bold mb-2">{{ item.artist|default_if_none:"" }}</h5>
+                            <p class="font-italic text-muted mb-0 small">{{ item.customer }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.appraiser }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.worknumber|default_if_none:"" }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.title }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.desc }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.size }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.technic }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.vjegy }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.purchase|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.price|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.pay|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.start|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.limit|intcomma }}</p>
+                            <p class="font-italic text-muted mb-0 small">{{ item.get_type_display }}</p>
                             <div class="d-flex align-items-center justify-content-between mt-1">
-                                <p class="font-italic text-muted mb-0 small">{{ item.get_type_display }}</p>
-                                <p class="font-italic text-muted mb-0 small">{{ item.size }}</p>
-                                <p class="font-italic text-muted mb-0 small">{{ item.price|intcomma}}</p>
+                                <h6 class="font-weight-bold my-2">{{ item.create_date }} | {{ item.modify_date }}</h6>
+                                <h7 class="font-weight-bold my-2">{{ item.creator }} | {{ item.modifier }}</h7>
+                                <p class="font-italic text-muted mb-0 small"><a href="{% url 'update_lot' code=item.code %}">{% trans 'Edit' %}</a></p>
                             </div>
                         </div>
                         {% if item.photo %}
-                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="70" class="ml-lg-5 order-1 order-lg-2">
+                            <img src="{{ item.photo.url}}" alt="{{ item.title }}" width="150" class="ml-lg-5 order-1 order-lg-2">
                         {% endif %}
+
                     </div> <!-- End -->
                 </li>
                 <!-- list group item -->
-                 {% endfor %}
+            {% endfor %}
             </ul> <!-- End -->
         </div>
     </div>

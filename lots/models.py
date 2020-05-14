@@ -88,6 +88,7 @@ class Lots(models.Model):
     start = models.IntegerField(blank=True, null=True)
     limit = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True)
+    status_sold = models.BooleanField(default=False)
     photo = models.ImageField(upload_to=path_and_rename, default='images/default.png', null=True, blank=True)
     vjegy = models.CharField(max_length=255, blank=True, null=True)
     # hammer = models.PositiveIntegerField(blank=True, null=True, default=0)

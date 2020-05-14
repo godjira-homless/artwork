@@ -50,7 +50,7 @@ def create_sale(request, code):
         obj.diff = obj.sold-obj.pay
         obj.tax = ceil(obj.diff*0.2126)
         form.save()
-        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
+        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy, status_sold=True)
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
@@ -99,7 +99,7 @@ def update_sale(request, code):
         obj.diff = int(obj.sold) - int(obj.pay)
         obj.tax = ceil(obj.diff*0.2126)
         form.save()
-        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy)
+        Lots.objects.filter(code=code).update(pay=obj.pay, purchase=obj.purchase, vjegy=obj.vjegy, status_sold=True)
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
