@@ -9,10 +9,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm" style="background-color: #e3e3e3;">
-        <h4>{% trans 'Update lot' %}</h4>
+        <h4>{% trans 'Update lot' %}: {{ form.code.value }}</h4>
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
-      info
+      <p class="badge badge-info small">{%if ss == True %} {% trans 'Sold' %} {% endif %}</p>
     </div>
     <div class="col-sm" style="background-color: #e3e3e3;">
       {% if form.photo %}

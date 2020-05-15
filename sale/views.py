@@ -4,11 +4,13 @@ from math import ceil
 from itertools import chain
 
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, F, ExpressionWrapper, Sum
 from django.db.models.functions import ExtractQuarter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.template.defaulttags import register
 
 from .models import Sales
 from .forms import SalesForm, SaleSelector
@@ -16,15 +18,44 @@ from .models import Lots
 from customers .models import Customer
 
 
+@register.filter(name='lookup')
+def lookup(value):
+    """
+    c = str(value)
+    c = int(c)
+    code = c
+    item2 = Lots.objects.filter(code=code)
+    # ph = "images/{}.jpg".format(value)
+    for itm in item2:
+        item = itm.photo
+        """
+    item = "images/default.png"
+    return item
+
+
 def current_year():
     return datetime.date.today().year
 
 @login_required
 def sale_list(request):
-    items = Sales.objects.all().order_by('-sale_date')
-    # lts = Lots.objects.filter(code__in=Sales.objects.all().order_by('-sale_date').values('code'))
-    dd = Sales.objects.select_related('code').all()
-    context = {'items': dd}
+#    items = Sales.objects.all().order_by('-sale_date')
+#    context = {'items': items}
+#    return render(request, 'sales_list.html', context)
+    queryset_list = Sales.objects.all().order_by('-sale_date')
+    query = request.GET.get("q")
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(code__icontains=query) | Q(vjegy__icontains=query)
+        )
+    paginator = Paginator(queryset_list, 10)
+    page = request.GET.get('page')
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        queryset_list = paginator.page(paginator.num_pages)
+    context = {'items': queryset_list}
     return render(request, 'sales_list.html', context)
 
 

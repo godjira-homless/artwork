@@ -111,6 +111,7 @@ def create_lot(request):
 @login_required
 def update_lot(request, code):
     cd = get_object_or_404(Lots, code=code)
+    ss=cd.status_sold
     form = LotsForm(request.POST or None, request.FILES or None, instance=cd)
     # filepath = request.FILES.get('photo', False)
     # photo = path_and_rename(cd, filepath)
@@ -163,5 +164,5 @@ def update_lot(request, code):
                              'technic': technic_name, 'purchase': purchase, 'price': price, 'pay': pay, 'start': start,
                              'limit': limit},
                     instance=cd)
-    context = {'form': form, 'errors': errors}
+    context = {'form': form, 'errors': errors, 'ss': ss}
     return render(request, 'lot_update.html', context)
