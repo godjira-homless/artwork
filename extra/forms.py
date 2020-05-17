@@ -1,6 +1,6 @@
 from django import forms
 from django.http import request
-
+from django.utils.translation import gettext as _
 from .models import Extras
 
 from artists.models import Artists
@@ -10,84 +10,77 @@ from technics.models import Technics
 
 
 class ExtrasForm(forms.ModelForm):
-    artist = forms.CharField(max_length=100, required=False)
-    appraiser = forms.CharField(max_length=100, required=False)
-    customer = forms.CharField(max_length=100, required=False)
-    technic = forms.CharField(max_length=100, required=False)
-    ai = forms.CharField(max_length=10, required=False, widget=forms.HiddenInput())
-    api = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    cid = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    ti = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    title = forms.CharField(max_length=255, required=False)
-    worknumber = forms.IntegerField(required=False)
+
+    customer = forms.CharField(label=_('Customer'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
+    artist = forms.CharField(label=_('Atrist'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
+    appraiser = forms.CharField(label=_('Appraiser'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
+    technic = forms.CharField(label=_('Technic'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
+    title = forms.CharField(label=_('Title'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
+    worknumber = forms.CharField(label=_('Worknumber'),
+                           widget=forms.TextInput(attrs={'style': 'width: 220px', 'class': 'form-control'}),
+                           max_length=220, required=False)
 
     class Meta:
         model = Extras
         fields = (
             'artist',
-            'ai',
-            'api',
-            'ti',
             'appraiser',
             'customer',
             'title',
+            'technic',
             'worknumber',
                   )
 
-    def clean_ai(self):
-        ai = self.cleaned_data.get("ai")
-        return ai
-
     def clean_artist(self, commit=True):
-        artist = self.cleaned_data.get("artist")
-        aid = self.data['ai'] or None
-        if aid or artist:
-            artist, created = Artists.objects.get_or_create(pk=aid, name=artist)
+        artist = self.cleaned_data.get("artist") or None
+        if artist is not None:
+            artist, created = Artists.objects.get_or_create(name=artist)
             self.cleaned_data['artist'] = artist
-        else:
-            artist = None
         return artist
 
-    def clean_appraiser(self, commit=True):
-        # appraiser = self.cleaned_data.get("appraiser")
-        apid = self.data['api']
-        if apid:
-            appraiser, created = Appraisers.objects.get_or_create(pk=apid)
-            self.cleaned_data['appraiser'] = appraiser
-        else:
-            appraiser = None
-        return appraiser
-
     def clean_customer(self, commit=True):
-        # appraiser = self.cleaned_data.get("appraiser")
-        cid = self.data['cid']
-        if cid:
-            customer, created = Customer.objects.get_or_create(pk=cid)
-            self.cleaned_data['customer'] = customer
-        else:
+        customer = self.cleaned_data.get("customer") or None
+        if customer is None:
             customer = None
+        else:
+            if Customer.objects.filter(name=customer).exists():
+                customer, created = Customer.objects.get_or_create(name=customer)
+                self.cleaned_data['customer'] = customer
+            else:
+                raise forms.ValidationError(("Customer does not exist! Choose another client!"))
         return customer
 
-    def clean_technic(self, commit=True):
-        # technic = self.cleaned_data.get("technic")
-        tid = self.data['ti']
-        if tid:
-            technic, created = Technics.objects.get_or_create(pk=tid)
-            self.cleaned_data['technic'] = technic
+    def clean_appraiser(self, commit=True):
+        appraiser = self.cleaned_data.get("appraiser") or None
+        if appraiser is None:
+          appraiser = None
         else:
-            technic = None
+            if Appraisers.objects.filter(name=appraiser).exists():
+                appraiser, created = Appraisers.objects.get_or_create(name=appraiser)
+                self.cleaned_data['appraiser'] = appraiser
+            else:
+                raise forms.ValidationError("Appraiser does not exist! Choose another one!")
+        return appraiser
+
+    def clean_technic(self, **kwargs):
+        technic = self.cleaned_data.get("technic") or None
+        if technic is not None:
+            technic, created = Technics.objects.get_or_create(name=technic)
+            self.cleaned_data['technic'] = technic
         return technic
 
-    def clean_title(self, commit=True):
-        title = self.cleaned_data.get("title")
-        return title
-
-    def clean_worknumber(self, commit=True):
-        worknumber = self.cleaned_data.get("worknumber")
-        if worknumber:
-            self.cleaned_data['worknumber'] = worknumber
-        else:
-            worknumber = None
+    def clean_worknumber(self):
+        worknumber = self.cleaned_data.get("worknumber") or None
         return worknumber
 
     def __init__(self, *args, **kwargs):

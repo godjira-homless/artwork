@@ -91,6 +91,14 @@ def create_lot(request):
         else:
             title = extra_title[0]
 
+        extra_technic = Extras.objects.filter(owner=request.user).values_list('technic', flat=True)
+        tec = extra_technic[0]
+        if tec is None:
+            technic_name = ""
+        else:
+            technic_name = Technics.objects.values_list('name', flat=True).get(pk=tec)
+
+
         extra_wnum = Extras.objects.filter(owner=request.user).values_list('worknumber', flat=True)
         wn = extra_wnum[0]
         if wn is None:
@@ -102,9 +110,10 @@ def create_lot(request):
         customer_name = ""
         appraiser_name = ""
         title = ""
+        technic_name = ""
         worknumber = ""
     form = LotsForm(initial={'code': next_code, 'artist': artist_name, 'customer': customer_name,
-                             'appraiser': appraiser_name, 'title': title, 'worknumber': worknumber})
+                             'appraiser': appraiser_name, 'title': title, 'technic': technic_name, 'worknumber': worknumber})
     return render(request, 'lot_create.html', {'form': form, 'errors': errors})
 
 

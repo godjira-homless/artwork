@@ -30,10 +30,8 @@ def create_extra(request):
         obj.owner = us
         form.save()
         return HttpResponseRedirect(reverse('extra_list'))
-    else:
-        errors = form.errors
     form = ExtrasForm()
-    return render(request, 'extra_create.html', {'form': form, 'errors': errors})
+    return render(request, 'extra_create.html', {'form': form})
 
 
 @login_required

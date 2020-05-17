@@ -100,7 +100,7 @@ class LotsForm(forms.ModelForm):
             raise forms.ValidationError("Appraiser does not exist! Choose another one!")
         return appraiser
 
-    def clean_technic(self, **kwargs):
+    def clean_technic(self, commit=True):
         technic = self.cleaned_data.get("technic") or None
         if technic is not None:
             technic, created = Technics.objects.get_or_create(name=technic)
