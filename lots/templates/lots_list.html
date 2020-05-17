@@ -38,7 +38,7 @@
                         <div class="media-body order-2 order-lg-1">
                         <h5 class="mt-0 font-weight-bold mb-2"><a href="{% url 'update_lot' code=item.code %}">{{ item.code }}</a> {{ ed.code }}</h5>
                             <p class="text-muted mb-0">{{ item.artist|default_if_none:"" }} {{ item.title }}</p>
-                            <p class="badge badge-info small">{%if item.status_sold == True %} {% trans 'Sold' %} {% endif %}</p>
+                            <p class="badge badge-info small">{%if item.status_sold == True %} <a href="{% url 'update_sale' code=item.code %}" class="badge badge-info small">{% trans 'Sold' %}</a> {% endif %}</p>
                         </div>
                         <div class="media-body order-2 order-lg-1">
                             <div class="d-flex align-items-center justify-content-between mt-1">

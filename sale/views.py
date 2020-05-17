@@ -22,7 +22,7 @@ def current_year():
 
 @login_required
 def sale_list(request):
-    queryset_list = Sales.objects.all().order_by('-sale_date')
+    queryset_list = Sales.objects.all().order_by('-sale_date', 'code')
     st = Sales.objects.aggregate(osszes=Count('code'))
     query = request.GET.get("q")
     if query:
