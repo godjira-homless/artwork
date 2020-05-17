@@ -1,11 +1,10 @@
 import json
 import datetime
 from math import ceil
-from itertools import chain
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q, F, ExpressionWrapper, Sum
+from django.db.models import Q, F, ExpressionWrapper, Sum, Count
 from django.db.models.functions import ExtractQuarter
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -18,30 +17,13 @@ from .models import Lots
 from customers .models import Customer
 
 
-@register.filter(name='lookup')
-def lookup(value):
-    """
-    c = str(value)
-    c = int(c)
-    code = c
-    item2 = Lots.objects.filter(code=code)
-    # ph = "images/{}.jpg".format(value)
-    for itm in item2:
-        item = itm.photo
-        """
-    item = "images/default.png"
-    return item
-
-
 def current_year():
     return datetime.date.today().year
 
 @login_required
 def sale_list(request):
-#    items = Sales.objects.all().order_by('-sale_date')
-#    context = {'items': items}
-#    return render(request, 'sales_list.html', context)
     queryset_list = Sales.objects.all().order_by('-sale_date')
+    st = Sales.objects.aggregate(osszes=Count('code'))
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -55,7 +37,7 @@ def sale_list(request):
         queryset_list = paginator.page(1)
     except EmptyPage:
         queryset_list = paginator.page(paginator.num_pages)
-    context = {'items': queryset_list}
+    context = {'items': queryset_list, 'st': st}
     return render(request, 'sales_list.html', context)
 
 
@@ -67,7 +49,7 @@ def biz_list(request, qt, ya):
     else:
         items = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=ya)
         ag = Sales.objects.filter(sale_date__quarter=qt, sale_date__year=ya).values().aggregate(Sum('tax'), Sum('diff'), Sum('sold'), Sum('purchase'), Sum('pay'))
-    context = {'items': items, 'ag': ag}
+    context = {'items': items, 'ag': ag, 'ya': ya, 'qt': qt}
     return render(request, 'biz_list.html', context)
 
 

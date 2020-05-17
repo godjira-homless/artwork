@@ -7,15 +7,46 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm">
-             <a href="{% url 'biz_list' qt=1 ya=2018 %}">2018 01</a>
+          <ul class="nav nav-pills">
+           <li class="nav-item">
+            <a href="{% url 'biz_list' qt=1 ya=2016 %}" class="nav-link  {% if ya == 2016 %}active{% endif %}">2016</a>
+           </li>
+          <li>
+            <a href="{% url 'biz_list' qt=1 ya=2017 %}" class="nav-link  {% if ya == 2017 %}active{% endif %}">2017</a>
+          </li>
+            <a href="{% url 'biz_list' qt=1 ya=2018 %}" class="nav-link  {% if ya == 2018 %}active{% endif %}">2018</a>
+          <li>
+            <a href="{% url 'biz_list' qt=1 ya=2019 %}" class="nav-link  {% if ya == 2019 %}active{% endif %}">2019</a>
+          <li>
+            <a href="{% url 'biz_list' qt=1 ya=2020 %}" class="nav-link  {% if ya == 2020 %}active{% endif %}">2020</a>
+           </li>
+           </li>
+          </ul>
+        </div>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md">
+          <ul class="nav nav-pills">
+           <li class="nav-item">
+            <a href="{% url 'biz_list' qt=1 ya=ya %}" class="nav-link  {% if qt == 1 %}active{% endif %}">First</a>
+           </li>
+          <li>
+            <a href="{% url 'biz_list' qt=2 ya=ya %}" class="nav-link  {% if qt == 2 %}active{% endif %}">Second</a>
+          </li>
+            <a href="{% url 'biz_list' qt=3 ya=ya %}" class="nav-link  {% if qt == 3 %}active{% endif %}">Third</a>
+          <li>
+            <a href="{% url 'biz_list' qt=4 ya=ya %}" class="nav-link  {% if qt == 4 %}active{% endif %}">Fourth</a>
+           </li>
+          </ul>
         </div>
     </div>
 </div>
 
-
 <div class="container py-5">
     <div class="row">
-                <h4>Quarter {{ ty }} {{ qt }} sold items</h4>
+                <h5>Quarter {{ ya }} {{ qt }} sold items</h5>
         <div class="mt-4 container table-responsive">
             <table class="table table-hover table-sm">
                 <thead>
