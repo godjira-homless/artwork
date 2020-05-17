@@ -46,12 +46,12 @@
 
         {% for item in items %}
         <tr>
-            <td>{{ item.artist }}</td>
-            <td>{{ item.appraiser }}</td>
-            <td>{{ item.customer }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.technic }}</td>
-            <td>{{ item.worknumber }}</td>
+            <td>{{ item.artist|default_if_none:"" }}</td>
+            <td>{{ item.appraiser|default_if_none:"" }}</td>
+            <td>{{ item.customer|default_if_none:"" }}</td>
+            <td>{{ item.title|default_if_none:"" }}</td>
+            <td>{{ item.technic|default_if_none:"" }}</td>
+            <td>{{ item.worknumber|default_if_none:"" }}</td>
             <td>
                 <a class="btn btn-outline-danger btn-sm" href="{% url 'delete_extra' item.id %}">Delete</a>
                 <a class="btn btn-outline-primary btn-sm" href="{% url 'update_extra' item.id %}">Update</a>

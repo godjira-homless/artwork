@@ -1,23 +1,96 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/jquery.autocomplete.css' %}">
-<script src="{% static 'js/jquery.autocomplete.js' %}"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-sm" style="background-color: #e3e3e3;">
+        <h4>{% trans 'Update Extra' %}</h4>
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      info
+    </div>
+    <div class="col-sm" style="background-color: #e3e3e3;">
+      more info
+    </div>
+  </div>
+</div>
 
+<div class="container">
+    <form method="POST" id="extraform" class="needs-validation" novalidate>{% csrf_token %}
+  <div class="row">
 
-<form action="" method="POST" id="post-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save" />
-</form>
+    <div class="col-sm form-inline align-items-start" style="background-color: #e3e3e3;">
+        <table class="table table-sm">
+            <tr>
+                <td>
+                    <label for="id_customer" class="col-form-label mr-2">{{ form.customer.label }}</label>
+                </td>
+                <td>
+                    {{ form.customer }}
+                    <span class="text-danger"><small>{{ errors.customer.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_appraiser" class="col-form-label mr-2">{{ form.appraiser.label }}</label>
+                </td>
+                <td>
+                    {{ form.appraiser }}
+                    <span class="text-danger"><small>{{ errors.appraiser.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_technic" class="col-form-label mr-2">{{ form.technic.label }}</label>
+                </td>
+                <td>
+                    {{ form.technic }}
+                    <span class="text-danger"><small>{{ errors.technic.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_worknumber" class="col-form-label mr-2">{% trans 'Worknumber' %}</label>
+                </td>
+                <td>
+                    {{ form.worknumber }}
+                    <span class="text-danger"><small>{{ errors.worknumber.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_artist" class="col-form-label mr-2">{{ form.artist.label }}</label>
+                </td>
+                <td>
+                    {{ form.artist }}
+                    <span class="text-danger"><small>{{ errors.artist.as_text }}</small></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id_title" class="col-form-label mr-2">{% trans 'Title' %}</label>
+                </td>
+                <td>
+                    {{ form.title }}
+                    <span class="text-danger"><small>{{ errors.title.as_text }}</small></span>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+  </div>
+                <input type="submit" value="{% trans 'Save' %}" />
+    </form>
+</div>
 
 {% endblock content %}
 
 
 {% block script %}
 
- <script>
+<script>
    $(document).ready(function(){
     $( "#id_artist" ).autocomplete({
       source: "{% url 'auto_complete' %}",
@@ -25,7 +98,6 @@
       minLength:2,
       select:function(event,ui) {
         $("#id_artist").val(ui.item.id)
-        $("#id_ai").val(ui.item.id)
       }
         });
 
@@ -38,24 +110,34 @@
       minLength:2,
       select:function(event,ui) {
         $("#id_appraiser").val(ui.item.id)
-        $("#id_api").val(ui.item.id)
       }
         });
 
    });
 
       $(document).ready(function(){
+    $( "#id_customer" ).autocomplete({
+      source: "{% url 'auto_complete_customer' %}",
+      selectFirst:true,
+      minLength:2,
+      select:function(event,ui) {
+        $("#id_customer").val(ui.item.id)
+      }
+        });
+
+   });
+
+         $(document).ready(function(){
     $( "#id_technic" ).autocomplete({
       source: "{% url 'technic_complete' %}",
       selectFirst:true,
       minLength:2,
       select:function(event,ui) {
         $("#id_technic").val(ui.item.id)
-        $("#id_ti").val(ui.item.id)
       }
         });
 
    });
-   </script>
+</script>
 
 {% endblock script %}

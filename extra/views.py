@@ -6,6 +6,7 @@ from django.urls import reverse
 from artists.models import Artists
 from appraisers.models import Appraisers
 from technics.models import Technics
+from customers.models import Customer
 # from tetelek.forms import TetelekForm
 from .models import Extras
 from .forms import ExtrasForm
@@ -53,18 +54,25 @@ def update_extra(request, id):
         appraiser_name = Appraisers.objects.values_list('name', flat=True).get(pk=apid)
     else:
         appraiser_name = ""
+    cuid = fr.initial['customer']
+    if cuid:
+        customer_name = Customer.objects.values_list('name', flat=True).get(pk=cuid)
+    else:
+        customer_name = ""
     techid = fr.initial['technic']
     if techid:
         technic_name = Technics.objects.values_list('name', flat=True).get(pk=techid)
     else:
         technic_name = ""
-    form = ExtrasForm(request.POST or None, initial={'ai': aid, 'artist': artist_name, 'appraiser': appraiser_name, 'technic': technic_name},
+    form = ExtrasForm(request.POST or None, initial={'ai': aid, 'artist': artist_name, 'customer': customer_name, 'appraiser': appraiser_name, 'technic': technic_name},
                       instance=instance)
     if form.is_valid():
         # obj = form.save(commit=False)
         form.save()
         return HttpResponseRedirect(reverse('extra_list'))
-    return render(request, 'extra_update.html', {'form': form})
+    else:
+        errors = form.errors
+    return render(request, 'extra_update.html', {'form': form, 'errors': errors})
 
 
 @login_required
