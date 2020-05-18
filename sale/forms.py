@@ -19,6 +19,8 @@ class SaleSelector(forms.Form):
 
     def clean_selcode(self, commit=True):
         selcode = self.cleaned_data.get("selcode")
+        if Sales.objects.filter(code=selcode).exists():
+            raise forms.ValidationError("Lots exist! You can not sold an item more than once!")
         if Lots.objects.filter(code=selcode).exists():
             selcode = Lots.objects.get(code=selcode)
             self.cleaned_data['selcode'] = selcode

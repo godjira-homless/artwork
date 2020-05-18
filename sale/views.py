@@ -70,7 +70,7 @@ def create_sale(request, code):
         return HttpResponseRedirect(reverse('sale_list'))
     else:
         errors = form.errors
-    form = SalesForm(initial={'note': '', }, instance=ins)
+    form = SalesForm(initial={'note': '', 'purchase': ins.purchase, 'pay': ins.pay}, instance=ins)
     return render(request, 'sale_create.html', {'form': form, 'errors': errors, 'ins': ins})
 
 
